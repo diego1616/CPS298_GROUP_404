@@ -24,18 +24,18 @@ I've hopped around schools almost as often as jobs, but I'm glad to be finishing
 5. Travel
 
 ## Favorites
-__Movie__
-_Singin' in the Rain_
-__TV Show__
-_Dr. Who_
-_The Office_
-__Color__
-_Yellow_
-__Food__
-_Tiramisu_
-__Number__
-_2_
-__Quote__
-> This is simply a demonstration
-> of block quotes in Markdown.
+__Movie__  
+_Singin' in the Rain_  
+__TV Show__  
+_Dr. Who_  
+_The Office_  
+__Color__  
+_Yellow_  
+__Food__  
+_Tiramisu_  
+__Number__  
+_2_  
+__Quote__  
+> This is simply a demonstration  
+> of block quotes in Markdown.  
 > -_Dan Santos_
