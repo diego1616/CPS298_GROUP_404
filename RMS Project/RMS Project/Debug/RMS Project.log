@@ -1,0 +1,7 @@
+﻿  DB_Connect.cpp
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\DB_Connect.cpp(65,17): warning C4150: deletion of pointer to incomplete type 'sqlite3'; no destructor called
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\sqlite3.h(249): message : see declaration of 'sqlite3'
+DB_Connect.obj : error LNK2019: unresolved external symbol _sqlite3_close referenced in function "public: __thiscall DB_Connect::~DB_Connect(void)" (??1DB_Connect@@QAE@XZ)
+DB_Connect.obj : error LNK2019: unresolved external symbol _sqlite3_open referenced in function "public: __thiscall DB_Connect::DB_Connect(void)" (??0DB_Connect@@QAE@XZ)
+DB_Connect.obj : error LNK2019: unresolved external symbol _sqlite3_errmsg referenced in function "public: __thiscall DB_Connect::DB_Connect(void)" (??0DB_Connect@@QAE@XZ)
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\Debug\RMS Project.exe : fatal error LNK1120: 3 unresolved externals

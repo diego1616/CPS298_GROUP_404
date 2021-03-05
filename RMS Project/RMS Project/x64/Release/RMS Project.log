@@ -1,0 +1,6 @@
+﻿  DB_Connect.cpp
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\DB_Connect.h(3,10): fatal error C1083: Cannot open include file: 'sqlite3.h': No such file or directory
+  Query.cpp
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\DB_Connect.h(3,10): fatal error C1083: Cannot open include file: 'sqlite3.h': No such file or directory
+  RMS Project.cpp
+C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\DB_Connect.h(3,10): fatal error C1083: Cannot open include file: 'sqlite3.h': No such file or directory
