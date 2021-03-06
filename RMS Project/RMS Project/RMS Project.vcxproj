@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DB_Connect.cpp" />
+    <ClCompile Include="DB_Literals.cpp" />
     <ClCompile Include="Query.cpp" />
     <ClCompile Include="RMS Project.cpp" />
     <ClCompile Include="shell.c" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DB_Connect.h" />
+    <ClInclude Include="DB_Literals.h" />
     <ClInclude Include="Query.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

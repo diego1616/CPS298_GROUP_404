@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <sqlite3.h>
+#include "sqlite3.h"
 #include <string>
 //#include "EventLog"  //class to be added later in order log certain events.  This can be useful for troubleshooting purposes. 
 
@@ -25,6 +25,8 @@ public:
 
 	void insertInto(string table, string fields, string values, string condition = "");
 	void queryFrom(string table, string fields, string condition = "");
+
+
 
 
 };

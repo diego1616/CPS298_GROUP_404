@@ -30,12 +30,18 @@
     <ClCompile Include="sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DB_Literals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DB_Connect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Query.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DB_Literals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
