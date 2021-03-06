@@ -36,14 +36,15 @@ DB_Connect::~DB_Connect() {
 			
 }
 
-void DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
+int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
 {
 
 	for (size_t i = 0; i < resultAmount; i++)
 	{
-		cout << column[i] << ":\"t" << values[i] << endl;
+		cout << column[i] << ":\t" << values[i] << endl;
 	}
 
+	return 0;
 }
 
 void DB_Connect::insertInto(string table, string fields, string values, string condition)
@@ -54,7 +55,7 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 	int check;
 
 	try {
-		string statement = "INSERT INTO " + table + " (" + fields + ")  VALUES(" + values + ")" + condition + ";";
+		string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
 
 		cout << "SQLITE STATEMENT: " << statement << endl;
 
@@ -82,7 +83,7 @@ void DB_Connect::queryFrom(string table, string fields, string condition)
 
 		cout << "SQLITE STATEMENT: " << statement << endl;
 
-		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
+		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), &DB_Connect::callback, NULL, &error);
 
 		if (check != SQLITE_OK)
 			throw logic_error(error);

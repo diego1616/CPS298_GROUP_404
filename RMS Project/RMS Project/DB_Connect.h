@@ -21,7 +21,7 @@ public:
 
 	//CRUD methods here
 
-	void callback(void *notUsed, int resultAmount, char** values, char** column);
+	static int callback(void *notUsed, int resultAmount, char** values, char** column);
 
 	void insertInto(string table, string fields, string values, string condition = "");
 	void queryFrom(string table, string fields, string condition = "");
