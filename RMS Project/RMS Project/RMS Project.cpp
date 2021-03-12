@@ -9,7 +9,7 @@ int main()
 //I looked up SQLite syntax.  Based on https://www.sqlitetutorial.net/sqlite-create-table/, I think the syntax here is wrong.  I wrote these tables based on that.
 	
 	//string myq = “CREATE TABLE [IF NOT EXISTS] product_table (
-	//			product_id INTEGER PRIMARY KEY NOT NULL,
+	//			product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
  //  				item_name TEXT NOT NULL,
 	//			manufacturer_id INTEGER NOT NULL,
 	//			manufacturer_product_id	TEXT	NOT NULL,
@@ -28,7 +28,7 @@ int main()
 	//		);
 
 	//		CREATE TABLE [IF NOT EXISTS] manufacturer_table (
-	//			manufacturer_id INTEGER PRIMARY KEY NOT NULL,
+	//			manufacturer_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			manufacturer_name	TEXT	NOT NULL,
 	//			contact_name	TEXT,
 	//			contact_email	TEXT,
@@ -43,14 +43,14 @@ int main()
 
 
 	//		CREATE TABLE [IF NOT EXISTS] department_table (
-	//			department_id	INTEGER PRIMARY KEY NOT NULL,
+	//			department_id	INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			department_name TEXT,
 	//		);
 
 
 
 	//		CREATE TABLE [IF NOT EXISTS] inventory_amounts_table (
-	//			inventory_id INTEGER PRIMARY KEY NOT NULL,
+	//			inventory_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			product_id INTEGER NOT NULL,
 	//			product_count	INTEGER,
 	//		FOREIGN KEY (product_id) 
@@ -61,12 +61,12 @@ int main()
 
 
 	//		CREATE TABLE [IF NOT EXISTS] keyword_table (
-	//			keyword_id INTEGER PRIMARY KEY NOT NULL,
+	//			keyword_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			keyword_name	TEXT	NOT NULL,
 	//		);
 
 	//		CREATE TABLE [IF NOT EXISTS] product_keyword_table (
-	//			p_key_id INTEGER PRIMARY KEY NOT NULL,
+	//			p_key_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			keyword_id	INTEGER NOT NULL,
 	//			product_id	INTEGER	NOT NULL,
 	//		FOREIGN KEY (product_id) 
@@ -81,13 +81,13 @@ int main()
 
 
 	//		CREATE TABLE [IF NOT EXISTS] storage_table (
-	//			storage_id INTEGER PRIMARY KEY NOT NULL,
+	//			storage_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			storage_name	TEXT	NOT NULL,
 	//		);
 
 
 	//		CREATE TABLE [IF NOT EXISTS] storage_location_table (
-	//			storage_loc_id INTEGER PRIMARY KEY NOT NULL,
+	//			storage_loc_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			storage_id	INTEGER	NOT NULL,
 	//			product_id	INTEGER	NOT NULL,
 	//		FOREIGN KEY (storage_id) 
@@ -101,13 +101,13 @@ int main()
 
 
 	//		CREATE TABLE [IF NOT EXISTS] sales_location_table (
-	//			sales_loc _id INTEGER PRIMARY KEY NOT NULL,
+	//			sales_loc _id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			sales_loc_name	TEXT	NOT NULL,
 	//		);
 
 
 	//		CREATE TABLE [IF NOT EXISTS] product_sales_location_table (
-	//			product_sales_loc_id INTEGER PRIMARY KEY NOT NULL,
+	//			product_sales_loc_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			sales_loc_id	INTEGER	NOT NULL,
 	//			product_id	INTEGER	NOT NULL,
 	//		FOREIGN KEY (sales_loc_id) 
@@ -119,7 +119,7 @@ int main()
 	//		);
 
 	//		CREATE TABLE [IF NOT EXISTS] user_table (
-	//			user_id INTEGER PRIMARY KEY NOT NULL,
+	//			user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			f_name	TEXT	NOT NULL,
 	//			l_name	TEXT	NOT NULL,
 	//			job_id	INTEGER,
@@ -135,7 +135,7 @@ int main()
 
 
 	//		CREATE TABLE [IF NOT EXISTS] job_table (
-	//			job_id INTEGER PRIMARY KEY NOT NULL,
+	//			job_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
 	//			job_name	TEXT	NOT NULL,
 	//		);”
 
