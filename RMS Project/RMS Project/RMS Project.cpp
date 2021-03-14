@@ -25,8 +25,8 @@ int main()
 	//			REFERENCES department_table (department_id)   \
 	//				ON DELETE CASCADE   \
 	//				ON UPDATE NO ACTION,  \
-	//		);
-
+	//		);  \
+  
 	//		CREATE TABLE [IF NOT EXISTS] manufacturer_table (
 	//			manufacturer_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
 	//			manufacturer_name	TEXT	NOT NULL,  \
@@ -39,13 +39,13 @@ int main()
 	//			state	TEXT,  \
 	//			country	TEXT,  \
 	//			phone_number	INTEGER,  \
-	//		);
+	//		);  \
 
 
 	//		CREATE TABLE [IF NOT EXISTS] department_table (
 	//			department_id	INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
 	//			department_name TEXT,  \
-	//		);
+	//		);  \
 
 
 
@@ -63,7 +63,7 @@ int main()
 	//		CREATE TABLE [IF NOT EXISTS] keyword_table (  \
 	//			keyword_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
 	//			keyword_name	TEXT	NOT NULL,  \
-	//		);
+	//		);  \
 
 	//		CREATE TABLE [IF NOT EXISTS] product_keyword_table (  \
 	//			p_key_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
@@ -76,14 +76,14 @@ int main()
 	//		FOREIGN KEY (keyword_id)   \
 	//			REFERENCES keyword_table (keyword_id)   \
 	//				ON DELETE CASCADE   \
-	//		);
+	//		);  \
 
 
 
 	//		CREATE TABLE [IF NOT EXISTS] storage_table (  \
 	//			storage_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
 	//			storage_name	TEXT	NOT NULL,  \
-	//		);
+	//		);  \
 
 
 	//		CREATE TABLE [IF NOT EXISTS] storage_location_table (  \
@@ -97,7 +97,7 @@ int main()
 	//		FOREIGN KEY (product_id)   \
 	//			REFERENCES product_table (product_id)   \
 	//				ON DELETE CASCADE  \
-	//		);
+	//		);  \
 
 
 	//		CREATE TABLE [IF NOT EXISTS] sales_location_table (  \
@@ -116,7 +116,7 @@ int main()
 	//		FOREIGN KEY (product_id)   \
 	//			REFERENCES product_table (product_id)   \
 	//				ON DELETE CASCADE  \
-	//		);
+	//		);  \
 
 	//		CREATE TABLE [IF NOT EXISTS] user_table (  \
 	//			user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
@@ -131,7 +131,7 @@ int main()
 	//		FOREIGN KEY (department_id)   \
 	//			REFERENCES department_table (department_id)   \
 	//				ON DELETE CASCADE   \
-	//		);
+	//		);  \
 
 
 	//		CREATE TABLE [IF NOT EXISTS] job_table (  \
