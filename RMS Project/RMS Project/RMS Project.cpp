@@ -137,7 +137,7 @@ int main()
 	//		CREATE TABLE [IF NOT EXISTS] job_table (  \
 	//			job_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  \
 	//			job_name	TEXT	NOT NULL,  \
-	//		);”
+	//		);”;
 
 
 DB_Connect dataBase;
