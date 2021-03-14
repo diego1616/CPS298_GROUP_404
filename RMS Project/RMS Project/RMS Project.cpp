@@ -33,7 +33,7 @@ int main()
 	//			contact_name	TEXT,  \
 	//			contact_email	TEXT,  \
 	//			street_address	TEXT,  \
-	//			street name	TEXT,  \
+	//			street_name	TEXT,  \
 	//			city		TEXT,  \
 	//			zip_code	TEXT,  \
 	//			state	TEXT,  \
