@@ -1,9 +1,11 @@
 #include <iostream>
 #include "DB_Connect.h"
-
+#include "DB_Literals.h"
 
 int main()
 {
+	string test = product_table::department_id;
+	cout << test << endl;
 
 	DB_Connect dataBase;
 

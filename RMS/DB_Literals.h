@@ -85,3 +85,22 @@ namespace job_table {
 	const string job_id = "job_id";
 	const string job_name = "job_name";
 }
+
+
+//namespace DB_Literals {
+//
+//	using namespace product_table;
+//	using namespace manufacturer_table;
+//	using namespace department_table;
+//	using namespace inventory_amounts_table;
+//	using namespace keyword_table;
+//	using namespace product_keyword_table;
+//	using namespace storage_table;
+//	using namespace storage_location_table;
+//	using namespace sales_location_table;
+//	using namespace product_sales_location_table;
+//	using namespace user_table;
+//	using namespace job_table;
+//
+//
+//}
