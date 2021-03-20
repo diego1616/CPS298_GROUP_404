@@ -1,7 +1,0 @@
-﻿  DB_Connect.cpp
-C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\DB_Connect.cpp(63,23): warning C4018: '<': signed/unsigned mismatch
-  Events.cpp
-C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\Events.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
-C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\Events.cpp(35): warning C4172: returning address of local variable or temporary: rString
-  RMS.vcxproj -> C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\Debug\RMS.exe

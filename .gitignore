@@ -1,11 +1,8 @@
 RMS Project/*
-RMS/RMS.sln
-RMS/RMS.vcxproj
-RMS/RMS.vcxproj.filters
-RMS/RMS.vcxproj.user
-RMS/RMS.sln
-RMS/chronicles/*
-RMS/.vs
+RMS/*.vcxproj*
+RMS/*.sln
+RMS/*chronicles/*
+RMS/.vs/*
 RMS/Release/*
 RMS/Debug/*
 RMS/x64/*

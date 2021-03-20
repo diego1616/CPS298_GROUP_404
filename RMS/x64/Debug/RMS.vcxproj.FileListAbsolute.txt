@@ -1,2 +1,0 @@
-C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\x64\Debug\RMS.exe
-C:\Users\Diego Perez\Desktop\CPS 298\CPS298_GROUP_404\RMS\x64\Debug\RMS.pdb

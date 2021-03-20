@@ -1,8 +1,0 @@
-﻿  DB_Literals.cpp
-LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
-  Generating code
-  0 of 2532 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  RMS Project.vcxproj -> C:\Users\Diego Perez\Desktop\CPS 298\GitHub\CPS298_GROUP_404\RMS Project\RMS Project\Release\RMS Project.exe

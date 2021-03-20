@@ -57,7 +57,6 @@ DB_Connect::~DB_Connect() {
 
 int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
 {
-
 	for (size_t i = 0; i < resultAmount; i++)
 	{
 		cout << column[i] << ":\t" << values[i] << endl;
@@ -65,6 +64,8 @@ int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** 
 
 	return 0;
 }
+
+
 
 void DB_Connect::insertInto(string table, string fields, string values, string condition)
 {
@@ -90,17 +91,18 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 	
 }
 
-void DB_Connect::queryFrom(string table, string fields, string condition)
+void DB_Connect::query(string &statement)
 {
+	if(statement == "")
+		return;
+
 	//add code to check for sql injection attacks
-
-	char* error;
-	int check;
-
 	try {
-		string statement = "SELECT " + fields + " FROM " + table + condition + ";";
 
-		cout << "SQLITE STATEMENT: " << statement << endl;
+		char* error;
+		int check;
+
+		cout << "DB_Connect::query() SQLITE STATEMENT: " << statement << endl;
 
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), &DB_Connect::callback, NULL, &error);
 
@@ -109,7 +111,24 @@ void DB_Connect::queryFrom(string table, string fields, string condition)
 	}
 	catch (exception e)
 	{
-			cout << DB_READ_ERROR << e.what() << endl;
+		cout << DB_READ_ERROR << e.what() << endl;
 	}
-
 }
+
+void DB_Connect::queryFrom(string table, string fields, string condition)
+{
+	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
+	this->query(statement);
+}
+
+void DB_Connect::getTables()
+{
+	string statement = "SELECT name FROM sqlite_master WHERE type='table';";
+	this->query(statement);
+}
+
+void DB_Connect::generalQuery(string &search_What)
+{
+		string statement = "SELECT name FROM sqlite_master WHERE LIKE='"+search_What + "';";
+}
+

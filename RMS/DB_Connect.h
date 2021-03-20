@@ -14,19 +14,23 @@ class DB_Connect
 	string dbName = "retail.db";
 	EventLog log;
 	bool connectionStatus;
-	sqlite3* sqLiteDB;	//public for now, but will have to be private later on. 
+	sqlite3* sqLiteDB;
+	void query(string& statement);
 
 public:
-	
+		
 	DB_Connect();
 	~DB_Connect();
 
 	//CRUD methods here
 
-	//helper function for queryFrom()
+	//helper function for queries
 	static int callback(void *notUsed, int resultAmount, char** values, char** column);
 
 	void insertInto(string table, string fields, string values, string condition = "");
 	void queryFrom(string table, string fields, string condition = "");
+	void getTables();
+	void generalQuery(string& search_What);
+
 };
 
