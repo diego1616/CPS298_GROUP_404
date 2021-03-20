@@ -140,6 +140,12 @@ job_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 job_name TEXT NOT NULL \
 ); \n";
 
+		std::string permission_level_table = 
+"CREATE TABLE IF NOT EXISTS permission_level_table( \
+permission_level_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
+permission_level_name TEXT NOT NULL \
+); \n";
+	
 public:
 
 	const std::string all_Tables = product_table + manufacturer_table + department_table + inventory_amounts_table +
