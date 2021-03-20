@@ -79,12 +79,17 @@ namespace user_table {
 	const string job_id = "job_id";
 	const string department_id = "department_id";
 	const string password = "password";
+	const string permission_level_id = "permission_level_id";
 }
 
 namespace job_table {
 	const string job_id = "job_id";
 	const string job_name = "job_name";
 }
+
+namespace permission_level_table = 
+	const string permission_level_id = "permission_level_id";
+	const string permission_level_name = "permission_level_name";
 
 
 //namespace DB_Literals {
