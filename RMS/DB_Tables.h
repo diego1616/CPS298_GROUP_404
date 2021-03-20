@@ -73,9 +73,11 @@ product_id INTEGER	NOT NULL, \
 FOREIGN KEY(product_id) \
 REFERENCES product_table(product_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 FOREIGN KEY(keyword_id) \
 REFERENCES keyword_table(keyword_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 ); \n";
 
 
@@ -93,9 +95,11 @@ product_id INTEGER	NOT NULL, \
 FOREIGN KEY(storage_id) \
 REFERENCES storage_table(storage_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 FOREIGN KEY(product_id) \
 REFERENCES product_table(product_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 ); \n";
 
 	std::string sales_location_table =
@@ -112,9 +116,11 @@ product_id INTEGER NOT NULL, \
 FOREIGN KEY(sales_loc_id) \
 REFERENCES storage_location_table(sales_loc_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 FOREIGN KEY(product_id) \
 REFERENCES product_table(product_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 ); \n";
 
 	std::string user_table =
@@ -125,13 +131,19 @@ l_name TEXT NOT NULL, \
 job_id	INTEGER, \
 department_id INTEGER, \
 password TEXT, \
-permission_level INTEGER, \
+permission_level_id INTEGER, \
 FOREIGN KEY(job_id) \
 REFERENCES job_table(job_id) \
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 FOREIGN KEY(department_id)\
 REFERENCES department_table(department_id)\
 ON DELETE CASCADE \
+ON UPDATE NO ACTION \
+FOREIGN KEY(permission_level_id)\
+REFERENCES permission_level_table(permission_level_id)\
+ON DELETE CASCADE \
+ON UPDATE NO ACTION \
 ); \n";
 
 	std::string job_table = 
@@ -150,7 +162,7 @@ public:
 
 	const std::string all_Tables = product_table + manufacturer_table + department_table + inventory_amounts_table +
 		keyword_table + product_keyword_table + storage_table + storage_location_table +
-		sales_location_table + product_sales_location_table + user_table + job_table;
+		sales_location_table + product_sales_location_table + user_table + job_table + permission_level_table;
 
 
 };
