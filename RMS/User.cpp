@@ -14,10 +14,12 @@ User::User() {
 void User::set_Values(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
 
 	//this sets the constructors
+	this->f_name = f_n;
 	this->l_name = l_n;
 	this->job_id = jb_id;
 	this->department_id = de_id;
 	this->password = psswrd;
+	this->permissions_id = per_id;
 };
 
 void User::add_User() {
@@ -29,19 +31,19 @@ void User::add_User() {
 	string yesno = "no";
 	do {
 		cout << "Please enter the user's job identification number: " ;
-		cin >> job_id;
+		getline(job_id);
 		cout << endl;
 
 		cout << "Please enter the user's department identification number: ";
-		cin >> department_id;
+		getline(department_id);
 		cout << endl;
 
 		cout << "Please enter the user's permissions level: ";
-		cin >> permissions_id;
+		getline(permissions_id);
 		cout << endl;
 
 		cout << "Is this information correct? yes/no";
-		cin >> yesno;
+		getline(yesno);
 
 	} while (yesno == "no");
 
@@ -62,14 +64,14 @@ void User::find_User_By_Name() {
 
 	do {
 		cout << enter_First;
-		cin >> f_name;
+		getline(f_name);
 		cout << endl;
 		cout << enter_Last;
-		cin >> l_name;
+		getline(l_name);
 		cout << endl;
 
 		cout << "Is " << f_name << " " << l_name << " the correct employee? yes/no";
-			cin >> yesno;
+		getline(yesno);
 		cout << endl;
 
 	} while (yesno == "no");
@@ -97,7 +99,10 @@ void User::change_User_Information() {
 	//this is used to change information about a user
 
 	int number_Option = 0;
-	string yesno = "no", new_f_name;
+	string yesno = "no";
+	string new_f_name;
+	string new_l_name;
+	int new_job_id, new_department_id, new_permission_id;
 
 	cout << "What would you like to do?" << endl;
 	
@@ -105,7 +110,7 @@ void User::change_User_Information() {
 	
 	cout << "Please choose the number option: ";
 	
-	cin >> number_Option;
+	getline(number_Option);
 	
 	cout << endl;
 
@@ -113,10 +118,10 @@ void User::change_User_Information() {
 		case 1:
 			do {
 				cout << "Please enter the new first name: ";
-					cin >> new_f_name;
+				getline(new_f_name);
 				cout << endl;
 				cout << "Is this correct? yes/no: ";
-					cin >> yesno;
+				getline(yesno);
 			} while (yesno == "no");
 
 				f_name = new_f_name;
@@ -125,40 +130,40 @@ void User::change_User_Information() {
 			break;
 		case 2:
 			do {
-				cout << "Please enter the new last name: "
-					cin >> new_l_name;
+				cout << "Please enter the new last name: ";
+				getline(new_l_name);
 				cout << endl;
-				cout << "Is this correct? yes/no: "
-					cin >> yesno;
-			} while (yesno = "no")
+				cout << "Is this correct? yes/no: ";
+				getline(yesno);
+			} while (yesno == "no");
 
-				l_name = new_l_name;
+				l_name == new_l_name;
 			add_To_DB_Table();
 
 			break;
 		case 3:
 			do {
-				cout << "Please enter the new job number: "
-					cin >> new_job_id;
+				cout << "Please enter the new job number: ";
+				getline(new_job_id);
 				cout << endl;
-				cout << "Is this correct? yes/no: "
-					cin >> yesno;
-			} while (yesno = "no")
+				cout << "Is this correct? yes/no: ";
+				getline(yesno);
+			} while (yesno == "no");
 
 				job_id = new_job_id;
 			add_To_DB_Table();
 
 			break;
 		case 4:
-			what_Are_You_Changing = "department_id_num";
+
 
 			do {
-				cout << "Please enter the new department number: "
-					cin >> new_department_id;
+				cout << "Please enter the new department number: ";
+				getline(new_department_id);
 				cout << endl;
-				cout << "Is this correct? yes/no: "
-					cin >> yesno;
-			} while (yesno = "no")
+				cout << "Is this correct? yes/no: ";
+				getline(yesno);
+			} while (yesno == "no");
 
 				department_id = new_department_id;
 			add_To_DB_Table();
@@ -166,14 +171,14 @@ void User::change_User_Information() {
 			break;
 		case 5:
 			do {
-				cout << "Please enter the new permission level: "
-					cin >> new_permission_id;
+				cout << "Please enter the new permission level: ";
+				getline(new_permission_id);
 				cout << endl;
-				cout << "Is this correct? yes/no: "
-					cin >> yesno;
-			} while (yesno = "no")
+				cout << "Is this correct? yes/no: ";
+				getline(yesno);
+			} while (yesno == "no");
 
-				permission_id = new_permission_id;
+				permissions_id = new_permission_id;
 			add_To_DB_Table();
 
 			break;
@@ -205,25 +210,25 @@ void User::change_User_Password() {
 
 	do {
 		cout << "Please enter your old password: ";
-		cin >> user_Entered_Password;
-		endl;
+		getline(user_Entered_Password);
+		cout << endl;
 	} while (password != user_Entered_Password);
 
 	do {
 		cout << "Please enter your new password: ";
-		cin >> new_Password_1;
-		endl;
+		getline(new_Password_1);
+		cout << endl;
 
 		cout << "Please enter it again: ";
-		cin >> new_Password_2;
-		endl;
+		getline(new_Password_2);
+		cout << endl;
 
 		if (new_Password_1 != new_Password_2) {
-			cout << "Your passwords do not match.  Please try again."
+			cout << "Your passwords do not match.  Please try again.";
 		};
 
 
-	} while (new_Password_1 != new_Password_2)
+	} while (new_Password_1 != new_Password_2);
 
 		password = new_Password_1;
 	add_To_DB_Table();
@@ -257,6 +262,6 @@ void User::print_Menu() {
 
 };
 
-String::~User() { delete[] user_id, f_name, string l_name, job_id, department_id, string password, permissions_id, enter_First, enter_Last; }
+//String::~User() { delete[] user_id, f_name, string l_name, job_id, department_id, string password, permissions_id, enter_First, enter_Last; }
 
 //do I use commas or semicolons??
