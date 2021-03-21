@@ -129,6 +129,7 @@ void DB_Connect::getTables()
 
 bool DB_Connect::generalQuery(string &search_What, string table)
 {
+	//this function has not been tested, the code below is just a preview
 		string statement = "SELECT name FROM sqlite_master WHERE LIKE='"+search_What + "';";
 
 		return false;
