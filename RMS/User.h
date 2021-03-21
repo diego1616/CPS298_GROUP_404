@@ -1,7 +1,11 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include "DB_Connect.h"
+using namespace std;
 
-ref class User
+
+class User 
 {
 private:
 	int user_id;
@@ -12,7 +16,10 @@ private:
 	string password;
 	int permissions_id;
 	string enter_First = "Please enter the user's first name: ";
-	string enter_Last = "Please enter the user's last name: ";"
+	string enter_Last = "Please enter the user's last name: ";
+	DB_Connect db;
+
+
 
 
 public:
@@ -23,6 +30,7 @@ public:
 	void change_User_Password();
 	void add_To_DB_Table();
 	void find_In_DB_Table();
+	void find_User_By_Name();
 	void print_Menu();
 	
 

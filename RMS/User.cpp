@@ -1,13 +1,23 @@
 #include "User.h"
 
+
+//please use getline instead of cin
+//fix constructor name
+
+User::User() {
+
+	
+
+}
+
+
 void User::set_Values(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
 
 	//this sets the constructors
-
-	l_name - l_n;
-	job_id = jb_id;
-	department_id = de_id;
-	password = psswrd;
+	this->l_name = l_n;
+	this->job_id = jb_id;
+	this->department_id = de_id;
+	this->password = psswrd;
 };
 
 void User::add_User() {
@@ -16,49 +26,62 @@ void User::add_User() {
 
 	find_User_By_Name();
 
-	string yesno = "no":
+	string yesno = "no";
 	do {
-		cout << "Please enter the user's job identification number: ";
+		cout << "Please enter the user's job identification number: " ;
 		cin >> job_id;
-		endl;
+		cout << endl;
 
 		cout << "Please enter the user's department identification number: ";
 		cin >> department_id;
-		endl;
+		cout << endl;
 
 		cout << "Please enter the user's permissions level: ";
 		cin >> permissions_id;
-		endl;
+		cout << endl;
 
 		cout << "Is this information correct? yes/no";
 		cin >> yesno;
 
-	} while (yesno = "no");
+	} while (yesno == "no");
 
-	cout << "Your password is "default".  Please change your password now."
+	cout << "Your password is \"default\".  Please change your password now.";
 		change_User_Password();
+
+		//add code to clear the stream in case someone uses getline
 };
 
 void User::find_User_By_Name() {
 
 	//this is used to get a user's name, to add a new user or find an existing user.
 
+	bool checkFName = false;
+	bool checkLName = false;
+
 	string yesno = "no";
 
 	do {
-		cout << enter_first;
+		cout << enter_First;
 		cin >> f_name;
-		endl;
-		cout << enter_last;
+		cout << endl;
+		cout << enter_Last;
 		cin >> l_name;
-		endl;
+		cout << endl;
 
-		cout << "Is " << f_name << " " << l_name << " the correct employee? yes/no"
+		cout << "Is " << f_name << " " << l_name << " the correct employee? yes/no";
 			cin >> yesno;
-		endl;
+		cout << endl;
 
-	} while (yesno = "no");
+	} while (yesno == "no");
 
+	//add code to clear the stream in case someone uses getline
+
+	//the code below is not perfect, it has some erros.  needs to be fixed. 
+	//checkFName = db.generalQuery(this->f_name, "User");
+	//checkLName = db.generalQuery(this->l_name, "User");
+
+	//if (checkFName && checkLName)
+	//	cout << " this user already exist";
 };
 
 void User::remove_User() {
@@ -74,23 +97,27 @@ void User::change_User_Information() {
 	//this is used to change information about a user
 
 	int number_Option = 0;
-	yesno = "no"
+	string yesno = "no", new_f_name;
 
-		cout >> "What would you like to do?" << endl;
-	print_Menu();
-	cout >> "Please choose the number option: ";
-	cin << number_Option;
-	endl;
+	cout << "What would you like to do?" << endl;
+	
+	this->print_Menu();
+	
+	cout << "Please choose the number option: ";
+	
+	cin >> number_Option;
+	
+	cout << endl;
 
-	SWITCH(numer_Option) {
+	switch(number_Option) {
 		case 1:
 			do {
-				cout << "Please enter the new first name: "
+				cout << "Please enter the new first name: ";
 					cin >> new_f_name;
-				endl;
-				cout << "Is this correct? yes/no: "
+				cout << endl;
+				cout << "Is this correct? yes/no: ";
 					cin >> yesno;
-			} while (yesno = "no")
+			} while (yesno == "no");
 
 				f_name = new_f_name;
 			add_To_DB_Table();
@@ -100,7 +127,7 @@ void User::change_User_Information() {
 			do {
 				cout << "Please enter the new last name: "
 					cin >> new_l_name;
-				endl;
+				cout << endl;
 				cout << "Is this correct? yes/no: "
 					cin >> yesno;
 			} while (yesno = "no")
@@ -113,7 +140,7 @@ void User::change_User_Information() {
 			do {
 				cout << "Please enter the new job number: "
 					cin >> new_job_id;
-				endl;
+				cout << endl;
 				cout << "Is this correct? yes/no: "
 					cin >> yesno;
 			} while (yesno = "no")
@@ -128,7 +155,7 @@ void User::change_User_Information() {
 			do {
 				cout << "Please enter the new department number: "
 					cin >> new_department_id;
-				endl;
+				cout << endl;
 				cout << "Is this correct? yes/no: "
 					cin >> yesno;
 			} while (yesno = "no")
@@ -141,7 +168,7 @@ void User::change_User_Information() {
 			do {
 				cout << "Please enter the new permission level: "
 					cin >> new_permission_id;
-				endl;
+				cout << endl;
 				cout << "Is this correct? yes/no: "
 					cin >> yesno;
 			} while (yesno = "no")

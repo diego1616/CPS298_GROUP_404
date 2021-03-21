@@ -15,7 +15,7 @@ class DB_Connect
 	EventLog log;
 	bool connectionStatus;
 	sqlite3* sqLiteDB;
-	void query(string& statement);
+	
 
 public:
 		
@@ -27,10 +27,10 @@ public:
 	//helper function for queries
 	static int callback(void *notUsed, int resultAmount, char** values, char** column);
 
+	void query(string& statement);//use if you already have a sqlite statement
 	void insertInto(string table, string fields, string values, string condition = "");
 	void queryFrom(string table, string fields, string condition = "");
 	void getTables();
-	void generalQuery(string& search_What);
-
+	bool generalQuery(string& search_What, string table="");
 };
 

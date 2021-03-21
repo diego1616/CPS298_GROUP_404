@@ -117,8 +117,24 @@ REFERENCES product_table(product_id) \
 ON DELETE CASCADE \
 ); \n";
 
+//	std::string user_table =
+//"CREATE TABLE IF NOT EXISTS user_table( \
+//user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
+//f_name TEXT NOT NULL, \
+//l_name TEXT NOT NULL, \
+//job_id	INTEGER, \
+//department_id INTEGER, \
+//password TEXT, \
+//FOREIGN KEY(job_id) \
+//REFERENCES job_table(job_id) \
+//ON DELETE CASCADE \
+//FOREIGN KEY(department_id)\
+//REFERENCES department_table(department_id)\
+//ON DELETE CASCADE \
+//); \n";
+
 	std::string user_table =
-"CREATE TABLE IF NOT EXISTS user_table( \
+		"CREATE TABLE IF NOT EXISTS user_table( \
 user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 f_name TEXT NOT NULL, \
 l_name TEXT NOT NULL, \
@@ -132,6 +148,7 @@ FOREIGN KEY(department_id)\
 REFERENCES department_table(department_id)\
 ON DELETE CASCADE \
 ); \n";
+
 
 	std::string job_table = 
 "CREATE TABLE IF NOT EXISTS job_table( \
