@@ -5,6 +5,7 @@
 #include "Events.h"
 #include "DB_Literals.h"
 #include "DB_Tables.h"
+#include <vector>
 
 using namespace std;
 
@@ -16,6 +17,8 @@ class DB_Connect
 	bool connectionStatus;
 	sqlite3* sqLiteDB;
 	
+	vector<string> columns;
+	vector<string> data;
 
 public:
 		
@@ -32,5 +35,6 @@ public:
 	void queryFrom(string table, string fields, string condition = "");
 	void getTables();
 	bool generalQuery(string& search_What, string table="");
+	void someTestDanMade();
 };
 

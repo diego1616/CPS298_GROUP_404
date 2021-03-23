@@ -59,13 +59,14 @@ int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** 
 {
 	for (size_t i = 0; i < resultAmount; i++)
 	{
-		cout << column[i] << ":\t" << values[i] << endl;
+
+		cout << column[i] << ":\t" << ((values[i]==nullptr)?"NULL":values[i]) << endl;
+
+		//inserting into the vectors for manipulation later.
 	}
 
 	return 0;
 }
-
-
 
 void DB_Connect::insertInto(string table, string fields, string values, string condition)
 {
@@ -133,5 +134,26 @@ bool DB_Connect::generalQuery(string &search_What, string table)
 		string statement = "SELECT name FROM sqlite_master WHERE LIKE='"+search_What + "';";
 
 		return false;
+}
+
+void DB_Connect::someTestDanMade() {
+
+	sqlite3_stmt* sql_statement;
+	const char* sql = "SELECT * FROM product_table;";
+	size_t statement_length = strlen(sql);
+
+	int prep = sqlite3_prepare_v2(this->sqLiteDB, sql, statement_length, &sql_statement, NULL);
+	
+	if (prep == SQLITE_OK) {
+		prep = sqlite3_step(sql_statement);
+		
+		for (int i = 0; i < 4; i++) {
+			const char* col_val = (char*)sqlite3_column_text(sql_statement, i);
+			cout << col_val << endl;
+		}
+	}
+	else {
+		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
+	}
 }
 

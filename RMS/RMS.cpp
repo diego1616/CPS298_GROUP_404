@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DB_Connect.h"
 #include "DB_Literals.h"
+#include "AddProduct.h"
 
 
 //this function will prompt for a number, check it, clear the stream, then return the number. 
@@ -45,36 +46,50 @@ int getNumber()
 
 int main()
 {
+	//this created a connection to the database
+	AddProduct myProductAdder;
 
-	//Katie, first I will show you the problem we want to avoid.  The reason to go through so many hoops.
+	//	DB_Connect::insertInto(table::products, "product_id,item_name,manufacturer_id","8765309,'barbie doll',37","");
 
-	//cin causes all kinds of trouble on its own, so I made a function to help.  It will also check for letters and bad data in general. 
 
-	while (true) {
+	//const string product_id = "product_id";
+	//const string item_name = "item_name";
+	//const string manufacturer_id = "manufacturer_id";
+	//const string manufacturer_product_id = "manufacturer_product_id";
+	//const string manufacturer_price = "manufacturer_price";
+	//const string retail_price = "retail_price";
+	//const string department_id = "department_id";
+	//const string low_stock_quantity = "low_stock_quantity";
 
-		int number1(0), number2(0);
+//	"CREATE TABLE IF NOT EXISTS product_table ( \
+//product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
+//item_name TEXT NOT NULL, \
+//manufacturer_id INTEGER NOT NULL, \
+//manufacturer_product_id	TEXT NOT NULL, \
+//manufatcturer_price	REAL, \
+//retail_price REAL, \
+//department_id INTEGER, \
+//low_stock_quantity INTEGER, \
+//FOREIGN KEY (manufacturer_id) \
+//REFERENCES manufacturer_table (manufacturer_id) \
+//ON DELETE CASCADE \
+//ON UPDATE NO ACTION, \
+//FOREIGN KEY (department_id) \
+//REFERENCES department_table (department_id) \
+//ON DELETE CASCADE \
+//ON UPDATE NO ACTION \
+//); \n";
 
-		cout << "please enter the first number" << endl;
-		
-		number1 = getNumber();
+	myProductAdder.insertInto(table::products, "item_name, manufacturer_id, manufacturer_product_id", "'I am a barbie doll',37,'no idea what this is'");
 
-		cout << "please enter the second number" << endl;
+	string all = "*";
+	myProductAdder.queryFrom(table::products, all);
 
-		number2 = getNumber();
+	getline(cin, myString);
 
-		cout << "your numbers are " << number1 << " and " << number2 << endl;
+	addquotes(myString);
 
-		cout << "Thank you for playing!!\n" << endl;
-
-	}
-
-	DB_Connect dataBase;
-
-	//printing the table names
-	dataBase.getTables();
-	
-	
-
+	myProductAdder.someTestDanMade();
 
 	return 0;
 }

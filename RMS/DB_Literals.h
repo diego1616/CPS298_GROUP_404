@@ -2,6 +2,22 @@
 #include <string>
 using namespace std;
 
+namespace table {
+	const string products = "product_table";
+	const string manufacturers = "manufacturer_table";
+	const string departments = "department_table";
+	const string inventory = "inventory_amounts_table";
+	const string keywords = "keyword_table";
+	const string product_keywords = "product_keyword_table";
+	const string storage = "storage_table";
+	const string storage_locations = "storage_location_table";
+	const string sales_locations = "sales_location_table";
+	const string product_sales_locations = "product_sales_location_table";
+	const string users = "user_table";
+	const string jobs = "job_table";
+}
+
+
 // Note: const implies static in this case
 namespace product_table {
 	const string product_id = "product_id";
