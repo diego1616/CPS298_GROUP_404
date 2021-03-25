@@ -3,19 +3,6 @@
 #include "User.h"
 
 
-User::User() {
-}
-
-
-void User::set_Values(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
-
-    //this sets the constructors
-    this->l_name = l_n;
-    this->job_id = jb_id;
-    this->department_id = de_id;
-    this->password = psswrd;
-
-};
 
 User::User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
     this->f_name = f_n;
