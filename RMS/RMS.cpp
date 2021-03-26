@@ -2,6 +2,7 @@
 #include "DB_Connect.h"
 #include "DB_Literals.h"
 #include "AddProduct.h"
+#include "Menu.h"
 
 
 //this function will prompt for a number, check it, clear the stream, then return the number. 
@@ -79,6 +80,10 @@ int main()
 //ON DELETE CASCADE \
 //ON UPDATE NO ACTION \
 //); \n";
+	
+	Menu m;
+
+	m.menu_options();
 
 	myProductAdder.insertInto(table::products, "item_name, manufacturer_id, manufacturer_product_id", "'I am a barbie doll',37,'no idea what this is'");
 
