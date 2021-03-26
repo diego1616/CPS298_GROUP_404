@@ -90,104 +90,112 @@ void User::change_User_Information() {
 
     //this is used to change information about a user
 
+
+
     int number_Option = 0;
     string yesno = "no", new_f_name;
 
-    cout << "What would you like to do?" << endl;
+    do {
 
-    this->print_Menu();
+        cout << "Please choose the number option: ";
 
-    cout << "Please choose the number option: ";
+        number_Option = getline();
 
-    number_Option = getline();
+        cout << endl;
 
-    cout << endl;
+        if ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
+            && (number_Option != 6) && (number_Option != 7) && (number_Option != 8)) {
+            cout << "That is not an option.  Please try again." << endl;
+        }
+
+
+    } while ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
+        && (number_Option != 6) && (number_Option != 7) && (number_Option != 8));
 
     switch (number_Option) {
-    case 1:
-        do {
-            cout << "Please enter the new first name: ";
-            new_f_name = getline();
-            cout << endl;
-            cout << "Is this correct? yes/no: ";
-            yesno = getline();
-        } while (yesno == "no");
 
-        f_name = new_f_name;
-        add_To_DB_Table();
-
-        break;
-    case 2:
-        do {
-            cout << "Please enter the new last name: "
-                new_l_name = getline();
-            cout << endl;
-            cout << "Is this correct? yes/no: "
+        case 1:
+            do {
+                cout << "Please enter the new first name: ";
+                new_f_name = getline();
+                cout << endl;
+                cout << "Is this correct? yes/no: ";
                 yesno = getline();
-        } while (yesno = "no")
+            } while (yesno == "no");
 
-            l_name = new_l_name;
-        add_To_DB_Table();
+            f_name = new_f_name;
+            add_To_DB_Table();
 
-        break;
-    case 3:
-        do {
-            cout << "Please enter the new job number: "
-                new_job_id = getline();
-            cout << endl;
-            cout << "Is this correct? yes/no: "
-                yesno = getline();
-        } while (yesno = "no")
+            break;
+        case 2:
+            do {
+                cout << "Please enter the new last name: "
+                    new_l_name = getline();
+                cout << endl;
+                cout << "Is this correct? yes/no: "
+                    yesno = getline();
+            } while (yesno = "no")
 
-            job_id = new_job_id;
-        add_To_DB_Table();
+                l_name = new_l_name;
+            add_To_DB_Table();
 
-        break;
-    case 4:
-        what_Are_You_Changing = "department_id_num";
+            break;
+        case 3:
+            do {
+                cout << "Please enter the new job number: "
+                    new_job_id = getline();
+                cout << endl;
+                cout << "Is this correct? yes/no: "
+                    yesno = getline();
+            } while (yesno = "no")
 
-        do {
-            cout << "Please enter the new department number: "
-                new_department_id = getline();
-            cout << endl;
-            cout << "Is this correct? yes/no: "
-                yesno = getline();
-        } while (yesno = "no")
+                job_id = new_job_id;
+            add_To_DB_Table();
 
-            department_id = new_department_id;
-        add_To_DB_Table();
+            break;
+        case 4:
+            what_Are_You_Changing = "department_id_num";
 
-        break;
-    case 5:
-        do {
-            cout << "Please enter the new permission level: "
-                new_permission_id = getline();
-            cout << endl;
-            cout << "Is this correct? yes/no: "
-                yesno = getline();
-        } while (yesno = "no")
+            do {
+                cout << "Please enter the new department number: "
+                    new_department_id = getline();
+                cout << endl;
+                cout << "Is this correct? yes/no: "
+                    yesno = getline();
+            } while (yesno = "no")
 
-            permission_id = new_permission_id;
-        add_To_DB_Table();
+                department_id = new_department_id;
+            add_To_DB_Table();
 
-        break;
-    case 6:
-        change_User_Password();
-        break;
+            break;
+        case 5:
+            do {
+                cout << "Please enter the new permission level: "
+                    new_permission_id = getline();
+                cout << endl;
+                cout << "Is this correct? yes/no: "
+                    yesno = getline();
+            } while (yesno = "no")
 
-    case 7:
-        add_User();
-        break;
+                permission_id = new_permission_id;
+            add_To_DB_Table();
 
-    case 8:
-        return;
+            break;
+        case 6:
+            change_User_Password();
+            break;
+
+        case 7:
+            add_User();
+            break;
+
+        case 8:
+            return;
 
     };
 
-
-    change_User_Information();
-
 };
+
 
 void User::change_User_Password() {
 
