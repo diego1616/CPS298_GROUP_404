@@ -26,7 +26,7 @@ void Menu::menu_options() {
     do {
         cout << "What would you like to work with?" << endl;
 
-        this->print_Menu();
+        this->print_main_menu();
 
         do {
 
