@@ -18,8 +18,7 @@ private:
 	string enter_First = "Please enter the user's first name: ";
 	string enter_Last = "Please enter the user's last name: ";
 	DB_Connect db;
-	User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id);
-	~User();
+
  
 
 public:
@@ -32,4 +31,6 @@ public:
 	void find_User_By_Name();
 	void print_Menu();
 	int getNumber()
+	User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id);
+	~User();
 };

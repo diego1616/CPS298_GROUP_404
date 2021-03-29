@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "sqlite3.h"
+#include "sqlite_dependencies/sqlite3.h"
 
 class DB_Tables
 {

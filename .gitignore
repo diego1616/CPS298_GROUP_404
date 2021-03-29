@@ -1,9 +1,0 @@
-RMS Project/*
-RMS/*.vcxproj*
-RMS/*.sln
-RMS/*chronicles/*
-RMS/.vs/*
-RMS/Release/*
-RMS/Debug/*
-RMS/x64/*
-DB Browser for SQLite/*

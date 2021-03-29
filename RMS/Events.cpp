@@ -1,4 +1,4 @@
-#include "Events.h";
+#include "Events.h"
 #pragma warning(disable : 4996)
 
 //record the time the object is created

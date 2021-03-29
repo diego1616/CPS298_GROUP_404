@@ -1,7 +1,7 @@
 #include <iostream>
 #include "DB_Connect.h"
 #include "DB_Literals.h"
-#include "AddProduct.h"
+#include "Product.h"
 
 
 //this function will prompt for a number, check it, clear the stream, then return the number. 
@@ -47,7 +47,7 @@ int getNumber()
 int main()
 {
 	//this created a connection to the database
-	AddProduct myProductAdder;
+	Product myProductAdder;
 
 	//	DB_Connect::insertInto(table::products, "product_id,item_name,manufacturer_id","8765309,'barbie doll',37","");
 
@@ -80,16 +80,18 @@ int main()
 //ON UPDATE NO ACTION \
 //); \n";
 
-	myProductAdder.insertInto(table::products, "item_name, manufacturer_id, manufacturer_product_id", "'I am a barbie doll',37,'no idea what this is'");
+	// myProductAdder.insertInto(table::products, "item_name, manufacturer_id, manufacturer_product_id", "'Too Many Dolls',31,'TheCompanyCompany'");
 
-	string all = "*";
-	myProductAdder.queryFrom(table::products, all);
+	// string all = "*";
+	// myProductAdder.queryFrom(table::products, all);
 
-	getline(cin, myString);
+	// getline(cin, myString);
 
-	addquotes(myString);
+	// addquotes(myString);
+
 
 	myProductAdder.someTestDanMade();
+	system("pause");
 
 	return 0;
 }
