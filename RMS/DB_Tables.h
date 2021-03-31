@@ -12,6 +12,16 @@ class DB_Tables
 product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 item_name TEXT NOT NULL, \
 manufacturer_id INTEGER NOT NULL, \
+FOREIGN KEY (manufacturer_id) \
+REFERENCES manufacturer_table (manufacturer_id) \
+ON DELETE CASCADE \
+ON UPDATE NO ACTION, \
+); \n";
+
+/*	"CREATE TABLE IF NOT EXISTS product_table ( \
+product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
+item_name TEXT NOT NULL, \
+manufacturer_id INTEGER NOT NULL, \
 manufacturer_product_id	TEXT NOT NULL, \
 manufatcturer_price	REAL, \
 retail_price REAL, \
@@ -26,6 +36,7 @@ REFERENCES department_table (department_id) \
 ON DELETE CASCADE \
 ON UPDATE NO ACTION \
 ); \n";
+*/*
 
 	std::string manufacturer_table =
 "CREATE TABLE IF NOT EXISTS manufacturer_table(	\
@@ -42,6 +53,7 @@ country	TEXT, \
 phone_number INTEGER \
 ); \n";
 
+/*
 	std::string department_table = 
 "CREATE TABLE IF NOT EXISTS department_table( \
 department_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
@@ -123,23 +135,10 @@ ON DELETE CASCADE \
 ON UPDATE NO ACTION \
 ); \n";
 
-//	std::string user_table =
-//"CREATE TABLE IF NOT EXISTS user_table( \
-//user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
-//f_name TEXT NOT NULL, \
-//l_name TEXT NOT NULL, \
-//job_id	INTEGER, \
-//department_id INTEGER, \
-//password TEXT, \
-//FOREIGN KEY(job_id) \
-//REFERENCES job_table(job_id) \
-//ON DELETE CASCADE \
-//FOREIGN KEY(department_id)\
-//REFERENCES department_table(department_id)\
-//ON DELETE CASCADE \
-//); \n";
+*/
 
-	std::string user_table =
+
+/*	std::string user_table =
 		"CREATE TABLE IF NOT EXISTS user_table( \
 user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 f_name TEXT NOT NULL, \
@@ -161,9 +160,16 @@ REFERENCES permission_level_table(permission_level_id)\
 ON DELETE CASCADE \
 ON UPDATE NO ACTION \
 ); \n";
+*/
+	std::string user_table =
+		"CREATE TABLE IF NOT EXISTS user_table( \
+user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
+u_name TEXT NOT NULL, \
+password TEXT, \
+); \n";
 
 
-	std::string job_table = 
+/*	std::string job_table = 
 "CREATE TABLE IF NOT EXISTS job_table( \
 job_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 job_name TEXT NOT NULL \
@@ -174,13 +180,14 @@ job_name TEXT NOT NULL \
 permission_level_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 permission_level_name TEXT NOT NULL \
 ); \n";
+*/
 	
 public:
 
-	const std::string all_Tables = product_table + manufacturer_table + department_table + inventory_amounts_table +
+	const std::string all_Tables = product_table + manufacturer_table + user_table;
+
+	/*const std::string all_Tables = product_table + manufacturer_table + department_table + inventory_amounts_table +
 		keyword_table + product_keyword_table + storage_table + storage_location_table +
 		sales_location_table + product_sales_location_table + user_table + job_table + permission_level_table;
-
-
+		*/
 };
-

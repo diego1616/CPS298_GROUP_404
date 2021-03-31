@@ -2,6 +2,7 @@
 #include "DB_Connect.h"
 #include "DB_Literals.h"
 #include "AddProduct.h"
+#include "Menu.h"
 
 //#define WIN32_LEAN_AND_MEAN     //the header windows.h defines a lot of data types, which causes conflict. This line fixes that. 
 //#include <windows.h>

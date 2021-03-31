@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <iostream>
 #include <regex>
 #define WIN32_LEAN_AND_MEAN     //the header windows.h defines a lot of data types, which causes conflict. This line fixes that. 
@@ -13,6 +14,7 @@ enum margins{MARGIN_0 = 0, MARGIN1 = 5, MARGIN2 = MARGIN1 + 20, POS_OFFSET = 5, 
 
 class Menu
 {
+private:
 
 	
 public:

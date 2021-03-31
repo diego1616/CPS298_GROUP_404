@@ -1,6 +1,10 @@
+#include <string>
+#include <iostream>
 #include "Menu.h"
+#include "User.h"
 
 
+void Menu::print_main_menu() {
 
 void Menu::gotoxy(int x, int y)
 {
@@ -15,7 +19,7 @@ void Menu::setColor(int color)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-
+   
 string Menu::addComma(string data) {
 
     data += ",";
@@ -54,7 +58,7 @@ bool Menu::onlyNumbers(string str) {
 
     //cout << "onlyNumbers() input string: " << str << endl;
     for (int i = 0; i < str.length() -1; i++)
-    {
+            {
         if (str[i] < 48 || str[i]>57)
         {
             //cout << "something besides a number was detected: " << str[i] << endl;
@@ -113,7 +117,7 @@ void Menu::menuLine(string& menuText, string storedInput, int margin, int margin
     cout << menuText;
     gotoxy(margin2, position);
     cout << storedInput;
-}
+            }
 
 //the third parameter is a pointer to a function to check the data is correct before accepting it.
 void Menu::getMenuLine(string& data, int margin, int position, function<string(string)> validateData) {
