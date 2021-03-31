@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 
+
 namespace table {
 	const string products = "product_table";
 	const string manufacturers = "manufacturer_table";
@@ -116,21 +117,31 @@ namespace permission_level_table {
 	const string permission_level_name = "permission_level_name";
 }
 
-//namespace DB_Literals {
-//
-//	using namespace product_table;
-//	using namespace manufacturer_table;
-//	using namespace department_table;
-//	using namespace inventory_amounts_table;
-//	using namespace keyword_table;
-//	using namespace product_keyword_table;
-//	using namespace storage_table;
-//	using namespace storage_location_table;
-//	using namespace sales_location_table;
-//	using namespace product_sales_location_table;
-//	using namespace user_table;
-//	using namespace job_table;
-//	using namepsace permission_level_table;
-//
-//
-//}
+
+namespace humanized {
+	const string tables[][2] = {
+		{table::products, "Products"},
+		{table::manufacturers, "Manufacturers"},
+		{table::departments, "Departments"},
+		{table::inventory, "Inventory"},
+		{table::keywords, "Keywords"},
+		{table::product_keywords, "Product Keywords"},
+		{table::storage, "Storage"},
+		{table::storage_locations, "Storage Locations"},
+		{table::sales_locations, "Sales Locations"},
+		{table::product_sales_locations, "Product Sales Locations"},
+		{table::users, "Users"},
+		{table::jobs, "Jobs"}
+	};
+
+	const string product_fields[][2] = {
+		{product_table::product_id, "Product ID"},
+		{product_table::item_name, "Item Name"},
+		{product_table::manufacturer_id, "Mfr. ID"},
+		{product_table::manufacturer_product_id, "Mfr. Product ID"},
+		{product_table::manufacturer_price, "Mfr. Price"},
+		{product_table::retail_price, "Retail Price"},
+		{product_table::department_id, "Dept ID"},
+		{product_table::low_stock_quantity, "Low Stock Quantity"}
+	};
+}

@@ -25,6 +25,8 @@ public:
 	DB_Connect();
 	~DB_Connect();
 
+	int lastQueryRows;
+
 	//CRUD methods here
 
 	//helper function for queries
@@ -32,7 +34,7 @@ public:
 
 	void query(string& statement);//use if you already have a sqlite statement
 	void insertInto(string table, string fields, string values, string condition = "");
-	void queryFrom(string table, string fields, string condition = "");
+	void queryFrom(string table, string fields="*", string condition = "");
 	void getTables();
 	bool generalQuery(string& search_What, string table="");
 	void someTestDanMade();

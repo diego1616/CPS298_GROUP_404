@@ -30,7 +30,7 @@ public:
 	void find_In_DB_Table();
 	void find_User_By_Name();
 	void print_Menu();
-	int getNumber()
+	int getNumber();
 	User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id);
 	~User();
 };
