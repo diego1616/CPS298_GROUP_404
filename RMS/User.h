@@ -22,15 +22,15 @@ private:
  
 
 public:
-	void add_User();
-	void remove_User();
-	void change_User_Information();
-	void change_User_Password();
-	void add_To_DB_Table();
-	void find_In_DB_Table();
-	void find_User_By_Name();
-	void print_Menu();
-	int getNumber();
-	User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id);
-	~User();
+	//void add_User();
+	//void remove_User();
+	//void change_User_Information();
+	//void change_User_Password();
+	//void add_To_DB_Table();
+	//void find_In_DB_Table();
+	//void find_User_By_Name();
+	//void print_Menu();
+	//int getNumber();
+	//User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id);
+	//~User();
 };
