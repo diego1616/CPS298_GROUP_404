@@ -18,9 +18,7 @@ private:
 	string enter_First = "Please enter the user's first name: ";
 	string enter_Last = "Please enter the user's last name: ";
 	DB_Connect db;
-
- 
-
+	 
 public:
 	//void add_User();
 	//void remove_User();

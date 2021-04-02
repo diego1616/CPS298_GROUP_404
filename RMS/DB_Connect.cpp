@@ -76,20 +76,18 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 	char* error;
 	int check;
+	string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
 
 	try {
-		string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
-
-		cout << "SQLITE STATEMENT: " << statement << endl;
-
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
 		if (check != SQLITE_OK)
 			throw logic_error(error);
+		else cout << DB_INSERT_OK;
 	}
 	catch (exception e) 
 	{
-		cout << DB_WRITE_ERROR << e.what() << endl;
+		cout << DB_WRITE_ERROR << e.what() << endl << "SQLITE STATEMENT: " << statement;
 	}
 	
 }
