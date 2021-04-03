@@ -90,7 +90,21 @@ int main()
 	// addquotes(myString);
 
 
-	myProductAdder.someTestDanMade();
+	// myProductAdder.someTestDanMade(product_table::product_id + "," + product_table::item_name, table::products);
+	// myProductAdder.someTestDanMade(ALL, table::products, "WHERE item_name='DanDan Doll'");
+	
+
+	// It's assumed that this input will already have been sanitized via regex at time of entry
+	string generated_by_class_function = "item_name = 'DamnDamn Doll'";
+	string also_generated_by_class_function = "product_id = 12";
+	string update_statement = myProductAdder.createUpdateString(table::products, generated_by_class_function, also_generated_by_class_function);
+	myProductAdder.dbUpdate(update_statement);
+
+	string some_user_input = "Dan";
+	string search_statement = myProductAdder.createSearchString(ALL, table::products, product_table::item_name, some_user_input);
+	myProductAdder.dbSearch(search_statement);
+
+
 	system("pause");
 
 	return 0;

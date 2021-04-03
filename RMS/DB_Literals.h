@@ -5,6 +5,7 @@ using namespace std;
 const string ALL = "*";
 
 namespace table {
+	const string master = "sqlite_master";
 	const string products = "product_table";
 	const string manufacturers = "manufacturer_table";
 	const string departments = "department_table";
@@ -119,6 +120,7 @@ namespace permission_level_table {
 
 namespace humanized {
 	const string tables[][2] = {
+		{table::master, "Master"},
 		{table::products, "Products"},
 		{table::manufacturers, "Manufacturers"},
 		{table::departments, "Departments"},

@@ -1,6 +1,8 @@
 #include "DB_Connect.h"
 #include "DB_Literals.h"
 #include <cstring>
+#include "Product.h"
+
 
 DB_Connect::DB_Connect() {
 
@@ -118,6 +120,8 @@ void DB_Connect::query(string &statement)
 	}
 }
 
+
+
 void DB_Connect::queryFrom(string table, string fields, string condition)
 {
 	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
@@ -130,6 +134,7 @@ void DB_Connect::getTables()
 	this->query(statement);
 }
 
+
 bool DB_Connect::generalQuery(string &search_What, string table)
 {
 	//this function has not been tested, the code below is just a preview
@@ -138,11 +143,50 @@ bool DB_Connect::generalQuery(string &search_What, string table)
 		return false;
 }
 
-void DB_Connect::someTestDanMade() {
+
+
+
+
+
+string DB_Connect::createSearchString(string fields, string table, string column, string search_keyword) {
+	string sql = "SELECT " + fields + " FROM " + table + " WHERE " + column + " LIKE '%" + search_keyword + "%';";
+	return sql;
+}
+
+
+string DB_Connect::createUpdateString(string table, string fields_and_values, string condition) {
+	string sql = "UPDATE " + table + " SET " + fields_and_values + " WHERE " + condition + ";";
+	return sql;
+}
+
+
+// Copied from the insert function above
+void DB_Connect::dbUpdate (string sql) {
+	char* error;
+	int check;
+
+	try {
+		string statement = sql;
+
+		cout << "UPDATE STATEMENT: " << statement << endl;
+
+		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
+
+		if (check != SQLITE_OK) {
+			throw logic_error(error);
+		}
+	} catch (exception e) {
+		cout << DB_WRITE_ERROR << e.what() << endl;
+	}
+}
+
+
+void DB_Connect::dbSearch(string sql) {
 	// TODO: pass arrays of columns and eventually search criteria into function for parsing and formatting (add '' and , where needed)
 // "+product_table::product_id+","+product_table::item_name+"
 	sqlite3_stmt* sql_statement;
-	string sql = "SELECT * FROM product_table;";
+	// string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
+
 	size_t statement_length = strlen(sql.c_str());
 
 	int prep = sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
@@ -151,6 +195,7 @@ void DB_Connect::someTestDanMade() {
 	if (prep == SQLITE_OK) {
 
 		// Print basic header row
+		// another comment
 		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
 			cout << left << setw(25) << sqlite3_column_name(sql_statement, header);
 		}
@@ -158,12 +203,53 @@ void DB_Connect::someTestDanMade() {
 		// end basic header row
 
 		// // Print human-friendly header row
+		// const string *table_fields[][2] = {{}};
+
+		// if (table == "product_table") {
+		// 	*table_fields = humanized::product_fields;
+		// }
+
+		// 	// case "manufacturer_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "department_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "inventory_amounts_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "keyword_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "product_keyword_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "storage_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "storage_location_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "sales_location_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "product_sales_location_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "user_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+		// 	// case "job_table":
+		// 	// 	*table_fields = humanized::product_fields;
+		// 	// 	break;
+
+
 		// for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
 		// 	string humanized_header = "";
 		// 	const char* col_header = sqlite3_column_name(sql_statement, header);
-		// 	for (int i = 0; i < 8; i++) {
-		// 		if (humanized::product_fields[i][0] == col_header) {
-		// 			humanized_header = humanized::product_fields[i][1];
+		// 	for (int i = 0; i < sizeof(*table_fields); i++) {
+		// 		if (*table_fields[i][0] == col_header) {
+		// 			humanized_header = *table_fields[i][1];
 		// 			break; // not absolutely necessary, but avoids extra iterations
 		// 		}
 		// 	}
@@ -187,9 +273,9 @@ void DB_Connect::someTestDanMade() {
 				// end data row
 			}
 		} 
-
 	} else {
 		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
 	}
+	sqlite3_finalize(sql_statement);
 }
 

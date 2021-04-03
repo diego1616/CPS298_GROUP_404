@@ -35,6 +35,9 @@ public:
 	void queryFrom(string table, string fields, string condition = "");
 	void getTables();
 	bool generalQuery(string& search_What, string table="");
-	void someTestDanMade();
+	string createUpdateString(string table, string fields_and_values, string condition);
+	string createSearchString(string fields, string table, string column, string search_keyword);
+	void dbUpdate(string sql);
+	void dbSearch(string sql);
 };
 
