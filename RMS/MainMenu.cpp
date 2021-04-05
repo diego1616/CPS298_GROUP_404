@@ -77,3 +77,39 @@ void MainMenu::menu_options() {
   
 };
 
+
+int MainMenu::getNumber() {
+    while (true) {
+        try {
+
+            cin.clear();
+
+            int temp(0);
+            cin >> temp;
+
+            cin.ignore(INT_MAX, '\n');
+
+            if (!cin.good()) throw logic_error("Invalid data");
+
+            return temp;
+        }
+        catch (exception e) {
+
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+
+            string answer("");
+
+            cout << "something went wrong: " << e.what() << endl;
+            cout << "would you like to try again? y/n : ";
+            getline(cin, answer);
+
+            if (answer[0] == 'y') { continue; }
+            else break;
+
+        }
+    }
+    return 0;
+};
+
+
