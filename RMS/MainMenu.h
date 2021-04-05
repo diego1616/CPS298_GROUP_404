@@ -14,4 +14,5 @@ private:
 public:
 	void print_main_menu();
 	void menu_options();
+	int getNumber();
 };
