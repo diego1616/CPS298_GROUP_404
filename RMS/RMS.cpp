@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AddProduct.h"
+#include "MainMenu.h"
 
 using namespace std;
 
@@ -8,6 +9,11 @@ int main()
 {
 	//keep this line so everything displays right. 
 	system("mode 1000");
+
+	MainMenu m_Menu;
+
+	m_Menu.menu_options();
+
 
 	AddProduct obj;
 	//Query obj; //needs to be developed
