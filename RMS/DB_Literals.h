@@ -95,6 +95,7 @@ namespace user_table {
 	const string l_name = "l_name";
 	const string job_id = "job_id";
 	const string department_id = "department_id";
+	const string permissions_level = "permissions_level";
 	const string password = "password";
 
 	//const string user_id = "user_id";
