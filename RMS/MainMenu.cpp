@@ -1,8 +1,8 @@
 #include <string>
 #include <iostream>
 #include "MainMenu.h"
-#include "C:\CPS298_GROUP_404\CPS298_GROUP_404\RMS\User.h"
-#include "C:\CPS298_GROUP_404\CPS298_GROUP_404\RMS\AddProduct.h"
+#include "User.h"
+#include "AddProduct.h"
 
 
 void MainMenu::print_main_menu() {
@@ -14,6 +14,9 @@ void MainMenu::print_main_menu() {
     cout << "3.  Manufacturers" << endl;
     cout << "4.  Store information" << endl;
     cout << "5.  Logout" << endl;
+
+
+
 
 
 };
@@ -37,7 +40,7 @@ void MainMenu::menu_options() {
 
             cout << "Please choose the number option: ";
 
-            number_Option = getline();
+            number_Option = getNumber();
 
             cout << endl;
 
@@ -54,13 +57,10 @@ void MainMenu::menu_options() {
 
         switch (number_Option) {
         case 1:
-
+            ap.viewingEnviroment();
             break;
         case 2:
- 
-
-            u.print_Menu();
-
+            u.change_User_Information();
             break;
         case 3:
 
@@ -76,7 +76,6 @@ void MainMenu::menu_options() {
     } while (number_Option != 5);
   
 };
-
 
 int MainMenu::getNumber() {
     while (true) {
@@ -111,5 +110,3 @@ int MainMenu::getNumber() {
     }
     return 0;
 };
-
-
