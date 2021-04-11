@@ -343,7 +343,7 @@ l_name TEXT NOT NULL, \
 job_id	INTEGER, \
 department_id INTEGER, \
 password TEXT, \
-permission_level_id INTEGER, \
+permissions_level INTEGER, \
 FOREIGN KEY(job_id) \
 REFERENCES job_table(job_id) \
 ON DELETE CASCADE \
