@@ -2,8 +2,6 @@
 #include <string>
 #include <iostream>
 #include "DB_Connect.h"
-
-
 using namespace std;
 
 

@@ -30,13 +30,19 @@ public:
 	//CRUD methods here
 
 	//helper function for queries
-	static int callback(void *notUsed, int resultAmount, char** values, char** column);
+	static int callback(void* notUsed, int resultAmount, char** values, char** column);
 
 	void query(string& statement);//use if you already have a sqlite statement
 	void insertInto(string table, string fields, string values, string condition = "");
-	void queryFrom(string table, string fields="*", string condition = "");
+	void queryFrom(string table, string fields, string condition = "");
 	void getTables();
-	bool generalQuery(string& search_What, string table="");
-	void someTestDanMade();
+	bool generalQuery(string& search_What, string table = "");
+	string createUpdateString(string table, string fields_and_values, string condition);
+	string createSearchString(string fields, string table, string column, string search_keyword);
+	string createDeleteString(string table, string condition = "");
+	void dbUpdate(string sql);
+	void dbSearch(string sql);
+
+
 };
 

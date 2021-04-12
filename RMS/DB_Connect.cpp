@@ -1,14 +1,16 @@
 #include "DB_Connect.h"
+#include "DB_Literals.h"
+#include <cstring>
+#include "Product.h"
+
 
 DB_Connect::DB_Connect() {
-	
-	this->lastQueryRows = 0;
 
 	int check1 = 0, check2 = 0;
 	string str;
 	DB_Tables tables;
 	char* error = new char();	//error message if writing to db
-	
+
 	log.logEvent(DB_OPENING, true);
 	str = this->path + this->dbName;
 
@@ -17,7 +19,7 @@ DB_Connect::DB_Connect() {
 		log.logEvent(DB_MISSING, true);
 		log.makePath(this->path);
 	}
-	
+
 	//Open or create database, and create tables. Old data will not be overwriten if already exists.
 	check1 = sqlite3_open(str.c_str(), &this->sqLiteDB);
 	check2 = sqlite3_exec(this->sqLiteDB, tables.all_Tables.c_str(), NULL, NULL, &error);
@@ -53,8 +55,8 @@ DB_Connect::~DB_Connect() {
 	//Close the database
 	sqlite3_close(this->sqLiteDB);
 	sqLiteDB = nullptr;
-	log.logEvent(DB_CLOSED,true);
-			
+	log.logEvent(DB_CLOSED, true);
+
 }
 
 int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
@@ -62,7 +64,7 @@ int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** 
 	for (size_t i = 0; i < resultAmount; i++)
 	{
 
-		cout << column[i] << ":\t" << ((values[i]==nullptr)?"NULL":values[i]) << endl;
+		cout << column[i] << ":\t" << ((values[i] == nullptr) ? "NULL" : values[i]) << endl;
 
 		//inserting into the vectors for manipulation later.
 	}
@@ -76,25 +78,27 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 	char* error;
 	int check;
-	string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
 
 	try {
+		string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
+
+		cout << "SQLITE STATEMENT: " << statement << endl;
+
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
 		if (check != SQLITE_OK)
 			throw logic_error(error);
-		else cout << DB_INSERT_OK;
 	}
-	catch (exception e) 
+	catch (exception e)
 	{
-		cout << DB_WRITE_ERROR << e.what() << endl << "SQLITE STATEMENT: " << statement;
+		cout << DB_WRITE_ERROR << e.what() << endl;
 	}
-	
+
 }
 
-void DB_Connect::query(string &statement)
+void DB_Connect::query(string& statement)
 {
-	if(statement == "")
+	if (statement == "")
 		return;
 
 	//add code to check for sql injection attacks
@@ -116,6 +120,8 @@ void DB_Connect::query(string &statement)
 	}
 }
 
+
+
 void DB_Connect::queryFrom(string table, string fields, string condition)
 {
 	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
@@ -128,21 +134,67 @@ void DB_Connect::getTables()
 	this->query(statement);
 }
 
-bool DB_Connect::generalQuery(string &search_What, string table)
+
+bool DB_Connect::generalQuery(string& search_What, string table)
 {
 	//this function has not been tested, the code below is just a preview
-		string statement = "SELECT name FROM sqlite_master WHERE LIKE='"+search_What + "';";
+	string statement = "SELECT name FROM sqlite_master WHERE LIKE='" + search_What + "';";
 
-		return false;
+	return false;
 }
 
 
-void DB_Connect::someTestDanMade() {
+string DB_Connect::createSearchString(string fields, string table, string column, string search_keyword) {
+	string sql = "SELECT " + fields + " FROM " + table + " WHERE " + column + " LIKE '%" + search_keyword + "%';";
+	return sql;
+}
+
+
+string DB_Connect::createUpdateString(string table, string fields_and_values, string condition) {
+	string sql = "UPDATE " + table + " SET " + fields_and_values + " WHERE " + condition + ";";
+	return sql;
+}
+
+string DB_Connect::createDeleteString(string table, string condition) {
+	string prepared_condition = condition;
+
+	if (condition != "") {
+		prepared_condition = " WHERE " + condition;
+	}
+
+	string sql = "DELETE FROM " + table + prepared_condition + ";";
+	return sql;
+}
+
+
+// Copied from the insert function above
+void DB_Connect::dbUpdate(string sql) {
+	char* error;
+	int check;
+
+	try {
+		string statement = sql;
+
+		cout << "UPDATE STATEMENT: " << statement << endl;
+
+		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
+
+		if (check != SQLITE_OK) {
+			throw logic_error(error);
+		}
+	}
+	catch (exception e) {
+		cout << DB_WRITE_ERROR << e.what() << endl;
+	}
+}
+
+//this is the old someTestDanMade function. 
+void DB_Connect::dbSearch(string sql) {
 	// TODO: pass arrays of columns and eventually search criteria into function for parsing and formatting (add '' and , where needed)
 // "+product_table::product_id+","+product_table::item_name+"
 	sqlite3_stmt* sql_statement;
-	//const char* sql = "SELECT product_id,item_name FROM product_table;";
-	string sql = "SELECT * FROM product_table;";
+	// string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
+
 	size_t statement_length = strlen(sql.c_str());
 
 	int prep = sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
@@ -150,29 +202,29 @@ void DB_Connect::someTestDanMade() {
 
 	if (prep == SQLITE_OK) {
 
-		// // Print basic header row
+		// Print basic header row
+		// another comment
+		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
+			cout << left << setw(25) << sqlite3_column_name(sql_statement, header);
+		}
+		cout << endl;
+		// end basic header row
+
 		// for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-		// 	cout << left << setw(25) << sqlite3_column_name(sql_statement, header);
+		// 	string humanized_header = "";
+		// 	const char* col_header = sqlite3_column_name(sql_statement, header);
+		// 	for (int i = 0; i < sizeof(*table_fields); i++) {
+		// 		if (*table_fields[i][0] == col_header) {
+		// 			humanized_header = *table_fields[i][1];
+		// 			break; // not absolutely necessary, but avoids extra iterations
+		// 		}
+		// 	}
+		// 	cout << left << setw(25) << humanized_header;
 		// }
 		// cout << endl; 
 		// // end header row
 
-		// Print human-friendly header row
-		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-			string humanized_header = "";
-			const char* col_header = sqlite3_column_name(sql_statement, header);
-			for (int i = 0; i < 8; i++) {
-				if (humanized::product_fields[i][0] == col_header) {
-					humanized_header = humanized::product_fields[i][1];
-					break; // not absolutely necessary, but avoids extra iterations
-				}
-			}
-			cout << left << setw(25) << humanized_header;
-		}
-		cout << endl;
-		// end header row
-
-		do {
+		while (step != SQLITE_DONE) {
 			step = sqlite3_step(sql_statement);
 			if (step == SQLITE_ROW) {
 				// print data row
@@ -187,11 +239,11 @@ void DB_Connect::someTestDanMade() {
 				cout << endl;
 				// end data row
 			}
-		} while (step != SQLITE_DONE);
-
+		}
 	}
 	else {
 		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
 	}
+	sqlite3_finalize(sql_statement);
 }
 

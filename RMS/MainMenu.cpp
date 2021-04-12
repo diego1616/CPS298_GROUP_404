@@ -60,7 +60,7 @@ void MainMenu::menu_options() {
             ap.viewingEnviroment();
             break;
         case 2:
-            u.change_User_Information();
+            u.print_Menu();
             break;
         case 3:
 

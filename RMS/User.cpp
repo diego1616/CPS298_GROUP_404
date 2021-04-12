@@ -158,7 +158,7 @@ void User::add_User() {
              f_name = new_f_name;
              condition += string_userID;
             
-             dbc.dbUpdate(table, "f_name", f_name, condition);
+             //dbc.dbUpdate(table, "f_name", f_name, condition);
  
              break;
          case 2:
@@ -174,7 +174,7 @@ void User::add_User() {
              l_name = new_l_name;
              condition += string_userID;
 
-             dbc.dbUpdate(table, "l_name", l_name, condition);
+             //dbc.dbUpdate(table, "l_name", l_name, condition);
              break;
          case 3:
              do {
@@ -189,7 +189,7 @@ void User::add_User() {
               string_job_id = to_string(job_id);
               condition += string_userID;
 
-              dbc.dbUpdate(table, "job_id", string_job_id, condition);
+              //dbc.dbUpdate(table, "job_id", string_job_id, condition);
  
              break;
          case 4:
@@ -206,7 +206,7 @@ void User::add_User() {
                  string_department_id = to_string(department_id);
                  condition += string_userID;
 
-                 dbc.dbUpdate(table, "department_id", string_department_id, condition);
+               //  dbc.dbUpdate(table, "department_id", string_department_id, condition);
  
              break;
          case 5:
@@ -222,7 +222,7 @@ void User::add_User() {
              string_permissions_level = to_string(permissions_level);
              condition += string_userID;
 
-             dbc.dbUpdate(table, "permissions_level", string_permissions_level, condition);
+             //dbc.dbUpdate(table, "permissions_level", string_permissions_level, condition);
 
  
              break;
@@ -279,7 +279,7 @@ void User::add_User() {
 
 
 
-        dbc_pass.dbUpdate(table, "password", password, condition);
+        //dbc_pass.dbUpdate(table, "password", password, condition);
  
  };
  
