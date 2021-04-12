@@ -1,7 +1,7 @@
 #include "DB_Connect.h"
 #include "DB_Literals.h"
 #include <cstring>
-#include "Product.h"
+#include "AddProduct.h"
 
 
 DB_Connect::DB_Connect() {

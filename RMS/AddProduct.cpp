@@ -90,7 +90,9 @@ void AddProduct::viewingEnviroment()
                 gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
                 cout << clearLine(50);  //ideally, there would be a way to know how many results and clear up until then. For now I am guessing 50 lines. 
                 gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
-                someTestDanMade();
+
+                //build a sql statement using new dbConnect Functions
+                this->dbSearch("select * from "+ table::products + ";");
                 gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
             }
              
