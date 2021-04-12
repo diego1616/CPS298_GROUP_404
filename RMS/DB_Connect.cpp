@@ -159,6 +159,19 @@ string DB_Connect::createUpdateString(string table, string fields_and_values, st
 	return sql;
 }
 
+string DB_Connect::createDeleteString(string table, string condition) {
+	string prepared_condition = condition;
+	
+	if (condition != "") {
+		prepared_condition = " WHERE " + condition;
+	}
+
+	string sql = "DELETE FROM " + table + prepared_condition + ";";
+	return sql;
+}
+
+
+
 
 // Copied from the insert function above
 void DB_Connect::dbUpdate (string sql) {

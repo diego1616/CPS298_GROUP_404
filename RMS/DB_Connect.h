@@ -37,6 +37,7 @@ public:
 	bool generalQuery(string& search_What, string table="");
 	string createUpdateString(string table, string fields_and_values, string condition);
 	string createSearchString(string fields, string table, string column, string search_keyword);
+	string createDeleteString(string table, string condition = "");
 	void dbUpdate(string sql);
 	void dbSearch(string sql);
 };

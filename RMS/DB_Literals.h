@@ -4,6 +4,7 @@ using namespace std;
 
 const string ALL = "*";
 
+
 namespace table {
 	const string master = "sqlite_master";
 	const string products = "product_table";
@@ -89,6 +90,7 @@ namespace product_sales_location_table {
 	const string sales_loc_id = "sales_loc_id";
 	const string product_id = "product_id";
 }
+
 
 namespace user_table {
 	const string user_id = "user_id";
