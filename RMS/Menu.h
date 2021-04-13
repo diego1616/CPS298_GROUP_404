@@ -8,8 +8,8 @@
 #include <string>
 using namespace std;
 
-const enum colors { WHITE = 7, BLUE = 9, GREEN = 10, RED = 12 };
-const enum margins{MARGIN_0 = 0, MARGIN1 = MARGIN_0 + 5, MARGIN2 = MARGIN1 + 20, 
+enum colors { WHITE = 7, BLUE = 9, GREEN = 10, RED = 12 };
+enum margins{MARGIN_0 = 0, MARGIN1 = MARGIN_0 + 5, MARGIN2 = MARGIN1 + 20, 
 				       POS_OFFSET = 5, POS_MESSAGES = 0, POS_TITLE = POS_OFFSET + 3 };
 
 class Menu

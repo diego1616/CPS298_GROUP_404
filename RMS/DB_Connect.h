@@ -25,7 +25,7 @@ public:
 	DB_Connect();
 	~DB_Connect();
 
-	int lastQueryRows;
+	//int lastQueryRows;
 
 	//CRUD methods here
 

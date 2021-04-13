@@ -88,10 +88,15 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 		if (check != SQLITE_OK)
 			throw logic_error(error);
+		
 	}
 	catch (exception e)
 	{
 		cout << DB_WRITE_ERROR << e.what() << endl;
+	}
+	catch (int e) {
+
+		cout << DB_WRITE_ERROR << e << endl;
 	}
 
 }
