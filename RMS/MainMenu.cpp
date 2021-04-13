@@ -3,6 +3,8 @@
 #include "MainMenu.h"
 #include "User.h"
 #include "AddProduct.h"
+#include "Manufacturer.h"
+#include "Store.h"
 
 
 void MainMenu::print_main_menu() {
@@ -31,6 +33,8 @@ void MainMenu::menu_options() {
 
         AddProduct ap;
         User u;
+        Manufacturer m;
+        Store s;
 
         cout << "What would you like to work with?" << endl;
 
@@ -57,16 +61,23 @@ void MainMenu::menu_options() {
 
         switch (number_Option) {
         case 1:
+            system("cls");
             ap.viewingEnviroment();
             break;
         case 2:
-            u.print_Menu();
+            int int_user_id;
+            
+            system("cls");
+            int_user_id = u.get_User_ID();
+            u.change_User_Information();
             break;
         case 3:
-
+            system("cls");
+            m.main_choice();
             break;
         case 4:
-
+            system("cls");
+            s.store_Choice();
             break;
         case 5:
 
