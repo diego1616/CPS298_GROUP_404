@@ -92,6 +92,19 @@ void Menu::getMenuLine(string& data, int margin, int position) {
     //cout << data;
 }
 
+void Menu::outputMsg(string msg)
+{
+    gotoxy(MARGIN_0, POS_MESSAGES);
+    clearLine(POS_BAR -1);
+    gotoxy(MARGIN_0, POS_MESSAGES);
+
+    if (msg != "") {
+        setColor(WHITE);
+        cout << msg << endl;
+
+    }
+}
+
 string Menu::buildFields(string fields[], int size) {
     //add a comma at the end of each field, but it does not do it to the final field.
 

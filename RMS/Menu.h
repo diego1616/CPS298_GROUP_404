@@ -6,11 +6,12 @@
 #include <windows.h>
 #include <conio.h>	//bad word here.......NSFW.  Give me a safe word. 
 #include <string>
+#include "Events.h"
 using namespace std;
 
 enum colors { WHITE = 7, BLUE = 9, GREEN = 10, RED = 12 };
 enum margins{MARGIN_0 = 0, MARGIN1 = MARGIN_0 + 5, MARGIN2 = MARGIN1 + 20, 
-				       POS_OFFSET = 5, POS_MESSAGES = 0, POS_TITLE = POS_OFFSET + 3 };
+				       POS_OFFSET = 5, POS_MESSAGES = 0, POS_BAR = POS_OFFSET + 1, POS_TITLE = POS_BAR + 2 };
 
 class Menu
 {
@@ -21,7 +22,7 @@ public:
 	regex checkNames = regex("^[\\w\\s]+$");
 	regex checkPartNumbers = regex("^[\\w\\s\\-\\_]+$");
 	regex checkMoney = regex("^\\d+(,\\d{3})*(\\.\\d*)?$");
-	string checkInput(string str, regex match); // if the regex matches, it returns the string, otherwise it returns invalid data
+	string checkInput(string str, regex match); // if the regex matches, it returns the string, otherwise it returns "invalid data"
 	string bar = "\xb0\xb0\xb0\xb0\xb0\xb0\xb0";
 
 	//this is the menus line position.
@@ -45,6 +46,8 @@ public:
 
 	//actually collects the data from the menu line.  
     void getMenuLine(string& data, int margin, int position);
+
+	void outputMsg(string msg=""); //use to either output to the msg field, or prime to the right place
     
 
 

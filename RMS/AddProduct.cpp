@@ -22,7 +22,7 @@ void AddProduct::viewingEnviroment()
         cout << counter << endl << +key;
 
 
-        printWhiteBar(MARGIN_0, POS_TITLE - 2);
+        printWhiteBar(MARGIN_0, POS_BAR);
       
         menuLine(title, instructions, MARGIN2, MARGIN2 +title.length() + 5, POS_TITLE, RED);
 
@@ -72,10 +72,14 @@ void AddProduct::viewingEnviroment()
             }
             else if (counter == 4)
             {
-                gotoxy(MARGIN_0, POS_MESSAGES);
-                clearLine(positions[0] + POS_OFFSET);
-                gotoxy(MARGIN_0, POS_MESSAGES);
+                outputMsg("");
 
+                //The following three lines are replaced by outoutMsg();
+                //gotoxy(MARGIN_0, POS_MESSAGES);
+                //clearLine(positions[0] + POS_OFFSET);
+                //gotoxy(MARGIN_0, POS_MESSAGES);
+
+                //Some test
                 //insertInto(table::products,
                 //    addComma(product_table::item_name) + addComma(product_table::manufacturer_id) + addComma(product_table::retail_price) + product_table::low_stock_quantity,
                 //            addQuotes(storedInMenu[0]) + addQuotes(storedInMenu[1]) + addComma(storedInMenu[2]) + storedInMenu[3]);

@@ -68,7 +68,7 @@ void MainMenu::menu_options() {
             int int_user_id;
             
             system("cls");
-            int_user_id = u.get_User_ID();
+            //int_user_id = u.get_User_ID();
             u.change_User_Information();
             break;
         case 3:
