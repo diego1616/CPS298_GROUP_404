@@ -10,6 +10,7 @@ int main()
 {
 	//keep this line so everything displays right. 
 	system("mode 1000");
+	system("title Inventory Management System v1.0");
 
 	//Diego's code for low level stock check starts.  Dont change until next comment line. It does not affect other code. Runs background
 	
