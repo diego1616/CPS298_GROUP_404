@@ -15,13 +15,14 @@ class DB_Connect
 	string dbName = "retail.db";
 	EventLog log;
 	bool connectionStatus;
-	sqlite3* sqLiteDB;
+	
 	
 	vector<string> columns;
 	vector<string> data;
 
 public:
-		
+	sqlite3* sqLiteDB;
+
 	DB_Connect();
 	~DB_Connect();
 
@@ -31,6 +32,7 @@ public:
 
 	//helper function for queries
 	static int callback(void* notUsed, int resultAmount, char** values, char** column);
+	static const char* prod_id;
 
 	void query(string& statement);//use if you already have a sqlite statement
 	void insertInto(string table, string fields, string values, string condition = "");

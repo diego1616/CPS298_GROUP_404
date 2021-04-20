@@ -29,12 +29,14 @@ void MainMenu::menu_options() {
 
     int number_Option = 0;
 
+    AddProduct ap;
+    User u;
+    Manufacturer m;
+    Store s;
+
     do {
 
-        AddProduct ap;
-        User u;
-        Manufacturer m;
-        Store s;
+
 
         cout << "What would you like to work with?" << endl;
 

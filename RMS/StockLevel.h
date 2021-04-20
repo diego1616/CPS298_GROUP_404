@@ -10,9 +10,11 @@ class StockLevel :
 {
 	int interval;
 	void checkLoop();
-	string findLowStock();
-	void orderItem(string item);
+	void findLowStock();
+	void orderRequest();
 	thread thread1;
+	void dbSearch(string sql, bool low_stock = false);
+	string prod_id;
 
 	StockLevel();	//make this one private so it can't be called.  Must use overloaded one. 
 

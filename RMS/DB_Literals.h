@@ -23,13 +23,16 @@ namespace table {
 namespace product_table {
 	const string product_id = "product_id";
   	const string item_name = "item_name";
-	const string manufacturer_id = "manufacturer_id";
-	const string manufacturer_product_id = "manufacturer_product_id";
-	const string manufacturer_price = "manufacturer_price";
+	const string manufacturer_id = "mfg_id";
+	const string manufacturer_product_id = "mfg_part_no";
+	const string manufacturer_price = "mfg_price";
 	const string retail_price = "retail_price";
-	const string department_id = "department_id";
-	const string low_stock_quantity = "low_stock_quantity";
+	const string department_id = "dpt_id";
+	const string low_stock_quantity = "min_stock";
+	const string stock = "stock";
+	const string reorder = "reorder";
 }
+
 
 namespace manufacturer_table {
 	const string manufacturer_id = "manufacturer_id";

@@ -403,12 +403,14 @@ class DB_Tables
 		"CREATE TABLE IF NOT EXISTS product_table ( \
 product_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, \
 item_name TEXT NOT NULL, \
-manufacturer_id INTEGER NOT NULL, \
-manufacturer_product_id	TEXT, \
-manufatcturer_price	REAL, \
+mfg_id INTEGER NOT NULL, \
+mfg_part_no	TEXT, \
+mfg_price	REAL, \
 retail_price REAL, \
-department_id INTEGER, \
-low_stock_quantity INTEGER \
+dpt_id INTEGER, \
+min_stock INTEGER, \
+stock INTEGER default 0, \
+reorder BOOL default false \
 ); \n";
 
 	std::string manufacturer_table =

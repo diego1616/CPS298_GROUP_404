@@ -2,7 +2,7 @@
 #include "DB_Literals.h"
 #include <cstring>
 #include "AddProduct.h"
-
+#include "StockLevel.h"
 
 DB_Connect::DB_Connect() {
 
@@ -103,6 +103,7 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 void DB_Connect::query(string& statement)
 {
+
 	if (statement == "")
 		return;
 
@@ -205,12 +206,14 @@ void DB_Connect::dbSearch(string sql) {
 	int prep = sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
 	int step = 0; // new int(0)
 
+
+
 	if (prep == SQLITE_OK) {
 
 		// Print basic header row
 		// another comment
 		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-			cout << left << setw(25) << sqlite3_column_name(sql_statement, header);
+			cout << left << setw(15) << sqlite3_column_name(sql_statement, header);
 		}
 		cout << endl;
 		// end basic header row
@@ -234,11 +237,11 @@ void DB_Connect::dbSearch(string sql) {
 			if (step == SQLITE_ROW) {
 				// print data row
 				for (int cell = 0; cell < sqlite3_column_count(sql_statement); cell++) {
-					if (const char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
-						cout << left << setw(25) << col_val;
+					if (char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
+						cout << left << setw(15) << col_val;
 					}
 					else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-						cout << left << setw(25) << "NULL";
+						cout << left << setw(15) << "NULL";
 					}
 				}
 				cout << endl;
