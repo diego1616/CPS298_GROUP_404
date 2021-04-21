@@ -1,7 +1,5 @@
 #include "StockLevel.h"
 
-
-
 void StockLevel::findLowStock()
 {
 
@@ -22,15 +20,12 @@ void StockLevel::orderRequest() {
 	string tmp = prod_id;
 	string sql = "UPDATE "+table::products+" SET "+product_table::reorder+" = true WHERE "+product_table::product_id+" = " + tmp + ";";
 
-
 	this->dbUpdate(sql);
-
-
 }
 
 void StockLevel::checkLoop()
 {
-	int count = 0;
+	//int count = 0;
 
 	while (true) {
 		
@@ -41,19 +36,19 @@ void StockLevel::checkLoop()
 		if (prod_id != "")
 		{
 			orderRequest();
-			outputMsg("TEST OF THIS THREAD");
+			outputMsg("PRODUCT ID " + prod_id + " PLACED IN AUTO ORDERING LIST");
 		}
 		else
 		{
-			outputMsg("SLEEP " + to_string(count));
-			count++;
+			//outputMsg("SLEEP " + to_string(count));
+			//count++;
 			//Sleep this thread until is needed again
 			std::this_thread::sleep_for(std::chrono::minutes(this->interval));
 			
 		}
 		
 		//std::this_thread::sleep_for(std::chrono::minutes(this->interval));
-		outputMsg("END OF LOOP - TEST AGAIN");
+		//outputMsg("END OF LOOP - TEST AGAIN");
 		
 	}
 }
@@ -77,10 +72,10 @@ void StockLevel::dbSearch(string sql, bool low_stock) {
 
 		// Print basic header row
 		// another comment
-		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-			cout << left << setw(15) << sqlite3_column_name(sql_statement, header);
-		}
-		cout << endl;
+		//for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
+		//	cout << left << setw(15) << sqlite3_column_name(sql_statement, header);
+		//}
+		//cout << endl;
 
 		while (step != SQLITE_DONE) {
 			step = sqlite3_step(sql_statement);
@@ -94,10 +89,10 @@ void StockLevel::dbSearch(string sql, bool low_stock) {
 							
 
 						}
-						cout << left << setw(15) << prod_id;
+						//cout << left << setw(15) << prod_id;
 					}
 					else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-						cout << left << setw(15) << "NULL";
+						//cout << left << setw(15) << "NULL";
 					}
 				}
 				cout << endl;

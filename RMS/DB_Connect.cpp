@@ -201,9 +201,9 @@ void DB_Connect::dbSearch(string sql) {
 	sqlite3_stmt* sql_statement;
 	// string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
 
-	size_t statement_length = strlen(sql.c_str());
+	int statement_length = (int)strlen(sql.c_str());
 
-	int prep = sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
+	int prep = (int)sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
 	int step = 0; // new int(0)
 
 

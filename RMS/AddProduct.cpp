@@ -16,6 +16,7 @@ void AddProduct::viewingEnviroment()
         clearLine((sizeof(menus) / sizeof(string) )*2);
 
         //Monitor the position of the counter and output the key that was pressed
+        setColor(BLUE);
         gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
         clearLine(2);
         gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
@@ -38,8 +39,14 @@ void AddProduct::viewingEnviroment()
         //for now, we are stuckk using the _getch() function. 
 
         key = _getch(); //function used to get a character from the console, but it doesnt echo.
-
-        if (key == 72)          //up key
+        
+        if (key == '\b' || key == 45) { //ESC or - pressed.  Clear and break. 
+            
+            system("cls");
+            setColor(WHITE);
+            break;
+        }
+        else if (key == 72)          //up key
             counter--;
         else if (key == 80)     //down key
             counter++;

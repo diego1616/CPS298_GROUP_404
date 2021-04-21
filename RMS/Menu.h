@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <conio.h>	//bad word here.......NSFW.  Give me a safe word. 
 #include <string>
-#include "Events.h"
+#include "Events.h" //check the outputMsg().  I included this header just to give this function some special functionatily.  
 using namespace std;
 
 enum colors { WHITE = 7, BLUE = 9, GREEN = 10, RED = 12 };

@@ -94,14 +94,14 @@ void Menu::getMenuLine(string& data, int margin, int position) {
 
 void Menu::outputMsg(string msg)
 {
+    EventLog log;
     gotoxy(MARGIN_0, POS_MESSAGES);
     clearLine(POS_BAR -1);
     gotoxy(MARGIN_0, POS_MESSAGES);
 
     if (msg != "") {
         setColor(WHITE);
-        cout << msg << endl;
-
+        log.logEvent(msg, true);
     }
 }
 

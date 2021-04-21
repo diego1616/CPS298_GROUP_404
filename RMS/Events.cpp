@@ -1,4 +1,4 @@
-#include "Events.h";
+#include "Events.h"
 #pragma warning(disable : 4996)
 
 //record the time the object is created
@@ -73,6 +73,18 @@ EventLog::~EventLog()
 	chronicle.close();
 }
 
+bool EventLog::sync = false;
+
+void EventLog::setSync()
+{
+	sync = true;
+}
+
+void EventLog::unsetSync()
+{
+	sync = false;
+}
+
 //creates a file path if it doesnt exist
 void EventLog::makePath(string path) {
 
@@ -86,6 +98,13 @@ void EventLog::makePath(string path) {
 }
 
 void EventLog::logEvent(string msg, bool print) {
+	
+	Menu position;
+	int count = 0;
+
+	position.gotoxy(MARGIN_0, POS_MESSAGES);
+	position.clearLine(POS_BAR - 1);
+	position.gotoxy(MARGIN_0, POS_MESSAGES);
 
 	try {
 
@@ -101,8 +120,23 @@ void EventLog::logEvent(string msg, bool print) {
 			throw runtime_error(LOG_ERROR);
 		
 		else {
-			if (print)
+
+			
+			if (print) {
+				
+				//wait up to three seconds if other function is printing a msg
+				while (sync) {
+					this_thread::sleep_for(chrono::seconds(1));
+					count++;
+
+					if (count >= 3)
+						break;
+				}
+
+				setSync();
 				cout << msg << endl;
+				unsetSync();
+			}
 			this->chronicle << this->watch.nowTime() << " - " << msg << endl;
 		}
 
