@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include "DB_Connect.h"
+#include "Product.h"
 using namespace std;
 
 

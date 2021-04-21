@@ -2,13 +2,16 @@
 #include "DB_Connect.h"
 #include "Events.h"
 
-class LogIn
+class LogIn : public DB_Connect
 {
-		DB_Connect db;
+		//DB_Connect db;
 
 public:
 	LogIn();
 	void aut();
+
+	void dbSearch(string sql);
+	string level;
 
 };
 

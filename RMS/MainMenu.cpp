@@ -17,10 +17,6 @@ void MainMenu::print_main_menu() {
     cout << "4.  Store information" << endl;
     cout << "5.  Logout" << endl;
 
-
-
-
-
 };
 
 void MainMenu::menu_options() {
@@ -30,6 +26,7 @@ void MainMenu::menu_options() {
     int number_Option = 0;
 
     AddProduct ap;
+    //Product ap;
     User u;
     Manufacturer m;
     Store s;
@@ -65,6 +62,8 @@ void MainMenu::menu_options() {
         case 1:
             system("cls");
             ap.viewingEnviroment();
+            //ap.displayMainMenu();
+
             break;
         case 2:
             int int_user_id;

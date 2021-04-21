@@ -42,5 +42,6 @@ public:
 	void print_Menu();
 	int getNumber();
 	User(string f_n = "", string l_n = "", int jb_id = 0, int de_id = 0, string psswrd = "", int per_id = 0);
+	string addQuotes(string data);
 	~User();
 };

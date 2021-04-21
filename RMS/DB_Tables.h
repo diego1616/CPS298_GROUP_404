@@ -492,6 +492,7 @@ password TEXT, \
 permissions_level INTEGER \
 ); \n";
 
+	
 
 	std::string job_table =
 		"CREATE TABLE IF NOT EXISTS job_table( \

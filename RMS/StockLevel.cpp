@@ -3,7 +3,6 @@
 void StockLevel::findLowStock()
 {
 
-
 	//string sql = "SELECT " + ID + " FROM " + table::products + " WHERE " +  ";";
 
 	//string sql = "SELECT " + product_table::product_id + " FROM " + table::products + " WHERE " + product_table::stock + "<" + product_table::low_stock_quantity + " LIMIT 1;";

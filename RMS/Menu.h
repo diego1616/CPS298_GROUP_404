@@ -35,6 +35,7 @@ public:
 	string clearLine(int howManyLines = 1); //this super important function overwrites x amount of lines with white spaces. it clears entire screen sections to make them glitch free, then print to them.
 	void printWhiteBar(int margin, int position);
 	
+
 	//these functions are for building sqlite statements
 	string addComma(string data);						//adds a comma ar the end of the string. 
 	string addQuotes(string data, bool comma = true);	//adds quotes and a comma by default, unless false is passed as a second argument.

@@ -15,7 +15,7 @@ class StockLevel :
 	thread thread1;
 	void dbSearch(string sql, bool low_stock = false);
 	string prod_id;
-
+	
 	StockLevel();	//make this one private so it can't be called.  Must use overloaded one. 
 
 public:

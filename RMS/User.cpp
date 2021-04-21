@@ -46,8 +46,12 @@ void User::add_User() {
      } while (yesno == "no");
 
      fields = "f_name, l_name, job_id, department_id, permissions_level, password";
-     values = full_name + ", " + string_department_id + ", " + string_permissions_level + ", default";
+     //values = full_name + ", " + string_department_id + ", " + string_permissions_level + ", default";
+     //values = "'"+ full_name + "', " + string_department_id + ", " + string_permissions_level + ", 'default'";
+     //values = "'" + full_name + "', '" + string_department_id + "', '" + string_permissions_level;
+     values = addQuotes(full_name) + ", " + addQuotes(string_department_id) + ", " + string_permissions_level;    //, 'default'";
      
+
      dbc_add.insertInto(table, fields, values);
 
  
@@ -343,6 +347,13 @@ void User::add_User() {
     }
     return 0;
 };
+
+ string User::addQuotes(string data) {
+
+     data = "'" + data + "'";
+
+     return data;
+ }
 
 User::~User(void) {
 
