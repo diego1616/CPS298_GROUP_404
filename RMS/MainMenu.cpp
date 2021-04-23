@@ -10,6 +10,8 @@
 void MainMenu::print_main_menu() {
 
     //this is used to create a main menu.
+    
+    system("cls");
 
     cout << "1.  Products" << endl;
     cout << "2.  Users" << endl;
