@@ -28,9 +28,7 @@ private:
 	string fields = "";
 	string values = "";
 	string db_password;
-	
-
- 
+	 
 
 public:
 	void add_User();
@@ -40,6 +38,7 @@ public:
 	void find_In_DB_Table();
 	string find_User_By_Name();
 	void print_Menu();
+	void see_All_Users();
 	void dbSearch(string sql);
 	int getNumber();
 	User(string f_n = "", string l_n = "", int jb_id = 0, int de_id = 0, string psswrd = "", int per_id = 0);
