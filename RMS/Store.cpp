@@ -1,12 +1,12 @@
 #include <string>
 #include <iostream>
-#include "DB_Connect.h"
+#include DB_Connect.h"
 #include <string>
 #include "Store.h"
-#include "MainMenu.h"
+#include MainMenu.h"
 
 
-Store::Store(string d_n, string st_l_n, string sa_l_n ) {
+Store::Store(string d_n, string st_l_n, string sa_l_n) {
     this->department_name = d_n;
     this->storage_loc_name = st_l_n;
     this->sales_loc_name = sa_l_n;
@@ -15,7 +15,7 @@ Store::Store(string d_n, string st_l_n, string sa_l_n ) {
 
 
 
-void Store::print_Main_Store_Menu() {
+ void Store::print_Main_Store_Menu() {
 
     // this is used to create a menu of for user class options.
 
@@ -28,6 +28,7 @@ void Store::print_Main_Store_Menu() {
 void Store::store_Choice() {
 
     int choice;
+    string thing;
 
     MainMenu mm;
 
@@ -42,13 +43,14 @@ void Store::store_Choice() {
         switch (choice) {
 
         case 1:
-            d_choice();
+            thing = "department";
             break;
         case 2:
-            sales_Loc_choice();
+            thing = "sales location";
             break;
         case 3:
-            storage_Loc_choice();
+            thing = "storage location";
+            
             break;
         case 4:
 
@@ -56,174 +58,54 @@ void Store::store_Choice() {
             break;
         }
 
+        thing_Choice(thing);
+
     } while ((choice != 4));
 
-};
 
-
-
-
-void Store::print_D_Menu() {
-
-    // this is used to create a menu of for user class options.
-    system("cls");
-
-    cout << "1.  Add a department." << endl;
-    cout << "2.  Change a deparment's name." << endl;
-    cout << "3.  Show all departments." << endl;
-    cout << "4.  Back." << endl;
-};
-
-void Store::d_choice() {
-    
-    int dchoice;
-    print_D_Menu();
-    cout << "Please choose the number option: ";
-    dchoice = getNumber();
-
-
-    do {   
-
-        switch (dchoice) {
-                       
-
-        case 1:
-            add_Department();
-            d_choice();
-            break;
-        case 2:
-            change_Department_Name();
-            d_choice();
-            break;
-        case 3:
-            show_All_Departments();
-            d_choice();
-            break;
-        case 4:
-            store_Choice();
-            break;
-
-        }
-
-    } while ((dchoice != 4));
-
-
-
-
-};
-
-void Store::add_Department() {
-
-    DB_Connect dbc_add;
-
-    system("cls");
-
-    string fields;
-    string values;
-    string sql;
-    string condition;
-
-    string yesno = "no";
-    do {
-        cout << "Please enter the department's name: ";
-        getline(cin, department_name);
-        department_name = "'" + department_name + "'";
-        cout << endl;
-
-       
-
-        cout << "Is this information correct? yes/no ";
-        getline(cin, yesno);
-
-    } while (yesno == "no");
-
-
-    condition = " department_name = " + department_name;
-
-    fields = "department_name";
-    values = department_name;
-
-
-    dbc_add.insertInto(table_department, fields, values);
-    dbc_add.queryFrom(table_department, "*", condition);
-
-};
-
-void Store::change_Department_Name() {
-
-    system("cls");
-
-    DB_Connect dbc_change;
-    string department_name;
-    string yesno = "no";
-    int choice = 0;
-
-    string new_depart_name;
-       
-    string fields_and_values;
-    string condition;
-    string sql;
-
-
-    cout << "Please enter the department name: ";
-    getline(cin, department_name);
-
-    do {
-       
-        cout << "Please enter the new name: ";
-        getline(cin, new_depart_name);
-        new_depart_name = "'" + new_depart_name + "'";
-
-        cout << endl;
-        cout << "Is this correct? yes/no: ";
-        getline(cin, yesno);
-
-    } while (yesno != "yes");
-
-            condition = " department_name = " + department_name;
-            fields_and_values = "department_name = " + new_depart_name;
-
-            sql = dbc_change.createUpdateString(table_department, fields_and_values, condition);
-            dbc_change.dbUpdate(sql);
-            dbc_change.queryFrom(table_department, "*", fields_and_values);
-  
-       
-
-};
-
-void Store::show_All_Departments() {
     
 
-    system("cls");
-
-    DB_Connect dbc_show_all;
-
-    dbc_show_all.queryFrom(table_department, "*", "");
-
 
 };
 
 
 
 
-
-void Store::print_Sales_Loc_Menu() {
-
-    // this is used to create a menu of for user class options.
+void Store::print_Thing_Menu(string thing) {
 
     system("cls");
 
-    cout << "1.  Add a sales location." << endl;
-    cout << "2.  Change a sales locations." << endl;
-    cout << "3.  Show all sales locations." << endl;
-    cout << "4.  Back." << endl;
+    cout << "1.  Add a " << thing << "." << endl;
+    cout << "2.  Change a " << thing << "." << endl;
+    cout << "3.  Show all " << thing << "." << endl;
+    cout << "4.  Delete a " << thing << "." << endl;
+    cout << "5.  Back." << endl;
 };
 
-void Store::sales_Loc_choice() {
+void Store::thing_Choice(string thing) {
+
     int choice;
+    string table;
+    string field;
 
-    print_Sales_Loc_Menu();
+    print_Thing_Menu(thing);
 
+
+    if (thing == "department") {
+        table = table_department;
+        field = "department_name";
+    }
+    else if (thing == "sales location") {
+        table = table_sales_loc;
+        field = "sales_loc_name";
+    }
+    else if (thing == "storage location") {
+        table = table_storage_loc;
+        field = "storage_name";
+    }
+    else {
+        cout << "error." << endl;
+    };
 
     cout << "Please choose the number option: ";
     choice = getNumber();
@@ -233,46 +115,46 @@ void Store::sales_Loc_choice() {
         switch (choice) {
 
         case 1:
-            add_Sales_Location();
-            sales_Loc_choice();
+            add_Thing(thing, table, field);
+            thing_Choice(thing);
             break;
         case 2:
-            change_Sales_Location();
-            sales_Loc_choice();
+            change_Thing(thing, field, table);
+            thing_Choice(thing);
             break;
         case 3:
-            show_All_Sales_Locations();
-            sales_Loc_choice();
+            show_All_Thing(table);
+            thing_Choice(thing);
             break;
         case 4:
+            delete_thing(field, thing, table);
+            thing_Choice(thing);
+            break;
+        case 5:
             store_Choice();
             break;
 
         }
 
-    } while ((choice != 4));
+    } while ((choice != 5));
+};
 
-    store_Choice();
-
-
-}
-
-void Store::add_Sales_Location() {
-
-    system("cls");
-
+void Store::add_Thing(string thing, string table, string field) {
     DB_Connect dbc_add;
 
-    string fields;
-    string values;
+    system("cls");
+        
+    string value;
     string sql;
     string condition;
 
+    string thing_name;
+
     string yesno = "no";
     do {
-        cout << "Please enter the sale's location: ";
-        getline(cin, sales_loc_name);
-        sales_loc_name = "'" + sales_loc_name + "'";
+        cout << "Please enter the " << thing << "'s name: ";
+        getline(cin, thing_name);
+        thing_name = "'" + thing_name + "'";
         cout << endl;
 
 
@@ -280,45 +162,45 @@ void Store::add_Sales_Location() {
         cout << "Is this information correct? yes/no ";
         getline(cin, yesno);
 
-    } while (yesno == "no");
+    } while (yesno != "yes");
 
 
-
-    fields = "sales_loc_name";
-    values = sales_loc_name;
-    condition = " sales_loc_name = " + sales_loc_name;
-
-
-    dbc_add.insertInto(table_sales_loc, fields, values);
-    dbc_add.queryFrom(table_department, "*", condition);
+    condition = " WHERE " + field + " = " + thing_name;
+    
+    value = thing_name;
 
 
+    dbc_add.insertInto(table, field, value);
+    dbc_add.queryFrom(table, "*", condition);
+
+    system("pause");
 };
 
-void Store::change_Sales_Location() {
-
+void Store::change_Thing(string thing, string field, string table) {
     system("cls");
 
     DB_Connect dbc_change;
-    string sales_name;
+    string name;
     string yesno = "no";
     int choice = 0;
 
-    string new_sales_name;
+    string new_name;
 
     string fields_and_values;
+    string fields_and_values2;
     string condition;
     string sql;
 
 
-    cout << "Please enter the sales location: ";
-    getline(cin, sales_loc_name);
-    sales_loc_name = "'" + sales_loc_name + "'";
+    cout << "Please enter the " << thing << " name: ";
+    getline(cin, name);
+    name = "'" + name + "'";
+
     do {
 
         cout << "Please enter the new name: ";
-        getline(cin, new_sales_name);
-        department_name = "'" + new_sales_name + "'";
+        getline(cin, new_name);
+        new_name = "'" + new_name + "'";
 
         cout << endl;
         cout << "Is this correct? yes/no: ";
@@ -326,166 +208,67 @@ void Store::change_Sales_Location() {
 
     } while (yesno != "yes");
 
-    condition = "sales_loc_name = " + sales_loc_name;
-    fields_and_values = "sales_loc_name = " + new_sales_name;
+    condition = field + " = " + name;
+    fields_and_values = field + " = " + new_name;
+    fields_and_values2 = " WHERE " + field + " = " + new_name;
 
-    
-    sql = dbc_change.createUpdateString(table_sales_loc, fields_and_values, condition);
+    sql = dbc_change.createUpdateString(table, fields_and_values, condition);
     dbc_change.dbUpdate(sql);
-    dbc_change.queryFrom(table_sales_loc, "*", fields_and_values);
+    dbc_change.queryFrom(table, "*", fields_and_values2);
+
+    system("pause");
 
 
 };
 
-void Store::show_All_Sales_Locations() {
+void Store::show_All_Thing(string table) {
 
     system("cls");
 
     DB_Connect dbc_show_all;
 
-    dbc_show_all.queryFrom(table_sales_loc, "*", "");
+    dbc_show_all.queryFrom(table, "*", "");
 
-
+    system("pause");
 };
 
 
+void Store::delete_thing(string type, string type_ID, string table) {
 
-void Store::print_Storage_Loc_Menu() {
+    string ID;
+    DB_Connect dbc_delete;
 
-    // this is used to create a menu of for user class options.
-
-    system("cls");
-
-    cout << "1.  Add a storage location." << endl;
-    cout << "2.  Change a storage location." << endl;
-    cout << "3.  Show all storeage locations." << endl;
-    cout << "4.  Back." << endl;
-};
-
-void Store::storage_Loc_choice() {
-    int choice;
-
-    print_Storage_Loc_Menu();
-
-
-    cout << "Please choose the number option: ";
-    choice = getNumber();
-
-    do {
-
-        switch (choice) {
-
-        case 1:
-            add_Storage_Location();
-            storage_Loc_choice();
-            break;
-        case 2:
-            change_Storage_Location();
-            storage_Loc_choice();
-            break;
-        case 3:
-            show_Storage_Location();
-            storage_Loc_choice();
-            break;
-        case 4:
-            store_Choice();
-            break;
-
-        }
-
-    } while ((choice != 4));
-
-
-}
-
-void Store::add_Storage_Location() {
-
-    system("cls");
-
-    DB_Connect dbc_add;
-
-    string fields;
-    string values;
-    string sql;
     string condition;
-
-    string yesno = "no";
-    do {
-        cout << "Please enter the storage location: ";
-        getline(cin, storage_loc_name);
-        storage_loc_name = "'" + storage_loc_name + "'";
-        cout << endl;
-
-
-        cout << "Is this information correct? yes/no ";
-        getline(cin, yesno);
-
-    } while (yesno == "no");
-
-
-    condition = "storage_loc_name = " + storage_loc_name;
-    fields = "storage_loc_name";
-    values = storage_loc_name;
-
-    dbc_add.insertInto(table_storage_loc, fields, values);
-    dbc_add.queryFrom(table_storage_loc, "*", condition);
-
-    
-};
-
-void Store::change_Storage_Location() {
-
-    system("cls");
-
-    DB_Connect dbc_change;
-    string storage_loc_name;
-    string yesno = "no";
-    int choice = 0;
-
-    string new_storage_name;
-
-    string fields_and_values;
-    string condition;
+    string conditiond;
+    string yesno;
     string sql;
 
 
-    cout << "Please enter the department name: ";
-    getline(cin, storage_loc_name);
+    cout << "Please enter the id of the " << type << " you would like to delete: ";
+    getline(cin, ID);
 
-    do {
-
-        cout << "Please enter the new name: ";
-        getline(cin, new_storage_name);
-        cout << endl;
-        cout << "Is this correct? yes/no: ";
-        getline(cin, yesno);
-
-    } while (yesno != "yes");
+    condition = " WHERE " + type_ID + " = " + ID;
 
 
-    fields_and_values = "storage_loc_name = " + new_storage_name;
+    dbc_delete.queryFrom(table, "*", condition);
 
-    condition = " storage_loc_name = " + storage_loc_name;
-    fields_and_values = "storage_loc_name = " + new_storage_name;
+    cout << "Are you sure you want to delete this " << type << " ? ";
+    getline(cin, yesno);
+    cout << endl;
 
-    sql = dbc_change.createUpdateString(table_department, fields_and_values, condition);
-    dbc_change.dbUpdate(sql);
-    dbc_change.queryFrom(table_department, "*", fields_and_values);
+    if (yesno == "yes")
+    {
+        conditiond = type_ID + " = " + ID;
+        sql = dbc_delete.createDeleteString(table, conditiond);
+        system("pause");
+    }
+    else {
+        return;
+    }
+
 
 
 };
-
-void Store::show_Storage_Location() {
-
-    system("cls");
-
-    DB_Connect dbc_show_all;
-
-    dbc_show_all.queryFrom(table_storage_loc, "*", "");
-    storage_Loc_choice();
-};
-
-
 
 int Store::getNumber() {
     while (true) {
