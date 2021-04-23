@@ -2,16 +2,16 @@
 #include <string>
 #include <iostream>
 //#include "C:\CPS298_GROUP_404\CPS298_GROUP_404\RMS\DB_Connect.h"
-#include "DB_Connect.h"
+#include "D:\Documents\College\CPS 298\Project4\DB_Connect.h"
 
 using namespace std;
 
-class Store 
+class Store
 {
 private:
 
 	string table_department = "department_table";
-	string table_storage_loc = "storage_location_table";
+	string table_storage_loc = "storage_table";
 	string table_sales_loc = "sales_location_table";
 	string department_name;
 	string storage_loc_name;
@@ -26,24 +26,15 @@ public:
 	void print_Main_Store_Menu();
 	void store_Choice();
 
-	void d_choice();
-	void print_D_Menu();
-	void add_Department();
-	void change_Department_Name();
-	void show_All_Departments();
+	
 
+    void print_Thing_Menu(string thing);
+    void thing_Choice(string thing);
+    void add_Thing(string thing, string table, string field);
+    void change_Thing(string thing, string field, string table);
+    void show_All_Thing(string table);
+	void delete_thing(string type, string type_ID, string table);
 
-	void print_Sales_Loc_Menu();
-	void sales_Loc_choice();
-    void add_Sales_Location();
-	void change_Sales_Location();
-	void show_All_Sales_Locations();
-
-	void print_Storage_Loc_Menu();
-	void storage_Loc_choice();
-    void add_Storage_Location();
-	void change_Storage_Location();
-	void show_Storage_Location();
-			
 	int getNumber();
+
 }; 
