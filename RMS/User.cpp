@@ -106,7 +106,42 @@ void User::add_User() {
  
      //this is used to remove an existing user
  
-     find_User_By_Name();
+
+     string u_ID;
+
+     DB_Connect dbc_delete;
+
+     string sql;
+     string condition;
+     string conditiond;
+
+     string yesno = "no";
+
+     system("cls");
+
+
+     cout << "Please enter the user's ID: ";
+     getline(cin, u_ID);
+
+     u_ID = "'" + u_ID + "'";
+
+
+     condition = " WHERE user_id = " + u_ID;
+
+
+     dbc_delete.queryFrom(table, "*", condition);
+
+     cout << "Are you sure you want to delete this user? ";
+     getline(cin, yesno);
+     cout << endl;
+
+     if (yesno == "yes")
+     {
+         conditiond = " user_id = " + u_ID;
+         sql = dbc_delete.createDeleteString(table, conditiond);
+         dbc_delete.dbUpdate(sql);
+         system("pause");
+     }
  
  };
 
@@ -158,7 +193,7 @@ void User::add_User() {
          break;
 
      case 4:
-
+         remove_User();
          break;
      case 5:
          mm.menu_options();
@@ -419,9 +454,11 @@ void User::add_User() {
      DB_Connect dbc_show_all;
      string fields;
 
-     fields = "f_name, l_name, job_id, department_id, permissions_level";
+     fields = "user_id, f_name, l_name, job_id, department_id, permissions_level";
 
      dbc_show_all.queryFrom(table, fields, "");
+
+     system("pause");
  };
  
  int User::getNumber() {
@@ -513,7 +550,3 @@ void User::add_User() {
 User::~User(void) {
 
 };
-
-
-
-
