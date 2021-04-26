@@ -184,7 +184,6 @@ string Product::getUpdateField() {
 
 	while (user_input < 1 || user_input > 8) {
 		cout << "\n Select the field you want to update:\n";
-<<<<<<< HEAD
 		cout << "\t1. "+product_table::item_name+"\n";
 		cout << "\t2. "+product_table::manufacturer_id+"\n";
 		cout << "\t3. "+product_table::manufacturer_product_id+"\n";
@@ -195,22 +194,11 @@ string Product::getUpdateField() {
 		cout << "\t8. "+product_table::stock+"\n";
 		cout << "\t9. "+product_table::reorder+"\n";
 		cout << "\t0. [EXIT MENU]\n";
-=======
-		cout << "\t1. item_name\n";
-		cout << "\t2. manufacturer_id\n";
-		cout << "\t3. manufacturer_product_id\n";
-		cout << "\t4. manufacturer_price\n";
-		cout << "\t5. retail_price\n";
-		cout << "\t6. department_id\n";
-		cout << "\t7. low_stock_quantity\n";
-		cout << "\t8. [EXIT MENU]\n";
->>>>>>> 8d71586d1a1dd488d3afa904812e6ac20e686c30
 		
 		cin >> user_input;
 
 		switch (user_input) {
 			case 1:
-<<<<<<< HEAD
 				field_to_update = product_table::item_name;
 				break;
 			case 2:
@@ -238,29 +226,6 @@ string Product::getUpdateField() {
 				field_to_update = product_table::reorder;
 				break;
 			case 0:
-=======
-				field_to_update = "item_name";
-				break;
-			case 2:
-				field_to_update = "manufacturer_id";
-				break;
-			case 3:
-				field_to_update = "manufacturer_product_id";
-				break;
-			case 4:
-				field_to_update = "manufacturer_price";
-				break;
-			case 5:
-				field_to_update = "retail_price";
-				break;
-			case 6:
-				field_to_update = "department_id";
-				break;
-			case 7:
-				field_to_update = "low_stock_quantity";
-				break;
-			case 8:
->>>>>>> 8d71586d1a1dd488d3afa904812e6ac20e686c30
 				displayMainMenu();
 				break;
 			default:
