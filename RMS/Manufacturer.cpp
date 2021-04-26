@@ -1,4 +1,3 @@
-#include <string>
 #include <iostream>
 #include "DB_Connect.h"
 #include <string>
@@ -28,7 +27,8 @@ void Manufacturer::print_Menu() {
     cout << "2.  Change a manufacturer's information." << endl;
     cout << "3.  Find a manufacturer." << endl;
     cout << "4.  Show all manufactuers." << endl;
-    cout << "5.  Go back." << endl;
+    cout << "5.  Delete a manufactuer." << endl;
+    cout << "6.  Go back." << endl;
 };
 
 void Manufacturer::main_choice() {
@@ -68,7 +68,12 @@ void Manufacturer::main_choice() {
 
                 main_choice();
                 break;
+
             case 5:
+                delete_Manufacturer();
+                main_choice();
+                break;
+            case 6:
                 mm.menu_options();
                 break;
 
@@ -395,6 +400,46 @@ void Manufacturer::show_All_Manufacturers() {
 
     dbc_show_all.queryFrom(table, "*", "");
 
+    system("pause");
+};
+
+void Manufacturer::delete_Manufacturer() {
+
+    string man_ID;
+
+    DB_Connect dbc_delete;
+
+    string sql;
+    string condition;
+    string conditiond;
+
+    string yesno = "no";
+
+    system("cls");
+
+
+    cout << "Please enter the manufacturer's ID: ";
+    getline(cin, man_ID);
+
+    man_ID = "'" + man_ID + "'";
+
+
+    condition = " WHERE manufacturer_id = " + man_ID;
+
+    
+    dbc_delete.queryFrom(table, "*", condition);
+
+    cout << "Are you sure you want to delete this manufacturer? ";
+    getline(cin, yesno);
+    cout << endl;
+
+    if (yesno == "yes")    
+    {
+        conditiond = " manufacturer_id = " + man_ID;
+        sql = dbc_delete.createDeleteString(table, conditiond);
+        dbc_delete.dbUpdate(sql);
+        system("pause");
+    }
 
 };
 
