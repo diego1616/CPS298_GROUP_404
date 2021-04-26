@@ -61,7 +61,7 @@ DB_Connect::~DB_Connect() {
 
 int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
 {
-	for (size_t i = 0; i < resultAmount; i++)
+	for (int i = 0; i < resultAmount; i++)
 	{
 
 		cout << column[i] << ":\t" << ((values[i] == nullptr) ? "NULL" : values[i]) << endl;

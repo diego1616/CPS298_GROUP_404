@@ -3,7 +3,7 @@
 #include "User.h"
 #include "DB_Connect.h"
 #include "MainMenu.h"
-
+#include "Manufacturer.h"
 
 User::User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
     this->f_name = f_n;

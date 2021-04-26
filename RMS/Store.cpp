@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
-#include "D:\Documents\College\CPS 298\Project4\DB_Connect.h"
+#include "DB_Connect.h"
 #include <string>
 #include "Store.h"
-#include "D:\Documents\College\CPS 298\Project4\MainMenu.h"
+#include "MainMenu.h"
 
 
 Store::Store(string d_n, string st_l_n, string sa_l_n) {
