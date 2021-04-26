@@ -7,8 +7,6 @@
 #include <functional> //allows passing functions as arguments
 #include "Menu.h"
 
-#include <limits>
-
 using namespace std;
 
 class Product :

@@ -39,8 +39,7 @@ void Product::displayMainMenu() {
 			default:
 				cout << "\nERROR: Please enter a number 1-5.\n";
 				cin.clear();
-				//cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cin.ignore(INT_MAX, '\n');
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				break;
 		}
 	}
@@ -185,47 +184,54 @@ string Product::getUpdateField() {
 
 	while (user_input < 1 || user_input > 8) {
 		cout << "\n Select the field you want to update:\n";
-		cout << "\t1. item_name\n";
-		cout << "\t2. manufacturer_id\n";
-		cout << "\t3. manufacturer_product_id\n";
-		cout << "\t4. manufacturer_price\n";
-		cout << "\t5. retail_price\n";
-		cout << "\t6. department_id\n";
-		cout << "\t7. low_stock_quantity\n";
-		cout << "\t8. [EXIT MENU]\n";
+		cout << "\t1. "+product_table::item_name+"\n";
+		cout << "\t2. "+product_table::manufacturer_id+"\n";
+		cout << "\t3. "+product_table::manufacturer_product_id+"\n";
+		cout << "\t4. "+product_table::manufacturer_price+"\n";
+		cout << "\t5. "+product_table::retail_price+"\n";
+		cout << "\t6. "+product_table::department_id+"\n";
+		cout << "\t7. "+product_table::low_stock_quantity+"\n";
+		cout << "\t8. "+product_table::stock+"\n";
+		cout << "\t9. "+product_table::reorder+"\n";
+		cout << "\t0. [EXIT MENU]\n";
 		
 		cin >> user_input;
 
 		switch (user_input) {
 			case 1:
-				field_to_update = "item_name";
+				field_to_update = product_table::item_name;
 				break;
 			case 2:
-				field_to_update = "manufacturer_id";
+				field_to_update = product_table::manufacturer_id;
 				break;
 			case 3:
-				field_to_update = "manufacturer_product_id";
+				field_to_update = product_table::manufacturer_product_id;
 				break;
 			case 4:
-				field_to_update = "manufacturer_price";
+				field_to_update = product_table::manufacturer_price;
 				break;
 			case 5:
-				field_to_update = "retail_price";
+				field_to_update = product_table::retail_price;
 				break;
 			case 6:
-				field_to_update = "department_id";
+				field_to_update = product_table::department_id;
 				break;
 			case 7:
-				field_to_update = "low_stock_quantity";
+				field_to_update = product_table::low_stock_quantity;
 				break;
 			case 8:
+				field_to_update = product_table::stock;
+				break;
+			case 9:
+				field_to_update = product_table::reorder;
+				break;
+			case 0:
 				displayMainMenu();
 				break;
 			default:
 				cout << "\nERROR: Please enter a number 1-8.\n";
 				cin.clear();
-				//cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cin.ignore(INT_MAX, '\n');
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				break;
 		}
 	}
