@@ -37,8 +37,10 @@ public:
 	void change_User_Password();
 	void find_In_DB_Table();
 	string find_User_By_Name();
-	void print_Menu();
+	void print_Change_Menu();
 	void see_All_Users();
+	void user_Menu();
+	void print_User_Menu();
 	void dbSearch(string sql);
 	int getNumber();
 	User(string f_n = "", string l_n = "", int jb_id = 0, int de_id = 0, string psswrd = "", int per_id = 0);
