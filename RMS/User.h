@@ -5,7 +5,8 @@
 using namespace std;
 
 
-class User 
+class User : 
+	public DB_Connect
 {
 private:
 	int user_id;
@@ -28,7 +29,9 @@ private:
 	string fields = "";
 	string values = "";
 	string db_password;
-	 
+
+
+	
 
 public:
 	void add_User();
