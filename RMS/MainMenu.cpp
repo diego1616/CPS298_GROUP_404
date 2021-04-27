@@ -10,8 +10,6 @@
 void MainMenu::print_main_menu() {
 
     //this is used to create a main menu.
-    
-    system("cls");
 
     cout << "1.  Products" << endl;
     cout << "2.  Users" << endl;
@@ -27,17 +25,29 @@ void MainMenu::menu_options() {
 
     int number_Option = 0;
 
-    AddProduct ap;
+    //Katie, this code is just fine, but I had to move it.  This is because creating the object stablished a connection to database.  too many connections basically. 
+    // My fix was to move each and single one to the switch statement.
+    //AddProduct ap;
     //Product ap;
-    User u;
-    Manufacturer m;
-    Store s;
+    //User u;
+    //Manufacturer m;
+    //Store s;
+
+    string title = "What would you like to work with?";
+    string instructions = "";
 
     do {
 
+ 
+        //this line gets replaced by the printMEnuLine()
+        //cout << "What would you like to work with?" << endl;
 
+        //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
 
-        cout << "What would you like to work with?" << endl;
+        //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
+        bar_Title_Menu();
+
+        //**************************************************************************************************************************************
 
         this->print_main_menu();
 
@@ -62,25 +72,37 @@ void MainMenu::menu_options() {
 
         switch (number_Option) {
         case 1:
-            system("cls");
-            ap.viewingEnviroment();
-            //ap.displayMainMenu();
-
+        {
+            //system("cls");
+            //ap.viewingEnviroment();
+            Product ap;
+            ap.displayMainMenu();
+        }
             break;
         case 2:
+        {
             int int_user_id;
-            
-            system("cls");
+
+            //system("cls");
             //int_user_id = u.get_User_ID();
-            u.change_User_Information();
+            //u.change_User_Information(); Katie, I commented this line out, because I think you mean user_Menu();  if it is not the case, change it back please. 
+            User u;
+            u.user_Menu();
+        }
             break;
         case 3:
-            system("cls");
+        {
+            //system("cls");
+            Manufacturer m;
             m.main_choice();
+        }
             break;
         case 4:
-            system("cls");
+        {
+            //system("cls");
+            Store s;
             s.store_Choice();
+        }
             break;
         case 5:
 

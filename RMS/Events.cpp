@@ -99,12 +99,10 @@ void EventLog::makePath(string path) {
 
 void EventLog::logEvent(string msg, bool print) {
 	
-	Menu position;
+	Menu display;
 	int count = 0;
 
-	position.gotoxy(MARGIN_0, POS_MESSAGES);
-	position.clearLine(POS_BAR - 1);
-	position.gotoxy(MARGIN_0, POS_MESSAGES);
+	display.prepField(MSG_FIELD_POS, MSG_FIELD);
 
 	try {
 
@@ -126,7 +124,7 @@ void EventLog::logEvent(string msg, bool print) {
 				
 				//wait up to three seconds if other function is printing a msg
 				while (sync) {
-					this_thread::sleep_for(chrono::seconds(1));
+					this_thread::sleep_for(chrono::milliseconds(50));
 					count++;
 
 					if (count >= 3)
@@ -135,6 +133,7 @@ void EventLog::logEvent(string msg, bool print) {
 
 				setSync();
 				cout << msg << endl;
+				this_thread::sleep_for(chrono::milliseconds(150)); //this ensure each message is display for this many seconds before being deleted. 
 				unsetSync();
 			}
 			this->chronicle << this->watch.nowTime() << " - " << msg << endl;

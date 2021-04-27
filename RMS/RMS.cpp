@@ -20,13 +20,9 @@ int main()
 	//Diego's low level stock check test end. 
 
 	
-	Login l;
 	MainMenu m_Menu;
-	
-	//l.login();
 
 	m_Menu.menu_options();
-
 
 
 	return 0;

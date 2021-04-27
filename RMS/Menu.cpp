@@ -49,7 +49,7 @@ string Menu::checkInput(string str, regex match) {
 }
 
 
-string Menu::clearLine(int howManyLines) {
+void Menu::clearLine(int howManyLines) {
 
     string temp("");
     int lineWidth = 180;
@@ -60,20 +60,31 @@ string Menu::clearLine(int howManyLines) {
     for (int i = 0; i < howManyLines; i++)
         cout << temp << endl;
 
-    return temp;
-
 }
 
-void Menu::printWhiteBar(int margin, int position)
+
+void Menu::prepField(int position, int length)
 {
-    gotoxy(margin, position);
+    //go to the start of the field.  We must always start at the most left. So use zero as parameter.
+    int x = 0;
+    gotoxy(x,position);
+    clearLine(length);
+    gotoxy(x, position);
+}
+
+void Menu::printWhiteBar(int where)
+{
+    //prepField(BAR_FIELD_POS, BAR_FIELD);
+    gotoxy(HORIZOTAL_OFFSET, where);
     setColor(WHITE);
     for (int i = 0; i < 28; i++)
         cout << bar;
-
 }
 
-void Menu::menuLine(string& menuText, string storedInput, int margin, int margin2, int position, int color) {
+void Menu::printMenuLine(string& menuText, string storedInput, int margin, int margin2, int position, int color) {
+    
+    gotoxy(margin, position);
+    clearLine();
     gotoxy(margin, position);
     setColor(color);
     cout << menuText;
@@ -88,20 +99,17 @@ void Menu::getMenuLine(string& data, int margin, int position) {
     clearLine(1);
     gotoxy(margin, position);
     getline(cin, data);
-    //gotoxy(margin, position);
-    //cout << data;
 }
 
 void Menu::outputMsg(string msg)
 {
     EventLog log;
-    gotoxy(MARGIN_0, POS_MESSAGES);
-    clearLine(POS_BAR -1);
-    gotoxy(MARGIN_0, POS_MESSAGES);
+
+    prepField(MSG_FIELD_POS, MSG_FIELD);
 
     if (msg != "") {
         setColor(WHITE);
-        log.logEvent(msg, true);
+        EventLog log(msg);
     }
 }
 
@@ -135,5 +143,19 @@ string Menu::buildData(string data[], int size) {
     }
 
     return sqFields;
+
+}
+
+
+void Menu::bar_Title_Menu(string title, string instructions)
+{
+    //printing white bar to separate message area
+    printWhiteBar(BAR_FIELD_POS);
+
+    //printing the title, if any
+    printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, WHITE);
+
+    //clearning old field, so that new output is clean and in the right place. 
+    prepField(MENU_FIELD_POS, MENU_FIELD);
 
 }

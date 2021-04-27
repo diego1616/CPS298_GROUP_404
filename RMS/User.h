@@ -6,7 +6,7 @@ using namespace std;
 
 
 class User : 
-	public DB_Connect
+	public DB_Connect, public Menu
 {
 private:
 	int user_id;
@@ -21,7 +21,7 @@ private:
 	string string_permissions_level;
 	string enter_First = "Please enter the user's first name: ";
 	string enter_Last = "Please enter the user's last name: ";
-	DB_Connect db;
+	//DB_Connect db;
 	string table = "user_table";
 	string condition = "user_id = ";
 	int int_userID;

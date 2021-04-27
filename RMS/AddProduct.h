@@ -22,8 +22,6 @@ public:
 
     //change this array to alter the menus
     string menus[6] = { "Product Name", "Mfg ID", "Retail Price\t$", "Low Stock Qty.","Submmit", "Query" };
-    string title =  "ENTER PRODUCT DATA";
-    string instructions = "Use the arrow keys to navigate. Press ESC or - to return to previous menu.";
 
     //this array contains the fields where the data will be stored in the database. 
     string fields[4] = { product_table::item_name, product_table::manufacturer_id, product_table::retail_price, product_table::low_stock_quantity };

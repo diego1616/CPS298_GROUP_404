@@ -42,6 +42,9 @@ public:
 	bool check_zip(int z = 0);
 	bool check_phone(int p = 0);
 
+	//this method was defined in Manufacturer.cpp but not listed in Manufacturer.h so I simply added the line. 
+	void delete_Manufacturer();
+
 
 	int getNumber();
 

@@ -52,7 +52,7 @@ public:
 	static void unsetSync();
 
 	static void makePath(string path = "");
-	void logEvent(string msg="", bool print=false);
+	void logEvent(string msg="", bool print=true);
 };
 
 

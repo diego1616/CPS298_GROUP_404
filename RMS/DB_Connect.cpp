@@ -46,8 +46,6 @@ DB_Connect::DB_Connect() {
 		sqLiteDB = nullptr;
 		log.logEvent(DB_CLOSED, true);
 	}
-
-
 }
 
 DB_Connect::~DB_Connect() {
@@ -66,7 +64,7 @@ int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** 
 
 		cout << column[i] << ":\t" << ((values[i] == nullptr) ? "NULL" : values[i]) << endl;
 
-		//inserting into the vectors for manipulation later.
+
 	}
 
 	return 0;
@@ -82,7 +80,8 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 	try {
 		string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
 
-		cout << "SQLITE STATEMENT: " << statement << endl;
+		log.logEvent("INSERT STATEMENT: " + statement);
+		this_thread::sleep_for(chrono::milliseconds(3000));
 
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
@@ -92,11 +91,13 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 	}
 	catch (exception e)
 	{
-		cout << DB_WRITE_ERROR << e.what() << endl;
+		log.logEvent(DB_WRITE_ERROR + (string)" " + (string)e.what());
+
 	}
 	catch (int e) {
 
-		cout << DB_WRITE_ERROR << e << endl;
+		log.logEvent(DB_WRITE_ERROR + (string)" " + to_string(e));
+	
 	}
 
 }
@@ -113,16 +114,24 @@ void DB_Connect::query(string& statement)
 		char* error;
 		int check;
 
-		cout << "DB_Connect::query() SQLITE STATEMENT: " << statement << endl;
+		log.logEvent("DB_Connect::query() SQLITE STATEMENT: " + statement);
+		this_thread::sleep_for(chrono::milliseconds(3000));
+		
+		Menu display;
+
+		//ideally, there would be a way to know how many results and clear up until then. For now I am guessing 60 lines. 
+		display.prepField(QUERY_FIELD_POS, 60);
 
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), &DB_Connect::callback, NULL, &error);
+
+		display.gotoxy(MARGIN_0, MSG_FIELD_POS);
 
 		if (check != SQLITE_OK)
 			throw logic_error(error);
 	}
 	catch (exception e)
 	{
-		cout << DB_READ_ERROR << e.what() << endl;
+		log.logEvent(DB_READ_ERROR + (string)" " +(string)e.what());
 	}
 }
 
@@ -181,7 +190,8 @@ void DB_Connect::dbUpdate(string sql) {
 	try {
 		string statement = sql;
 
-		cout << "UPDATE STATEMENT: " << statement << endl;
+		log.logEvent("UPDATE STATEMENT: " + statement);
+		this_thread::sleep_for(chrono::milliseconds(3000)); 
 
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
@@ -190,7 +200,8 @@ void DB_Connect::dbUpdate(string sql) {
 		}
 	}
 	catch (exception e) {
-		cout << DB_WRITE_ERROR << e.what() << endl;
+
+		log.logEvent(DB_WRITE_ERROR + (string)" " + (string)e.what());
 	}
 }
 
@@ -201,12 +212,15 @@ void DB_Connect::dbSearch(string sql) {
 	sqlite3_stmt* sql_statement;
 	// string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
 
+	Menu display;
+
+	//ideally, there would be a way to know how many results and clear up until then. For now I am guessing 60 lines. 
+	display.prepField(QUERY_FIELD_POS, 60);
+	
 	int statement_length = (int)strlen(sql.c_str());
 
 	int prep = (int)sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
 	int step = 0; // new int(0)
-
-
 
 	if (prep == SQLITE_OK) {
 
@@ -248,10 +262,48 @@ void DB_Connect::dbSearch(string sql) {
 				// end data row
 			}
 		}
+		display.gotoxy(MARGIN_0, MSG_FIELD_POS);
 	}
 	else {
 		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
 	}
 	sqlite3_finalize(sql_statement);
 }
+
+void DB_Connect::dbSearch(string sql, string& result)
+{
+	sqlite3_stmt* sql_statement;
+
+	int statement_length = (int)strlen(sql.c_str());
+
+	int prep = (int)sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
+	int step = 0; // new int(0)
+
+	if (prep == SQLITE_OK) {
+
+		
+		while (step != SQLITE_DONE) {
+			step = sqlite3_step(sql_statement);
+			if (step == SQLITE_ROW) {
+				// print data row
+				for (int cell = 0; cell < sqlite3_column_count(sql_statement); cell++) {
+					if (char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
+						cout << left << setw(15) << col_val;
+					}
+					else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
+						cout << left << setw(15) << "NULL";
+					}
+				}
+				cout << endl;
+				// end data row
+			}
+		}
+
+	}
+	else {
+		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
+	}
+	sqlite3_finalize(sql_statement);
+}
+
 

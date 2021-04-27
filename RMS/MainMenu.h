@@ -6,7 +6,8 @@
 using namespace std;
 
 
-class MainMenu
+class MainMenu : 
+	public Menu
 {
 private:
 

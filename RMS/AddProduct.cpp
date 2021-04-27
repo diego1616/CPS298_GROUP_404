@@ -6,33 +6,42 @@ void AddProduct::viewingEnviroment()
 	
     int counter(-1);
     char key(0);
+    string title = "ENTER PRODUCT DATA";
+    string instructions = "Use the arrow keys to navigate. Press ESC or - to return to previous menu.";
    
     while (true)
     {
-           
-        //the first thing is go to clear the areas occupied by the menus.
-        //Otherwise, you get some overlapping text when resizing windows, which can look very odd. 
-        gotoxy(MARGIN_0, positions[0] + POS_OFFSET );
-        clearLine((sizeof(menus) / sizeof(string) )*2);
 
         //Monitor the position of the counter and output the key that was pressed
+        //setColor(BLUE);
+        //gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
+        //clearLine(2);
+        //gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
+        //cout << counter << endl << +key;
+
+        prepField(BAR_FIELD_POS - 3 , 2);
         setColor(BLUE);
-        gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
-        clearLine(2);
-        gotoxy(MARGIN_0, positions[0] + POS_OFFSET - 2);
         cout << counter << endl << +key;
 
+        printWhiteBar(BAR_FIELD_POS);
+     
+        //printing the title
+        printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, RED);
 
-        printWhiteBar(MARGIN_0, POS_BAR);
-      
-        menuLine(title, instructions, MARGIN2, MARGIN2 +title.length() + 5, POS_TITLE, RED);
+        //the first thing is go to clear the areas occupied by the menus.
+         //Otherwise, you get some overlapping text when resizing windows, which can look very odd. 
+         //gotoxy(MARGIN_0, positions[0] + POS_OFFSET );
+         //clearLine((sizeof(menus) / sizeof(string) )*2);
 
-        menuLine(menus[0], storedInMenu[0], MARGIN1, MARGIN2, positions[0] + POS_OFFSET, Set[0]);
-        menuLine(menus[1], storedInMenu[1], MARGIN1, MARGIN2, positions[1] + POS_OFFSET, Set[1]);
-        menuLine(menus[2], storedInMenu[2], MARGIN1, MARGIN2, positions[2] + POS_OFFSET, Set[2]);
-        menuLine(menus[3], storedInMenu[3], MARGIN1, MARGIN2, positions[3] + POS_OFFSET, Set[3]);
-        menuLine(menus[4], "", MARGIN1, MARGIN2, positions[4] + POS_OFFSET, Set[4]);                //this is an action menu, does not store data
-        menuLine(menus[5], "", MARGIN1, MARGIN2, positions[5] + POS_OFFSET, Set[5]);               //this is an action menu, does not store data
+        //even if the printMenuLine clears each line, somethings there are resizing erros, so it is best to clear the menu field.
+        prepField(MENU_FIELD_POS, MENU_FIELD);
+
+        printMenuLine(menus[0], storedInMenu[0], MARGIN_1, MARGIN_2, positions[0] + MENU_FIELD_POS, Set[0]);
+        printMenuLine(menus[1], storedInMenu[1], MARGIN_1, MARGIN_2, positions[1] + MENU_FIELD_POS, Set[1]);
+        printMenuLine(menus[2], storedInMenu[2], MARGIN_1, MARGIN_2, positions[2] + MENU_FIELD_POS, Set[2]);
+        printMenuLine(menus[3], storedInMenu[3], MARGIN_1, MARGIN_2, positions[3] + MENU_FIELD_POS, Set[3]);
+        printMenuLine(menus[4], "", MARGIN_1, MARGIN_2, positions[4] + MENU_FIELD_POS, Set[4]);                //this is an action menu, does not store data
+        printMenuLine(menus[5], "", MARGIN_1, MARGIN_2, positions[5] + MENU_FIELD_POS, Set[5]);               //this is an action menu, does not store data
      
         //if we could find  way to detect any ey input, we could add some functionallyti and the program would become much more powerful.
         //for example, press F10 and do something else, or press q and go the the menu query.  etc. 
@@ -56,55 +65,49 @@ void AddProduct::viewingEnviroment()
            
             if (counter == 0)
             {
-                getMenuLine(storedInMenu[counter], MARGIN2, positions[counter] + POS_OFFSET);
+                getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
                 storedInMenu[counter] = checkInput(storedInMenu[counter],checkNames);
  
             }
 			else if (counter == 1)
 			{
-				getMenuLine(storedInMenu[counter], MARGIN2, positions[counter] + POS_OFFSET);
+                getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
                 storedInMenu[counter] = checkInput(storedInMenu[counter], checkPartNumbers);
 
 			}
             else if (counter == 2)
 			{
-				getMenuLine(storedInMenu[counter], MARGIN2, positions[counter] + POS_OFFSET);
+                getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
                 storedInMenu[counter] = checkInput(storedInMenu[counter],checkMoney);
 
             }
             else if (counter == 3)
             {
-                getMenuLine(storedInMenu[counter], MARGIN2, positions[counter] + POS_OFFSET);
+                getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
                 storedInMenu[counter] = checkInput(storedInMenu[counter],checkMoney);
             }
             else if (counter == 4)
             {
                 outputMsg("");
 
-                //The following three lines are replaced by outoutMsg();
-                //gotoxy(MARGIN_0, POS_MESSAGES);
-                //clearLine(positions[0] + POS_OFFSET);
-                //gotoxy(MARGIN_0, POS_MESSAGES);
-
-                //Some test
-                //insertInto(table::products,
-                //    addComma(product_table::item_name) + addComma(product_table::manufacturer_id) + addComma(product_table::retail_price) + product_table::low_stock_quantity,
-                //            addQuotes(storedInMenu[0]) + addQuotes(storedInMenu[1]) + addComma(storedInMenu[2]) + storedInMenu[3]);
-
                 insertInto(table::products,
-                                    buildFields(fields,sizeof(fields)/sizeof(string)),
+                                    buildFields(fields,
+                                        sizeof(fields)/sizeof(string)),
                                             addQuotes(storedInMenu[0]) + addQuotes(storedInMenu[1]) + addComma(storedInMenu[2]) + storedInMenu[3]);
             }
             
             else if (counter == 5)
             {
-                gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
-                cout << clearLine(50);  //ideally, there would be a way to know how many results and clear up until then. For now I am guessing 50 lines. 
-                gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
+                //gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
+                //clearLine(50);  //ideally, there would be a way to know how many results and clear up until then. For now I am guessing 50 lines. 
+                //gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
+
+                //ideally, there would be a way to know how many results and clear up until then. For now I am guessing 60 lines. 
+                prepField(QUERY_FIELD_POS, 60);
 
                 //build a sql statement using new dbConnect Functions
                 this->dbSearch("select * from "+ table::products + ";");
-                gotoxy(MARGIN_0, positions[6] + POS_OFFSET);
+                gotoxy(MARGIN_0, QUERY_FIELD_POS);
             }
              
         }

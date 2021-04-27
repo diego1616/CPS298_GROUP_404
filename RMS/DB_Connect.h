@@ -30,6 +30,9 @@ using namespace std;
 #define PRODUCT_DELETED(X) "PRODUCT DELETED: " + (string)X
 #define PRODUCT_UPDATED(X) "PRODUCT UPDATED: " + (string)X
 
+#define NOT_FOUND "RECORD NOT FOUND"
+#define NULL_FIND "EMPTY RECORD"
+
 #define LOG_ERROR "UNABLE TO OPEN OR WRITE TO LOG FILE "
 
 class DB_Connect
@@ -67,6 +70,7 @@ public:
 	string createDeleteString(string table, string condition = "");
 	void dbUpdate(string sql);
 	void dbSearch(string sql);
+	void dbSearch(string sql, string &result);
 
 
 };
