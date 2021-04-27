@@ -3,7 +3,9 @@
 #include "User.h"
 #include "DB_Connect.h"
 #include "MainMenu.h"
-#include "Manufacturer.h"
+
+// This class is used to manage user information
+
 
 User::User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_id) {
     this->f_name = f_n;
@@ -154,7 +156,6 @@ void User::add_User() {
      string fields_and_values;
      string condition;
      string sql;
-     int new_job_id, new_department_id, new_permissions_level;
      string u_ID;
 
      do {
@@ -358,7 +359,7 @@ void User::add_User() {
  void User::change_User_Password() {
  
      //this is used to create a new password or change an existing one.
-
+     system("clear");
 
      string user_Entered_Password = "";
      string new_Password_1;
@@ -372,13 +373,16 @@ void User::add_User() {
 
      DB_Connect dbc_pass;
 
-     //condition = "user_id = " + u_ID;
-     //string sql = "SELECT password FROM " + table + " " + condition + ";";
 
-     //dbSearch(sql);
 
      cout << "Please enter the user ID: ";
      getline(cin, u_ID);
+
+     condition = "user_id = " + u_ID;
+     sql = "SELECT password FROM " + table + " WHERE " + condition + ";";
+
+     dbSearch(sql);
+   
  
      do {
          cout << "Please enter your old password: ";
@@ -497,7 +501,7 @@ void User::add_User() {
 
 
 
- /*
+ 
  void User::dbSearch(string sql) {
      // TODO: pass arrays of columns and eventually search criteria into function for parsing and formatting (add '' and , where needed)
  // "+product_table::product_id+","+product_table::item_name+"
@@ -515,10 +519,7 @@ void User::add_User() {
 
          // Print basic header row
          // another comment
-         for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-             cout << left << setw(15) << sqlite3_column_name(sql_statement, header);
-         }
-         cout << endl;
+         
 
          while (step != SQLITE_DONE) {
              step = sqlite3_step(sql_statement);
@@ -526,13 +527,13 @@ void User::add_User() {
                  // print data row
                  for (int cell = 0; cell < sqlite3_column_count(sql_statement); cell++) {
                      if (char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
-
-
+                         if (cell == 0) {
                              db_password = col_val;
+                         }
 
                      }
                      else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-                         cout << left << setw(15) << "NULL";
+                         //cout << left << setw(15) << "NULL";
                      }
                  }
                  cout << endl;
@@ -545,8 +546,12 @@ void User::add_User() {
      }
      sqlite3_finalize(sql_statement);
  }
- */
+ 
 
 User::~User(void) {
 
 };
+
+
+
+
