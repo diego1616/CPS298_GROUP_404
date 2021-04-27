@@ -6,6 +6,9 @@
 #include "MainMenu.h"
 
 
+//This class is used to manage physical information about the store and store layout
+
+
 Store::Store(string d_n, string st_l_n, string sa_l_n) {
     this->department_name = d_n;
     this->storage_loc_name = st_l_n;
@@ -94,18 +97,18 @@ void Store::thing_Choice(string thing) {
 
     if (thing == "department") {
         table = table_department;
-        field = "department_name";
-        field_ID = "department_id";
+        field = department_table::department_name;
+        field_ID = department_table::department_id;
     }
     else if (thing == "sales location") {
         table = table_sales_loc;
-        field = "sales_loc_name";
-        field_ID = "sales_loc_id";
+        field = sales_location_table::sales_loc_name;
+        field_ID = sales_location_table::sales_loc_id;
     }
     else if (thing == "storage location") {
         table = table_storage_loc;
-        field = "storage_name";
-        field_ID = "storage_id";
+        field = storage_table::storage_name;
+        field_ID = storage_table::storage_id;
     }
     else {
         cout << "error." << endl;
@@ -151,7 +154,7 @@ void Store::add_Thing(string thing, string table, string field) {
     string value;
     string sql;
     string condition;
-
+    
     string thing_name;
 
     string yesno = "no";
@@ -220,7 +223,7 @@ void Store::change_Thing(string thing, string field, string table) {
     dbc_change.dbUpdate(sql);
     dbc_change.queryFrom(table, "*", fields_and_values2);
 
-    system("pause");
+    //system("pause");
 
 
 };
