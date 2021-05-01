@@ -286,7 +286,7 @@
 #include "MainMenu.h"
 
 void Product::displayMainMenu() {
-	MainMenu m;
+	//MainMenu m;
 	int user_input = 0;
 
 	//if you want to add a menu title, just mod these strings
@@ -331,7 +331,8 @@ void Product::displayMainMenu() {
 				break;
 			case 5:
 				system("cls");
-				m.menu_options();
+				return;
+				//m.menu_options();
 				break;
 			default:
 				cout << "\nERROR: Please enter a number 1-5.\n";

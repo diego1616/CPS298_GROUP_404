@@ -133,7 +133,7 @@ void EventLog::logEvent(string msg, bool print) {
 
 				setSync();
 				cout << msg << endl;
-				this_thread::sleep_for(chrono::milliseconds(150)); //this ensure each message is display for this many seconds before being deleted. 
+				this_thread::sleep_for(chrono::milliseconds(1500)); //this ensure each message is display for this many seconds before being deleted. 
 				unsetSync();
 			}
 			this->chronicle << this->watch.nowTime() << " - " << msg << endl;

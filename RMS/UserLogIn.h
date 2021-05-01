@@ -3,25 +3,25 @@
 #include "DB_Connect.h"
 #include "MainMenu.h"
 
-#define BAD_CREDENTIALS(X) "USER ID " + (string)X + " LOGIN ATTEMPT FAILED" 
-
 class UserLogIn :
-    public Menu, public DB_Connect
+    public MainMenu
 {
-    string userName;
-    string password;
-    string userID;
-    string acessLevel;
-    void allowAccess();
+    string who;
+    string userAccessLevel;
+
+    //this array holds the values that will go in the fields.  Do not change this code, as it is automated based on the fields[] array.
+    string storedInMenu[2]{ "" };
+
+    //string acessLevel;    //this has been replaced by static variable accessLevel in the DB_Connect class
+    void allowAccess(); //starts the Main_Menu Process
 
 public:
 
     UserLogIn(); //constructor, it initiates the log in process
-    void dbSearch(string sql, string &data); //overridden function from the DB_Connect class.  pass data by ref to have it overridden. 
+    void dbSearch(string sql, string &data); //overridden function from the DB_Connect class. gets the result from query to &data 
     void getData();
     bool validateData();
-   
-
+    void clearUser();
 
 };
 

@@ -7,7 +7,7 @@ using namespace std;
 
 
 class MainMenu : 
-	public Menu
+ public Menu, public DB_Connect
 {
 private:
 

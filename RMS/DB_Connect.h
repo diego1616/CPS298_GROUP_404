@@ -35,6 +35,11 @@ using namespace std;
 
 #define LOG_ERROR "UNABLE TO OPEN OR WRITE TO LOG FILE "
 
+#define WRONG_ACCESS_LEVEL "INVALID ACCESS LEVEL REQUESTED"
+#define USER_LOG_OK(X) (string)X + " HAS BEEN AUTHENTICATED"
+#define USER_LOG_BAD(X) "USER " + (string)X + " INCORRECT LOGIN CREDENTIALS"
+#define USER_LOG_EMPTY + "NO_USER"
+
 class DB_Connect
 {
 	string path = "databases\\";
@@ -42,15 +47,21 @@ class DB_Connect
 	EventLog log;
 	bool connectionStatus;
 	
-	
 	vector<string> columns;
 	vector<string> data;
 
+	static int accessLevel;  //0 is no one, simply in the login page.
+							// 1 is admin
+							// 2 or 3 is for different users
+							
 public:
 	sqlite3* sqLiteDB;
 
 	DB_Connect();
 	~DB_Connect();
+
+	static bool setAcess(int level, string who);	//calling this function without the right arguments will do nothing
+	static int getAcess();
 
 	//int lastQueryRows;
 

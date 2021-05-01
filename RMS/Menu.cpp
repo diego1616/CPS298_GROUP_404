@@ -159,3 +159,12 @@ void Menu::bar_Title_Menu(string title, string instructions)
     prepField(MENU_FIELD_POS, MENU_FIELD);
 
 }
+
+void Menu::loginBasedPrint(string text, int minAccess)
+{
+    if (minAccess >= DB_Connect::getAcess())
+        cout << text << endl;
+    else
+        cout << "" << endl;
+
+}

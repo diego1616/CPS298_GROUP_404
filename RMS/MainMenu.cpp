@@ -7,15 +7,22 @@
 #include "Store.h"
 
 
+
 void MainMenu::print_main_menu() {
 
     //this is used to create a main menu.
 
-    cout << "1.  Products" << endl;
-    cout << "2.  Users" << endl;
-    cout << "3.  Manufacturers" << endl;
-    cout << "4.  Store information" << endl;
-    cout << "5.  Logout" << endl;
+    //cout << "1.  Products" << endl;
+    //cout << "2.  Users" << endl;
+    //cout << "3.  Manufacturers" << endl;
+    //cout << "4.  Store information" << endl;
+    //cout << "5.  Logout" << endl;
+
+    loginBasedPrint("1.  Products", 2);
+    loginBasedPrint("2.  Users", 2);
+    loginBasedPrint("3.  Manufacturers", 1);
+    loginBasedPrint("4.  Store information", 2);
+    loginBasedPrint("5.  Logout", 3);
 
 };
 
@@ -72,42 +79,50 @@ void MainMenu::menu_options() {
 
         switch (number_Option) {
         case 1:
-        {
-            //system("cls");
-            //ap.viewingEnviroment();
-            Product ap;
-            ap.displayMainMenu();
-        }
-            break;
+
+            if (DB_Connect::getAcess() <= 2) {
+                Product ap;
+                ap.displayMainMenu();
+                break;
+            }
+            else
+                break;
+ 
         case 2:
-        {
-            int int_user_id;
 
-            //system("cls");
-            //int_user_id = u.get_User_ID();
-            //u.change_User_Information(); Katie, I commented this line out, because I think you mean user_Menu();  if it is not the case, change it back please. 
-            User u;
-            u.user_Menu();
-        }
-            break;
+            if (DB_Connect::getAcess() <= 2) {
+                User u;
+                u.user_Menu();
+                break;
+            }
+            else
+                break;
+
         case 3:
-        {
-            //system("cls");
-            Manufacturer m;
-            m.main_choice();
-        }
-            break;
-        case 4:
-        {
-            //system("cls");
-            Store s;
-            s.store_Choice();
-        }
-            break;
-        case 5:
 
+            if (DB_Connect::getAcess() <= 1) {
+                Manufacturer m;
+                m.main_choice();
+                break;
+            }
+            else
+                break;
+
+        case 4:
+            if (DB_Connect::getAcess() <= 2) {
+                Store s;
+                s.store_Choice();
+                break;
+            }
+            else
+                break;
+        case 5:
+            //everyone must have access to log out
+            system("cls");
+            return; //back to log in page
             break;
         };
+
 
     } while (number_Option != 5);
   

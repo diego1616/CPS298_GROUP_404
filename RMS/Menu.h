@@ -82,6 +82,8 @@ public:
 	void outputMsg(string msg=""); //use to either output to the msg field, or prime to the right place
 
 	void bar_Title_Menu(string title = " ", string instructions = " ");
+
+	void loginBasedPrint(string text, int minAccess);
     
 
 

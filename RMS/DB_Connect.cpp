@@ -57,6 +57,34 @@ DB_Connect::~DB_Connect() {
 
 }
 
+int DB_Connect::accessLevel = 0;
+
+bool DB_Connect::setAcess(int level, string who)
+{
+	EventLog log;
+
+	if (level > 0 || level <= 3)
+		if (who != NOT_FOUND && who != "")
+		{
+			DB_Connect::accessLevel = level;
+			log.logEvent(USER_LOG_OK(who));
+			return true;
+		}
+		else {
+			log.logEvent(USER_LOG_BAD(who));
+			return false;
+		}
+	else {
+		log.logEvent(WRONG_ACCESS_LEVEL);
+		return false;
+	}
+}
+
+int DB_Connect::getAcess()
+{
+	return DB_Connect::accessLevel;
+}
+
 int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
 {
 	for (int i = 0; i < resultAmount; i++)
