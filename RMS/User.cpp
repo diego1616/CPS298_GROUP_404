@@ -76,14 +76,14 @@ void User::add_User() {
      //dbc_add.queryFrom(table, "*", condition);
 
      insertInto(table, fields, values);
-     queryFrom(table, "*", condition);
+     //queryFrom(table, "*", condition);
 
-     //this line is a good message, but it overwrites some stuff, so I decided to make it a log message.  It will go to the top of the screen, nice and big. 
+     queryFrom(table, user_table::user_id + ", f_name, l_name, job_id, department_id, permissions_level", condition);
+
+     //this line is a good message, but it overwrites some stuff, so I decided to add an argument to change_User_Password().
+     //It will print a message in the title field, at the top of the screen. 
      //cout << "Your password is \"default\".  Please change your password now.";
-
-     EventLog log("\nYour password is \"default\".  Please change your password now.");
-
-     change_User_Password();
+      change_User_Password("Your password is \"default\".  Please change your password now.");
 
 
  
@@ -186,6 +186,7 @@ void User::add_User() {
          //dbc_delete.dbUpdate(sql);
          sql = createDeleteString(table, conditiond);
          dbUpdate(sql);
+         
 
          //system("pause");
      }
@@ -204,14 +205,6 @@ void User::add_User() {
      string u_ID;
 
      do {
-
-
-         //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-         //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
-         bar_Title_Menu();
-
-         //***************************************************************************************************************************************
 
          print_User_Menu();
          cout << endl;
@@ -285,6 +278,9 @@ void User::add_User() {
 
      //**************************************************************************************************************************************
 
+     queryFrom(table, "f_name, l_name, job_id, department_id, permissions_level");
+
+     bar_Title_Menu();
 
      cout << "Please enter the user ID: ";
      getline(cin, u_ID);
@@ -306,13 +302,6 @@ void User::add_User() {
  
          if ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
              && (number_Option != 6) && (number_Option != 7)) {
-
-             //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-             //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
-             bar_Title_Menu();
-
-             //**************************************************************************************************************************************
              cout << "That is not an option.  Please try again." << endl;
          }
  
@@ -436,14 +425,15 @@ void User::add_User() {
          };
 
  
-     } while ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
-         && (number_Option != 6) && (number_Option != 7));
+     //} while ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
+     //    && (number_Option != 6) && (number_Option != 7));
 
+     } while (number_Option != 7);
  
  };
  
  
- void User::change_User_Password() {
+ void User::change_User_Password(string carryOverMsg) {
  
      //this is used to create a new password or change an existing one.
      //system("clear");     //this line clears old stuff that should not be cleared. 
@@ -464,7 +454,7 @@ void User::add_User() {
      //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
 
      //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
-     bar_Title_Menu();
+     bar_Title_Menu(carryOverMsg);
 
      //**************************************************************************************************************************************
 
@@ -523,7 +513,7 @@ void User::add_User() {
 
      // this is used to create a menu of for user class options.
 
-
+     bar_Title_Menu();
 
      cout << "1.  Add user." << endl;
      cout << "2.  Change user's information." << endl;
@@ -537,7 +527,7 @@ void User::add_User() {
  
      // this is used to create a menu of for user class options.
 
-
+     bar_Title_Menu();
  
      cout << "1.  Change user's first name." << endl;
      cout << "2.  Change user's last name." << endl;

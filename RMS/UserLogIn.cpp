@@ -10,10 +10,6 @@ void UserLogIn::allowAccess()
 
 		if (DB_Connect::setAcess(stoi(this->userAccessLevel), this->who)) {
 			
-			log.logEvent(USER_LOG_OK(who));
-			
-			//log.logEvent(" DB_Connect::getAcess() = " + to_string(DB_Connect::getAcess()));
-
 			this->menu_options();
 			
 			clearUser();	//once it leaves the Menu_Options() loop, it will clear the user, and the data stored in the menus.
@@ -46,7 +42,7 @@ void UserLogIn::dbSearch(string sql, string& data) {
 	bool check = true;
 
 	EventLog log(sql);
-	int statement_length = strlen(sql.c_str());
+	int statement_length = (int)strlen(sql.c_str());
 
 	int prep = sqlite3_prepare_v2(sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
 	int step = 0; // new int(0)
@@ -100,9 +96,9 @@ void UserLogIn::getData()
 
 	while (true)
 	{
-		prepField(BAR_FIELD_POS - 3, 2);
-		setColor(BLUE);
-		cout << counter << endl << +key;
+		//prepField(BAR_FIELD_POS - 3, 2);
+		//setColor(BLUE);
+		//cout << counter << endl << +key;
 
 		printWhiteBar(BAR_FIELD_POS);
 
@@ -124,9 +120,10 @@ void UserLogIn::getData()
 
 		if (key == 72)          //up key
 			counter--;
-		else if (key == 80)     //down key
+		else if (key == 80 || key == 9)     //down key or Tab
 			counter++;
-		else if (key == '\r' || key == 77)   //carriage return and right arrow key
+		//else if (key == '\r' || key == 77)   //carriage return and right arrow key
+		else if ((key >= 48 && key <= 122) || (key == '\r' || key == 77))   //carriage return and right arrow key
 		{
 			setColor(GREEN);
 
@@ -134,27 +131,27 @@ void UserLogIn::getData()
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], noCheck);
+				counter++;
 
 			}
 			else if (counter == 1)
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], noCheck);
-
+				counter++;
 			}
 			else if (counter == 2)
 			{
 				if (validateData())
 				{
-
 					allowAccess();
 				}
 				else {
 
 					EventLog log(USER_LOG_BAD(storedInMenu[0]));
 				}
+				counter++;
 			}
-
 		}
 
 		//set all of the lines to white

@@ -22,7 +22,11 @@ Manufacturer::Manufacturer(string m_n, string c_n, string c_e, string s_num, str
 void Manufacturer::print_Menu() {
 
     // this is used to create a menu of for user class options.
-
+    
+    //line added for display purposes
+    //system("cls");
+    bar_Title_Menu();
+    
     cout << "1.  Add a manufacturer." << endl;
     cout << "2.  Change a manufacturer's information." << endl;
     cout << "3.  Find a manufacturer." << endl;
@@ -34,47 +38,50 @@ void Manufacturer::print_Menu() {
 void Manufacturer::main_choice() {
      
     int choice;
-    MainMenu mm;
+    //MainMenu mm;
 
+
+    do {
 
     print_Menu();
 
-
     cout << "Please choose the number option: ";
+
     choice = getNumber();
 
-    do {
 
         switch (choice) {
 
             case 1:
                 add_Manufacturer();
                 
-                main_choice();
+                //main_choice();
 
                 break;
             case 2:
                 change_Manufacturer_Info();
 
-                main_choice();
+                //main_choice();
                 break;
             case 3:
                 search_for_Manufacturer();
 
-                main_choice();
+                //main_choice();
                 break;
             case 4:
                 show_All_Manufacturers();
 
-                main_choice();
+                //main_choice();
                 break;
 
             case 5:
                 delete_Manufacturer();
-                main_choice();
+                //main_choice();
                 break;
             case 6:
-                mm.menu_options();
+                
+                //mm.menu_options();
+                return;
                 break;
 
         }
@@ -88,6 +95,8 @@ void Manufacturer::main_choice() {
 
 
 void Manufacturer::print_Change_Menu() {
+    
+    bar_Title_Menu();
 
     cout << "1.  Change manufactuer's name." << endl;
     cout << "2.  Change manufactuer's contact name." << endl;
@@ -101,16 +110,19 @@ void Manufacturer::print_Change_Menu() {
 
 void Manufacturer::add_Manufacturer() {
 
-    DB_Connect dbc_add;
+    //DB_Connect dbc_add;
     
     string sql;
     string conditions;
 
     string yesno = "no";
 
-    system("cls");
+    //system("cls");
 
     do {
+        //line added for display purposes
+        bar_Title_Menu();
+
         cout << "Please enter the manufacturer's name: ";
         getline(cin, manufacturer_name);
         cout << endl;
@@ -175,26 +187,27 @@ void Manufacturer::add_Manufacturer() {
 
     cout << values;
 
-    dbc_add.insertInto(table, fields, values);
+    //dbc_add.insertInto(table, fields, values);
+    insertInto(table, fields, values);
 
     //conditions = "manufacturer_name = " + manufacturer_name;
 
 
     //dbc_add.queryFrom(table, "*", conditions);
 
-    main_choice();
+    //main_choice();
 
 
 };
 
 void Manufacturer::change_Manufacturer_Info() {
 
-    DB_Connect dbc_change;
+    //DB_Connect dbc_change;
     string man_ID;
     int choice = 0;
     string condition;
 
-    system("cls");
+    //system("cls");
 
     search_for_Manufacturer();
 
@@ -242,8 +255,11 @@ void Manufacturer::change_Manufacturer_Info() {
 
                 fields_and_values = "manufacturer_name = " + new_manufacturer_name;
 
-                sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-                dbc_change.dbUpdate(sql);
+                //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+                //dbc_change.dbUpdate(sql);
+
+                sql = createUpdateString(table, fields_and_values, condition);
+                dbUpdate(sql);
 
                 
                 break;
@@ -263,8 +279,11 @@ void Manufacturer::change_Manufacturer_Info() {
 
                 fields_and_values = "contact_name = " + new_contact_name;
 
-                sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-                dbc_change.dbUpdate(sql);
+                //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+                //dbc_change.dbUpdate(sql);
+
+                sql = createUpdateString(table, fields_and_values, condition);
+                dbUpdate(sql);
 
                 break;
 
@@ -285,8 +304,11 @@ void Manufacturer::change_Manufacturer_Info() {
 
                 fields_and_values = "contact_email = " + new_contact_email;
 
-                sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-                dbc_change.dbUpdate(sql);
+                //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+                //dbc_change.dbUpdate(sql);
+
+                sql = createUpdateString(table, fields_and_values, condition);
+                dbUpdate(sql);
 
                 break;
 
@@ -334,8 +356,11 @@ void Manufacturer::change_Manufacturer_Info() {
                     ", state = " + new_state + ", country = " + new_country;
 
 
-                sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-                dbc_change.dbUpdate(sql);
+                //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+                //dbc_change.dbUpdate(sql);
+
+                sql = createUpdateString(table, fields_and_values, condition);
+                dbUpdate(sql);
 
                 break;
 
@@ -355,8 +380,11 @@ void Manufacturer::change_Manufacturer_Info() {
 
                 fields_and_values = "phone_number = " + new_string_phone_number;
 
-                sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-                dbc_change.dbUpdate(sql);
+                //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+                //dbc_change.dbUpdate(sql);
+
+                sql = createUpdateString(table, fields_and_values, condition);
+                dbUpdate(sql);
 
                 break;
 
@@ -374,9 +402,10 @@ void Manufacturer::change_Manufacturer_Info() {
 
 void Manufacturer::search_for_Manufacturer() {
 
-    system("cls");
+    //system("cls");
+    bar_Title_Menu();
 
-    DB_Connect dbc_search;
+    //DB_Connect dbc_search;
     string name;
     string condition; 
    
@@ -388,26 +417,31 @@ void Manufacturer::search_for_Manufacturer() {
     cout << name;
 
     condition = " WHERE manufacturer_name = " + name;
-    dbc_search.queryFrom(table, "*", condition);
+    //dbc_search.queryFrom(table, "*", condition);
+
+    queryFrom(table, "*", condition);
  
 };
 
 void Manufacturer::show_All_Manufacturers() {
 
-    system("cls");
+    //system("cls");
+    bar_Title_Menu();
 
-    DB_Connect dbc_show_all;
+    //DB_Connect dbc_show_all;
 
-    dbc_show_all.queryFrom(table, "*", "");
+    //dbc_show_all.queryFrom(table, "*", "");
 
-    system("pause");
+    queryFrom(table, "*", "");
+
+    //system("pause");
 };
 
 void Manufacturer::delete_Manufacturer() {
 
     string man_ID;
 
-    DB_Connect dbc_delete;
+    //DB_Connect dbc_delete;
 
     string sql;
     string condition;
@@ -415,8 +449,8 @@ void Manufacturer::delete_Manufacturer() {
 
     string yesno = "no";
 
-    system("cls");
-
+    //system("cls");
+    bar_Title_Menu();
 
     cout << "Please enter the manufacturer's ID: ";
     getline(cin, man_ID);
@@ -427,18 +461,24 @@ void Manufacturer::delete_Manufacturer() {
     condition = " WHERE manufacturer_id = " + man_ID;
 
     
-    dbc_delete.queryFrom(table, "*", condition);
+    //dbc_delete.queryFrom(table, "*", condition);
 
+    queryFrom(table, "*", condition);
+    bar_Title_Menu();
     cout << "Are you sure you want to delete this manufacturer? ";
     getline(cin, yesno);
     cout << endl;
 
     if (yesno == "yes")    
     {
-        conditiond = " manufacturer_id = " + man_ID;
-        sql = dbc_delete.createDeleteString(table, conditiond);
-        dbc_delete.dbUpdate(sql);
-        system("pause");
+        //conditiond = " manufacturer_id = " + man_ID;
+        //sql = dbc_delete.createDeleteString(table, conditiond);
+        //dbc_delete.dbUpdate(sql);
+        //system("pause");
+
+        sql = createDeleteString(table, conditiond);
+        dbUpdate(sql);
+
     }
 
 };

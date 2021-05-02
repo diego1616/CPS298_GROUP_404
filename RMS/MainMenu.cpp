@@ -28,7 +28,7 @@ void MainMenu::print_main_menu() {
 
 void MainMenu::menu_options() {
 
-    //this is used to pick what to do
+     //this is used to pick what to do
 
     int number_Option = 0;
 
@@ -40,9 +40,6 @@ void MainMenu::menu_options() {
     //Manufacturer m;
     //Store s;
 
-    string title = "What would you like to work with?";
-    string instructions = "";
-
     do {
 
  
@@ -52,7 +49,7 @@ void MainMenu::menu_options() {
         //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
 
         //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
-        bar_Title_Menu();
+        bar_Title_Menu("What would you like to work with?", " ");
 
         //**************************************************************************************************************************************
 
@@ -118,7 +115,7 @@ void MainMenu::menu_options() {
                 break;
         case 5:
             //everyone must have access to log out
-            system("cls");
+            system("cls");      //this is the only cls needed in the entire project.
             return; //back to log in page
             break;
         };

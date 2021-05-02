@@ -17,8 +17,10 @@ Store::Store(string d_n, string st_l_n, string sa_l_n) {
 };
 
 
-
  void Store::print_Main_Store_Menu() {
+
+     //system("cls");
+     bar_Title_Menu();
 
     // this is used to create a menu of for user class options.
 
@@ -32,16 +34,17 @@ void Store::store_Choice() {
 
     int choice;
     string thing;
+    EventLog log;
+    //MainMenu mm;
+    do {
 
-    MainMenu mm;
-
+     
     print_Main_Store_Menu();
 
 
     cout << "Please choose the number option: ";
     choice = getNumber();
 
-    do {
 
         switch (choice) {
 
@@ -53,21 +56,20 @@ void Store::store_Choice() {
             break;
         case 3:
             thing = "storage location";
-            
             break;
         case 4:
-
-            mm.menu_options();
+            //mm.menu_options();
+            log.logEvent("store_Choice() at the four choice");
+            return;
+            log.logEvent("store_Choice() after return");
             break;
         }
-
-        thing_Choice(thing);
+        log.logEvent("store_Choice() outside the switch");
+        
+        if (choice != 4 && thing != "")
+            thing_Choice(thing);
 
     } while ((choice != 4));
-
-
-    
-
 
 };
 
@@ -76,7 +78,8 @@ void Store::store_Choice() {
 
 void Store::print_Thing_Menu(string thing) {
 
-    system("cls");
+    bar_Title_Menu();
+    ////system("cls");
 
     cout << "1.  Add a " << thing << "." << endl;
     cout << "2.  Change a " << thing << "." << endl;
@@ -87,14 +90,18 @@ void Store::print_Thing_Menu(string thing) {
 
 void Store::thing_Choice(string thing) {
 
+    EventLog log;
     int choice;
     string table;
     string field;
     string field_ID;
 
+    do {
+
+    //log.logEvent("thing_Choice() before ifs");
+
     print_Thing_Menu(thing);
-
-
+    
     if (thing == "department") {
         table = table_department;
         field = department_table::department_name;
@@ -114,31 +121,37 @@ void Store::thing_Choice(string thing) {
         cout << "error." << endl;
     };
 
+    //log.logEvent("thing_Choice() after ifs");
+
     cout << "Please choose the number option: ";
     choice = getNumber();
+    log.logEvent("thing_Choice() before the switch - choice = " + to_string(choice));
 
-    do {
+        //print_Thing_Menu(thing);
 
         switch (choice) {
+            //log.logEvent("thing_Choice() inside switch");
 
         case 1:
             add_Thing(thing, table, field);
-            thing_Choice(thing);
+            //thing_Choice(thing);
             break;
         case 2:
             change_Thing(thing, field, table);
-            thing_Choice(thing);
+            //thing_Choice(thing);
             break;
         case 3:
             show_All_Thing(table);
-            thing_Choice(thing);
+            //thing_Choice(thing);
             break;
         case 4:
             delete_thing(thing, field_ID, table);
-            thing_Choice(thing);
+            //thing_Choice(thing);
             break;
         case 5:
-            store_Choice();
+            log.logEvent("thing_Choice() inside the switch - choice should be 5 = " + to_string(choice));
+            return;
+            //store_Choice();
             break;
 
         }
@@ -147,10 +160,13 @@ void Store::thing_Choice(string thing) {
 };
 
 void Store::add_Thing(string thing, string table, string field) {
-    DB_Connect dbc_add;
+    //DB_Connect dbc_add;
 
-    system("cls");
-        
+
+    ////system("cls");
+    
+   
+
     string value;
     string sql;
     string condition;
@@ -159,6 +175,8 @@ void Store::add_Thing(string thing, string table, string field) {
 
     string yesno = "no";
     do {
+        bar_Title_Menu();
+
         cout << "Please enter the " << thing << "'s name: ";
         getline(cin, thing_name);
         thing_name = "'" + thing_name + "'";
@@ -177,16 +195,19 @@ void Store::add_Thing(string thing, string table, string field) {
     value = thing_name;
 
 
-    dbc_add.insertInto(table, field, value);
-    dbc_add.queryFrom(table, "*", condition);
+    //dbc_add.insertInto(table, field, value);
+    //dbc_add.queryFrom(table, "*", condition);
 
-    system("pause");
+    insertInto(table, field, value);
+    queryFrom(table, "*", condition);
+
+    //system("pause");
 };
 
 void Store::change_Thing(string thing, string field, string table) {
-    system("cls");
+    ////system("cls");
 
-    DB_Connect dbc_change;
+    //DB_Connect dbc_change;
     string name;
     string yesno = "no";
     int choice = 0;
@@ -198,20 +219,22 @@ void Store::change_Thing(string thing, string field, string table) {
     string condition;
     string sql;
 
-
-    cout << "Please enter the " << thing << " name: ";
-    getline(cin, name);
-    name = "'" + name + "'";
-
     do {
 
-        cout << "Please enter the new name: ";
-        getline(cin, new_name);
-        new_name = "'" + new_name + "'";
+		bar_Title_Menu();
 
-        cout << endl;
-        cout << "Is this correct? yes/no: ";
-        getline(cin, yesno);
+		cout << "Please enter the " << thing << " name: ";
+		getline(cin, name);
+		name = "'" + name + "'";
+
+
+		cout << "Please enter the new name: ";
+		getline(cin, new_name);
+		new_name = "'" + new_name + "'";
+
+		cout << endl;
+		cout << "Is this correct? yes/no: ";
+		getline(cin, yesno);
 
     } while (yesno != "yes");
 
@@ -219,9 +242,14 @@ void Store::change_Thing(string thing, string field, string table) {
     fields_and_values = field + " = " + new_name;
     fields_and_values2 = " WHERE " + field + " = " + new_name;
 
-    sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-    dbc_change.dbUpdate(sql);
-    dbc_change.queryFrom(table, "*", fields_and_values2);
+    //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
+    //dbc_change.dbUpdate(sql);
+    //dbc_change.queryFrom(table, "*", fields_and_values2);
+
+
+    sql = createUpdateString(table, fields_and_values, condition);
+    dbUpdate(sql);
+    queryFrom(table, "*", fields_and_values2);
 
     //system("pause");
 
@@ -230,13 +258,15 @@ void Store::change_Thing(string thing, string field, string table) {
 
 void Store::show_All_Thing(string table) {
 
-    system("cls");
+    ////system("cls");
 
-    DB_Connect dbc_show_all;
+   // DB_Connect dbc_show_all;
 
-    dbc_show_all.queryFrom(table, "*", "");
+    //dbc_show_all.queryFrom(table, "*", "");
 
-    system("pause");
+    queryFrom(table, "*", "");
+
+    //system("pause");
 };
 
 
@@ -244,13 +274,14 @@ void Store::delete_thing(string thing, string field, string table) {
 
 
     string ID;
-    DB_Connect dbc_delete;
+    //DB_Connect dbc_delete;
 
     string condition;
     string conditiond;
     string yesno;
     string sql;
 
+    bar_Title_Menu();
 
     cout << "Please enter the id of the " << thing << " you would like to delete: ";
     getline(cin, ID);
@@ -258,18 +289,27 @@ void Store::delete_thing(string thing, string field, string table) {
     condition = " WHERE " + field + " = " + ID;
 
 
-    dbc_delete.queryFrom(table, "*", condition);
+    //dbc_delete.queryFrom(table, "*", condition);
+    queryFrom(table, "*", condition);
 
+    bar_Title_Menu();
     cout << "Are you sure you want to delete this " << thing << " ? ";
     getline(cin, yesno);
     cout << endl;
 
     if (yesno == "yes")
     {
+        //conditiond = field + " = " + ID;
+        //sql = dbc_delete.createDeleteString(table, conditiond);
+        //dbc_delete.dbUpdate(sql);
+        //system("pause");
+
         conditiond = field + " = " + ID;
-        sql = dbc_delete.createDeleteString(table, conditiond);
-        dbc_delete.dbUpdate(sql);
-        system("pause");
+        sql = createDeleteString(table, conditiond);
+        dbUpdate(sql);
+     
+        show_All_Thing(table);
+
     }
     else {
         return;

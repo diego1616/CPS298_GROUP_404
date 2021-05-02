@@ -7,6 +7,7 @@
 #include <conio.h>	//bad word here.......NSFW.  Give me a safe word. 
 #include <string>
 #include "Events.h" //check the outputMsg().  I included this header just to give this function some special functionatily.  
+#include "DB_Connect.h"
 using namespace std;
 
 enum colors { WHITE = 7, BLUE = 9, GREEN = 10, RED = 12 };
@@ -26,10 +27,10 @@ enum margin {
 };
 
 enum fieldLength {
-	MSG_FIELD = 5 + VERTICAL_OFFSET,
+	MSG_FIELD = 6 + VERTICAL_OFFSET,
 	BAR_FIELD = 2 + VERTICAL_OFFSET,
 	TITLE_FIELD = 2 + VERTICAL_OFFSET,
-	MENU_FIELD = 15 + VERTICAL_OFFSET
+	MENU_FIELD = 22 + VERTICAL_OFFSET
 };
 
 //I set it up this way, so that if you change the lenght of one field, the positions will be right.
@@ -79,7 +80,7 @@ public:
 	//actually collects the data from the menu line.  
     void getMenuLine(string& data, int margin, int position);
 
-	void outputMsg(string msg=""); //use to either output to the msg field, or prime to the right place
+	//void outputMsg(string msg=""); //use to either output to the msg field, or prime to the right place
 
 	void bar_Title_Menu(string title = " ", string instructions = " ");
 

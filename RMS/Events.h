@@ -30,8 +30,8 @@ public:
 };
 
 
-class EventLog {	//this class starts out very basic, but we need to add funcionality such as tapping into the user session.  
-					//for now it will be just creating a file and a folder with the date on the name
+class EventLog {
+
 	string path = "chronicles\\";
 	string fileName;
 	string extension = ".log";
@@ -39,7 +39,10 @@ class EventLog {	//this class starts out very basic, but we need to add funciona
 	ofstream chronicle;
 
 	bool fileStatus;
-	
+
+	static int msgColor;
+	static int lineCount;
+	static void checktLineCount(bool reset = false);
 
 public:
 	

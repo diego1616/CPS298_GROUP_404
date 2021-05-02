@@ -5,7 +5,8 @@
 
 using namespace std;
 
-class Store
+class Store:
+	public Menu, public DB_Connect
 {
 private:
 

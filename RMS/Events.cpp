@@ -60,6 +60,7 @@ double TimeStamp::nowtimer()
 	return currentTimer.count();
 }
 
+
 //constructor meant to create folder paths, create a file with today's date, and write to it if needed.
 //The object can be used to keep on writing if needed by means of other functions. 
 EventLog::EventLog(string msg)
@@ -97,12 +98,29 @@ void EventLog::makePath(string path) {
 		std::filesystem::create_directories(dir);
 }
 
+int EventLog::msgColor = WHITE;
+int EventLog::lineCount = 0;
+
+void EventLog::checktLineCount(bool reset)
+{
+	if(reset)
+		EventLog::lineCount = 0;
+	else if (EventLog::lineCount >= (MSG_FIELD - 1)) {
+		EventLog::lineCount = 0;
+		if(EventLog::msgColor == WHITE)
+			EventLog::msgColor = BLUE;
+		else
+			EventLog::msgColor = WHITE;
+	}
+
+}
+
 void EventLog::logEvent(string msg, bool print) {
 	
 	Menu display;
 	int count = 0;
 
-	display.prepField(MSG_FIELD_POS, MSG_FIELD);
+	//display.prepField(MSG_FIELD_POS, MSG_FIELD);
 
 	try {
 
@@ -118,13 +136,12 @@ void EventLog::logEvent(string msg, bool print) {
 			throw runtime_error(LOG_ERROR);
 		
 		else {
-
-			
+						
 			if (print) {
 				
 				//wait up to three seconds if other function is printing a msg
 				while (sync) {
-					this_thread::sleep_for(chrono::milliseconds(50));
+					this_thread::sleep_for(chrono::milliseconds(20));
 					count++;
 
 					if (count >= 3)
@@ -132,8 +149,17 @@ void EventLog::logEvent(string msg, bool print) {
 				}
 
 				setSync();
-				cout << msg << endl;
-				this_thread::sleep_for(chrono::milliseconds(1500)); //this ensure each message is display for this many seconds before being deleted. 
+
+				EventLog::checktLineCount();
+				display.gotoxy(MARGIN_0, MSG_FIELD_POS + EventLog::lineCount); 
+				display.clearLine(1);
+				display.gotoxy(MARGIN_0, MSG_FIELD_POS + EventLog::lineCount);
+				EventLog::lineCount++;
+
+				display.setColor(EventLog::msgColor);
+				cout << this->watch.nowTime() + (string)" - " + msg << endl;
+				this_thread::sleep_for(chrono::milliseconds(50)); //this ensure each message is display for this many seconds before being deleted. 
+				
 				unsetSync();
 			}
 			this->chronicle << this->watch.nowTime() << " - " << msg << endl;

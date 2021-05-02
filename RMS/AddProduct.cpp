@@ -88,7 +88,7 @@ void AddProduct::viewingEnviroment()
             }
             else if (counter == 4)
             {
-                outputMsg("");
+                //outputMsg("");
 
                 insertInto(table::products,
                                     buildFields(fields,

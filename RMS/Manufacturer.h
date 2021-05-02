@@ -6,12 +6,13 @@
 
 using namespace std;
 
-class Manufacturer
+class Manufacturer:
+	public DB_Connect, public Menu
 {
 
 private:
 	
-	DB_Connect db;
+	//DB_Connect db;
 	string table = "manufacturer_table";
 	string manufacturer_name;
 	string contact_name;

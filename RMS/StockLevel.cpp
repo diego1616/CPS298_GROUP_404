@@ -25,6 +25,7 @@ void StockLevel::orderRequest() {
 void StockLevel::checkLoop()
 {
 	//int count = 0;
+	EventLog log;
 
 	while (true) {
 		
@@ -35,7 +36,8 @@ void StockLevel::checkLoop()
 		if (prod_id != "")
 		{
 			orderRequest();
-			outputMsg("PRODUCT ID " + prod_id + " PLACED IN AUTO ORDERING LIST");
+			//outputMsg("PRODUCT ID " + prod_id + " PLACED IN AUTO ORDERING LIST");
+			log.logEvent("PRODUCT ID " + prod_id + " PLACED IN AUTO ORDERING LIST");
 		}
 		else
 		{

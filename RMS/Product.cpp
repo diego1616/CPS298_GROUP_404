@@ -17,23 +17,23 @@
 //
 //		switch (user_input) {
 //			case 1:
-//				system("cls");
+//				//system("cls");
 //				add();
 //				break;
 //			case 2:
-//				system("cls");
+//				//system("cls");
 //				search();
 //				break;
 //			case 3:
-//				system("cls");
+//				//system("cls");
 //				update();
 //				break;
 //			case 4:
-//				system("cls");
+//				//system("cls");
 //				confirmAndDelete();
 //				break;
 //			case 5:
-//				system("cls");
+//				//system("cls");
 //				m.menu_options();
 //				break;
 //			default:
@@ -133,7 +133,7 @@
 //            }
 //             
 //        } else if (key == 27) {
-//        	system("cls");
+//        	//system("cls");
 //        	displayMainMenu();
 //        }
 //        
@@ -286,22 +286,13 @@
 #include "MainMenu.h"
 
 void Product::displayMainMenu() {
-	//MainMenu m;
+	
+	//system("cls");
 	int user_input = 0;
 
-	//if you want to add a menu title, just mod these strings
-	string title = " ";
-	string instructions = " ";
+	while (user_input > 1 || user_input < 5) {
 
-
-	while (user_input < 1 || user_input > 5) {
-
-		printWhiteBar(BAR_FIELD_POS);
-
-		//printing the title
-		printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)(int)title.length() + 5, TITLE_FIELD_POS, WHITE);
-
-		prepField(MENU_FIELD_POS, MENU_FIELD);
+		bar_Title_Menu();
 
 		cout << "\nSelect an option (1-4):\n";
 		cout << "\t1. Add product\n";
@@ -310,38 +301,40 @@ void Product::displayMainMenu() {
 		cout << "\t4. Delete product\n";
 		cout << "\t5. [EXIT MENU]\n";
 		
-		cin >> user_input;
+		user_input = getNumber();
 
 		switch (user_input) {
 			case 1:
-				system("cls");
+				//system("cls");
 				add();
 				break;
 			case 2:
-				system("cls");
+				//system("cls");
 				search();
 				break;
 			case 3:
-				system("cls");
+				//system("cls");
 				update();
 				break;
 			case 4:
-				system("cls");
+				//system("cls");
 				confirmAndDelete();
 				break;
 			case 5:
-				system("cls");
+				//system("cls");
 				return;
-				//m.menu_options();
 				break;
 			default:
 				cout << "\nERROR: Please enter a number 1-5.\n";
+
 				cin.clear();
 				//cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				cin.ignore(INT_MAX, '\n');
 				break;
 		}
+		
 	}
+
 }
 
 void Product::add() {
@@ -357,24 +350,26 @@ void Product::add() {
 	//change this array to alter the menus
 	string menus[6] = { "Product Name", "Mfg ID", "Retail Price\t$", "Low Stock Qty.","Submit", "Query" };
 	
-	string title = "ENTER PRODUCT DATA";
-	
-	string instructions = "Use the arrow keys to navigate, or ESC to return to previous menu.";
+	//string title = "ENTER PRODUCT DATA";
+	//
+	//string instructions = "Use the arrow keys to navigate, or ESC to return to previous menu.";
 
 	while (true)
 	{
 
-		prepField(BAR_FIELD_POS - 3, 2);
+		/*prepField(BAR_FIELD_POS - 3, 2);
 		setColor(BLUE);
-		cout << counter << endl << +key;
+		cout << counter << endl << +key;*/
 
-		printWhiteBar(BAR_FIELD_POS);
+		//printWhiteBar(BAR_FIELD_POS);
 
-		//printing the title
-		printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, RED);
+		////printing the title
+		//printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, RED);
 
-		//even if the printMenuLine clears each line, somethings there are resizing erros, so it is best to clear the menu field.
-		prepField(MENU_FIELD_POS, MENU_FIELD);
+		////even if the printMenuLine clears each line, somethings there are resizing erros, so it is best to clear the menu field.
+		//prepField(MENU_FIELD_POS, MENU_FIELD);
+
+		bar_Title_Menu("ENTER PRODUCT DATA", "Use the arrow keys to navigate, or ESC to return to previous menu.");
 
 		printMenuLine(menus[0], storedInMenu[0], MARGIN_1, MARGIN_2, positions[0] + MENU_FIELD_POS, Set[0]);
 		printMenuLine(menus[1], storedInMenu[1], MARGIN_1, MARGIN_2, positions[1] + MENU_FIELD_POS, Set[1]);
@@ -391,15 +386,16 @@ void Product::add() {
 
 		if (key == '\b' || key == 45) { //ESC or - pressed.  Clear and break. 
 
-			system("cls");
+			//system("cls");
 			setColor(WHITE);
 			break;
 		}
 		else if (key == 72)          //up key
 			counter--;
-		else if (key == 80)     //down key
+		else if (key == 80 || key == 9)     //down key or Tab
 			counter++;
-		else if (key == '\r' || key == 77)   //carriage return and right arrow key
+		//else if (key == '\r' || key == 77)   //carriage return and right arrow key
+		else if ((key >= 48 && key <= 122) || (key == '\r' || key == 77))   //carriage return and right arrow key
 		{
 			setColor(GREEN);
 
@@ -407,33 +403,35 @@ void Product::add() {
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], checkNames);
-
+				counter++;
 			}
 			else if (counter == 1)
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], checkPartNumbers);
-
+				counter++;
 			}
 			else if (counter == 2)
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], checkMoney);
-
+				counter++;
 			}
 			else if (counter == 3)
 			{
 				getMenuLine(storedInMenu[counter], MARGIN_2, positions[counter] + MENU_FIELD_POS);
 				storedInMenu[counter] = checkInput(storedInMenu[counter], checkMoney);
+				counter++;
 			}
 			else if (counter == 4)
 			{
-				outputMsg("");
+				//outputMsg("");
 
 				insertInto(table::products,
 					buildFields(fields,
 						sizeof(fields) / sizeof(string)),
 					addQuotes(storedInMenu[0]) + addQuotes(storedInMenu[1]) + addComma(storedInMenu[2]) + storedInMenu[3]);
+				counter++;
 			}
 
 			else if (counter == 5)
@@ -441,7 +439,7 @@ void Product::add() {
 
 				//build a sql statement using new dbConnect Functions
 				this->dbSearch("select * from " + table::products + ";");
-
+				counter++;
 			}
 
 		}
@@ -468,22 +466,13 @@ void Product::add() {
 void Product::search() {
 	string user_input = "";
 
-	//if you want to add a menu title, just mod these strings
-	string title = " ";
-	string instructions = " ";
-	
-	printWhiteBar(BAR_FIELD_POS);
-
-	//printing the title
-	printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, WHITE);
-
-	prepField(MENU_FIELD_POS, MENU_FIELD);
+	bar_Title_Menu();
 
 	cout << "Enter a search term: ";
 	cin >> user_input;
 	string prepared_input = createSearchString("*", table::products, product_table::item_name, user_input);
 	dbSearch(prepared_input);
-	displayMainMenu();
+	//displayMainMenu();
 }
 
 void Product::returnAll() {
@@ -496,16 +485,7 @@ void Product::returnAll() {
 string Product::getProductID(string update_or_delete) {
 	string user_input = "";
 
-	//if you want to add a menu title, just mod these strings
-	string title = " ";
-	string instructions = " ";
-
-	printWhiteBar(BAR_FIELD_POS);
-
-	//printing the title
-	printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, WHITE);
-
-	prepField(MENU_FIELD_POS, MENU_FIELD);
+	bar_Title_Menu();
 
 	cout << "\n\nEnter the ID # of the product to " + update_or_delete + ": ";
 	cin >> user_input;
@@ -517,18 +497,9 @@ string Product::getUpdateField() {
 
 	string field_to_update;
 
-	//if you want to add a menu title, just mod these strings
-	string title = " ";
-	string instructions = " ";
-
 	while (user_input < 1 || user_input > 8) {
 
-		printWhiteBar(BAR_FIELD_POS);
-
-		//printing the title
-		printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, WHITE);
-
-		prepField(MENU_FIELD_POS, MENU_FIELD);
+			bar_Title_Menu();
 
 		cout << "\n Select the field you want to update:\n";
 		cout << "\t1. item_name\n";
@@ -541,7 +512,7 @@ string Product::getUpdateField() {
 		cout << "\t8. [EXIT MENU]\n";
 		
 		cin >> user_input;
-
+	
 		switch (user_input) {
 			case 1:
 				field_to_update = "item_name";
@@ -565,7 +536,12 @@ string Product::getUpdateField() {
 				field_to_update = "low_stock_quantity";
 				break;
 			case 8:
-				displayMainMenu();
+
+				cin.clear();
+				//cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				cin.ignore(INT_MAX, '\n');
+
+				return "";
 				break;
 			default:
 				cout << "\nERROR: Please enter a number 1-8.\n";
@@ -576,27 +552,24 @@ string Product::getUpdateField() {
 		}
 	}
 
+	cin.clear();
+	//cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cin.ignore(INT_MAX, '\n');
+
 	return field_to_update;
 }
 
 string Product::getNewValue() {
 	string user_input = "";
 	cout << "Enter a new value: ";
-	cin >> user_input;
+	//cin >> user_input;
+	getline(cin, user_input);
 	return user_input;
 }
 
 void Product::update() {
 	
-	string title = " ";
-	string instructions = " ";
-
-	printWhiteBar(BAR_FIELD_POS);
-
-	//printing the title
-	printMenuLine(title, instructions, MARGIN_2, MARGIN_2 + (int)title.length() + 5, TITLE_FIELD_POS, WHITE);
-	
-	prepField(QUERY_FIELD_POS, MENU_FIELD);
+	bar_Title_Menu();
 
 	returnAll();
 	string product_to_update = getProductID("update");
@@ -609,7 +582,8 @@ void Product::update() {
 	string condition = product_table::product_id + " = " + product_to_update;
 	string prepared_input = createUpdateString(table::products, field_and_value, condition);
 	dbUpdate(prepared_input);
-	displayMainMenu();
+	Product::returnAll();
+	//displayMainMenu();
 }
 
 //////////////////////////////////////
@@ -634,6 +608,42 @@ void Product::confirmAndDelete() {
 		string prepared_input = createDeleteString(table::products, condition);
 		dbUpdate(prepared_input);
 	} else {
-		displayMainMenu();
+		//displayMainMenu();
+		return;
 	}
 }
+
+
+int Product::getNumber() {
+	while (true) {
+		try {
+
+			cin.clear();
+
+			int temp(0);
+			cin >> temp;
+
+			cin.ignore(INT_MAX, '\n');
+
+			if (!cin.good()) throw logic_error("Invalid data");
+
+			return temp;
+		}
+		catch (exception e) {
+
+			cin.clear();
+			cin.ignore(INT_MAX, '\n');
+
+			string answer("");
+
+			cout << "something went wrong: " << e.what() << endl;
+			cout << "would you like to try again? y/n : ";
+			getline(cin, answer);
+
+			if (answer[0] == 'y') { continue; }
+			else break;
+
+		}
+	}
+	return 0;
+};

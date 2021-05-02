@@ -37,7 +37,7 @@ public:
 	void add_User();
 	void remove_User();
 	void change_User_Information();
-	void change_User_Password();
+	void change_User_Password(string carryOverMsg = "");
 	void find_In_DB_Table();
 	string find_User_By_Name();
 	void print_Change_Menu();

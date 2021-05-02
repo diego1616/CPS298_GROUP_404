@@ -44,7 +44,7 @@ class DB_Connect
 {
 	string path = "databases\\";
 	string dbName = "retail.db";
-	EventLog log;
+	
 	bool connectionStatus;
 	
 	vector<string> columns;

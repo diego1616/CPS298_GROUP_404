@@ -5,6 +5,8 @@
 #include "StockLevel.h"
 
 DB_Connect::DB_Connect() {
+	
+	EventLog log;
 
 	int check1 = 0, check2 = 0;
 	string str;
@@ -49,7 +51,7 @@ DB_Connect::DB_Connect() {
 }
 
 DB_Connect::~DB_Connect() {
-
+	EventLog log;
 	//Close the database
 	sqlite3_close(this->sqLiteDB);
 	sqLiteDB = nullptr;
@@ -85,6 +87,7 @@ int DB_Connect::getAcess()
 	return DB_Connect::accessLevel;
 }
 
+//this function works well, but it does not display records nicely.  Rather than fixing it, I have used Dans function, who worked on this issue already. 
 int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** column)
 {
 	for (int i = 0; i < resultAmount; i++)
@@ -100,6 +103,7 @@ int DB_Connect::callback(void* notUsed, int resultAmount, char** values, char** 
 
 void DB_Connect::insertInto(string table, string fields, string values, string condition)
 {
+	EventLog log;
 	//add code to check for sql injection attacks
 
 	char* error;
@@ -109,7 +113,6 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 		string statement = "INSERT INTO " + table + "(" + fields + ") VALUES(" + values + ")" + condition + ";";
 
 		log.logEvent("INSERT STATEMENT: " + statement);
-		this_thread::sleep_for(chrono::milliseconds(3000));
 
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
@@ -132,12 +135,14 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 void DB_Connect::query(string& statement)
 {
+	EventLog log;
 
 	if (statement == "")
 		return;
 
 	//add code to check for sql injection attacks
 	try {
+
 
 		char* error;
 		int check;
@@ -164,12 +169,20 @@ void DB_Connect::query(string& statement)
 }
 
 
+//this function works well, but it does not display so nice.  Rather than fixing it, I have used Dans function, who worked on this issue already. 
+//void DB_Connect::queryFrom(string table, string fields, string condition)
+//{
+//	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
+//	this->query(statement);
+//}
 
 void DB_Connect::queryFrom(string table, string fields, string condition)
 {
 	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
-	this->query(statement);
+
+	this->dbSearch(statement);
 }
+
 
 void DB_Connect::getTables()
 {
@@ -212,6 +225,8 @@ string DB_Connect::createDeleteString(string table, string condition) {
 
 // Copied from the insert function above
 void DB_Connect::dbUpdate(string sql) {
+
+	EventLog log;
 	char* error;
 	int check;
 
@@ -219,8 +234,7 @@ void DB_Connect::dbUpdate(string sql) {
 		string statement = sql;
 
 		log.logEvent("UPDATE STATEMENT: " + statement);
-		this_thread::sleep_for(chrono::milliseconds(3000)); 
-
+		
 		check = sqlite3_exec(this->sqLiteDB, statement.c_str(), NULL, NULL, &error);
 
 		if (check != SQLITE_OK) {
@@ -244,6 +258,7 @@ void DB_Connect::dbSearch(string sql) {
 
 	//ideally, there would be a way to know how many results and clear up until then. For now I am guessing 60 lines. 
 	display.prepField(QUERY_FIELD_POS, 60);
+	display.setColor(GREEN);
 	
 	int statement_length = (int)strlen(sql.c_str());
 
@@ -255,7 +270,7 @@ void DB_Connect::dbSearch(string sql) {
 		// Print basic header row
 		// another comment
 		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-			cout << left << setw(15) << sqlite3_column_name(sql_statement, header);
+			cout << left << setw(17) << sqlite3_column_name(sql_statement, header);
 		}
 		cout << endl;
 		// end basic header row
@@ -280,17 +295,17 @@ void DB_Connect::dbSearch(string sql) {
 				// print data row
 				for (int cell = 0; cell < sqlite3_column_count(sql_statement); cell++) {
 					if (char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
-						cout << left << setw(15) << col_val;
+						cout << left << setw(17) << col_val;
 					}
 					else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-						cout << left << setw(15) << "NULL";
+						cout << left << setw(17) << "NULL";
 					}
 				}
 				cout << endl;
 				// end data row
 			}
 		}
-		display.gotoxy(MARGIN_0, MSG_FIELD_POS);
+		display.gotoxy(MARGIN_0, MSG_FIELD_POS);//this way you are not at the bottom of the results, which is annoying
 	}
 	else {
 		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
@@ -298,40 +313,40 @@ void DB_Connect::dbSearch(string sql) {
 	sqlite3_finalize(sql_statement);
 }
 
-void DB_Connect::dbSearch(string sql, string& result)
-{
-	sqlite3_stmt* sql_statement;
+//use this function to get a single data field from the DB.  Pass a string variable by reference, and the result will be there. 
+void DB_Connect::dbSearch(string sql, string& data) {
 
+	sqlite3_stmt* sql_statement;
+	bool check = true;
+
+	EventLog log(sql);
 	int statement_length = (int)strlen(sql.c_str());
 
-	int prep = (int)sqlite3_prepare_v2(this->sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
+	int prep = sqlite3_prepare_v2(sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
 	int step = 0; // new int(0)
 
 	if (prep == SQLITE_OK) {
 
-		
-		while (step != SQLITE_DONE) {
-			step = sqlite3_step(sql_statement);
-			if (step == SQLITE_ROW) {
-				// print data row
-				for (int cell = 0; cell < sqlite3_column_count(sql_statement); cell++) {
-					if (char* col_val = (char*)sqlite3_column_text(sql_statement, cell)) { // NB: NULL cell values will break the function prematurely; those are handled below
-						cout << left << setw(15) << col_val;
-					}
-					else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-						cout << left << setw(15) << "NULL";
-					}
-				}
-				cout << endl;
-				// end data row
-			}
-		}
+		step = sqlite3_step(sql_statement);
 
+		if (step == SQLITE_ROW)
+		{
+			char* col_val = (char*)sqlite3_column_text(sql_statement, 0);
+
+			if (sqlite3_column_type(sql_statement, 0) != SQLITE_NULL)  // NB: NULL cell values will break the function prematurely; those are handled below
+				data = col_val;
+			else	//something was found, but it was NULL
+				data = NULL_FIND;
+
+		}
+		else if (step == SQLITE_DONE) 	//this means nothing was found.  Nothing wrong with the query, just nothing found.
+			data = NOT_FOUND;
+		
 	}
 	else {
 		const char* error_message = sqlite3_errmsg(this->sqLiteDB);
+		log.logEvent(error_message);
 	}
 	sqlite3_finalize(sql_statement);
+
 }
-
-

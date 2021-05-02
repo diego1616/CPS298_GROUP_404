@@ -31,5 +31,7 @@ public:
     bool confirmPrompt();
     void confirmAndDelete();
 
+    int getNumber();
+
 };
 

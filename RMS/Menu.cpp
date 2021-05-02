@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include "Menu.h"
-#include "User.h"
+//#include "User.h"
 
 void Menu::gotoxy(int x, int y)
 {
@@ -52,7 +52,7 @@ string Menu::checkInput(string str, regex match) {
 void Menu::clearLine(int howManyLines) {
 
     string temp("");
-    int lineWidth = 180;
+    int lineWidth = 200;
 
     for (int i = 0; i < lineWidth; i++)
         temp += " ";
@@ -101,17 +101,17 @@ void Menu::getMenuLine(string& data, int margin, int position) {
     getline(cin, data);
 }
 
-void Menu::outputMsg(string msg)
-{
-    EventLog log;
-
-    prepField(MSG_FIELD_POS, MSG_FIELD);
-
-    if (msg != "") {
-        setColor(WHITE);
-        EventLog log(msg);
-    }
-}
+//void Menu::outputMsg(string msg)
+//{
+//    EventLog log;
+//
+//    prepField(MSG_FIELD_POS, MSG_FIELD);
+//
+//    if (msg != "") {
+//        setColor(WHITE);
+//        EventLog log(msg);
+//    }
+//}
 
 string Menu::buildFields(string fields[], int size) {
     //add a comma at the end of each field, but it does not do it to the final field.
