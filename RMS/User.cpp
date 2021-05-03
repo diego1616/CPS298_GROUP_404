@@ -278,7 +278,7 @@ void User::add_User() {
 
      //**************************************************************************************************************************************
 
-     queryFrom(table, "f_name, l_name, job_id, department_id, permissions_level");
+     
 
      bar_Title_Menu();
 
@@ -640,7 +640,3 @@ void User::add_User() {
 User::~User(void) {
 
 };
-
-
-
-
