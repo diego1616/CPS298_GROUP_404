@@ -59,12 +59,12 @@ void Store::store_Choice() {
             break;
         case 4:
             //mm.menu_options();
-            log.logEvent("store_Choice() at the four choice");
+            //log.logEvent("store_Choice() at the four choice");
             return;
-            log.logEvent("store_Choice() after return");
+            //log.logEvent("store_Choice() after return");
             break;
         }
-        log.logEvent("store_Choice() outside the switch");
+        //log.logEvent("store_Choice() outside the switch");
         
         if (choice != 4 && thing != "")
             thing_Choice(thing);
@@ -125,7 +125,7 @@ void Store::thing_Choice(string thing) {
 
     cout << "Please choose the number option: ";
     choice = getNumber();
-    log.logEvent("thing_Choice() before the switch - choice = " + to_string(choice));
+    //log.logEvent("thing_Choice() before the switch - choice = " + to_string(choice));
 
         //print_Thing_Menu(thing);
 
@@ -149,7 +149,7 @@ void Store::thing_Choice(string thing) {
             //thing_Choice(thing);
             break;
         case 5:
-            log.logEvent("thing_Choice() inside the switch - choice should be 5 = " + to_string(choice));
+            //log.logEvent("thing_Choice() inside the switch - choice should be 5 = " + to_string(choice));
             return;
             //store_Choice();
             break;
