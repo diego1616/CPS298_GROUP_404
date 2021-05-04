@@ -2,7 +2,6 @@
 #include <iostream>
 #include "MainMenu.h"
 #include "User.h"
-#include "AddProduct.h"
 #include "Manufacturer.h"
 #include "Store.h"
 
@@ -32,26 +31,9 @@ void MainMenu::menu_options() {
 
     int number_Option = 0;
 
-    //Katie, this code is just fine, but I had to move it.  This is because creating the object stablished a connection to database.  too many connections basically. 
-    // My fix was to move each and single one to the switch statement.
-    //AddProduct ap;
-    //Product ap;
-    //User u;
-    //Manufacturer m;
-    //Store s;
-
     do {
 
- 
-        //this line gets replaced by the printMEnuLine()
-        //cout << "What would you like to work with?" << endl;
-
-        //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-        //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
         bar_Title_Menu("What would you like to work with?", " ");
-
-        //**************************************************************************************************************************************
 
         this->print_main_menu();
 

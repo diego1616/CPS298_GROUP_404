@@ -1,3 +1,6 @@
+//The idea of this class is to match what is in the database.  That way, you can call fields elsewhere in the program without typos.
+//It also makes it easier to look for fields when you dont remember them. 
+
 #pragma once
 #include <string>
 using namespace std;
@@ -100,15 +103,6 @@ namespace user_table {
 	const string department_id = "department_id";
 	const string permissions_level = "permissions_level";
 	const string password = "password";
-
-	//const string user_id = "user_id";
-	//const string f_name = "f_name";
-	//const string l_name = "l_name";
-	//const string job_id = "job_id";
-	//const string department_id = "department_id";
-	//const string password = "password";
-	//const string permission_level_id = "permission_level_id";
-
 }
 
 namespace job_table {

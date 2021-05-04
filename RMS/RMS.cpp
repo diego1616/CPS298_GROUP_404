@@ -1,12 +1,6 @@
 #include <iostream>
-#include "AddProduct.h"
-#include "MainMenu.h"
 #include "StockLevel.h"
-#include "Loginb.h"
 #include "UserLogIn.h"
-
-using namespace std;
-
 
 int main()
 {
@@ -18,7 +12,7 @@ int main()
 	//Argument is how often to check the entire database. Value represents minutes. 
 	StockLevel checkInBackground(1);
 
-	//all menus start here. 
+	//All menus start here. 
 	UserLogIn start;
 
 	return 0;

@@ -57,17 +57,17 @@ void UserLogIn::dbSearch(string sql, string& data) {
 
 			if (sqlite3_column_type(sql_statement, 0) != SQLITE_NULL) { // NB: NULL cell values will break the function prematurely; those are handled below
 				data = col_val;
-				//log.logEvent(" The following data was found by UserLogIn::dbSearch() = " + data );
+
 			}
 			else {	//something was found, but it was NULL
 
 				data = NULL_FIND;
-				//log.logEvent(" The following data was found by UserLogIn::dbSearch() = " + data);
+
 			}
 		}
 		else if (step == SQLITE_DONE) {	//this means nothing was found.  Nothing wrong with the query, just nothing found.
 			data = NOT_FOUND;
-			//log.logEvent(" The following data was found by UserLogIn::dbSearch() = " + data);
+
 		}
 
 	}
@@ -112,10 +112,6 @@ void UserLogIn::getData()
 		printMenuLine(menus[1], "", MARGIN_1, MARGIN_2, positions[1] + MENU_FIELD_POS, Set[1]);
 		printMenuLine(menus[2], "", MARGIN_1, MARGIN_2, positions[2] + MENU_FIELD_POS, Set[2]);                //this is an action menu, does not store data
 
-		//if we could find  way to detect any key input, we could add some functionality and the program could become much more powerful.
-		//for example, press F10 and do something else, or press q and go the the menu query.  etc. 
-		//for now, we are stuck using the _getch() function. 
-
 		key = _getch(); //function used to get a character from the console, but it doesnt echo.
 
 		if (key == 72)          //up key
@@ -123,7 +119,7 @@ void UserLogIn::getData()
 		else if (key == 80 || key == 9)     //down key or Tab
 			counter++;
 		//else if (key == '\r' || key == 77)   //carriage return and right arrow key
-		else if ((key >= 48 && key <= 122) || (key == '\r' || key == 77))   //carriage return and right arrow key
+		else if ((key >= 48 && key <= 122) || (key == '\r' || key == 77))   //carriage return, right arrow key, and most keyboard keys
 		{
 			setColor(GREEN);
 

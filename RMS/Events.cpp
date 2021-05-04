@@ -101,6 +101,7 @@ void EventLog::makePath(string path) {
 int EventLog::msgColor = WHITE;
 int EventLog::lineCount = 0;
 
+//this function is used change the color and reset the count of the MSG field. 
 void EventLog::checktLineCount(bool reset)
 {
 	if(reset)
@@ -119,8 +120,8 @@ void EventLog::logEvent(string msg, bool print) {
 	
 	Menu display;
 	int count = 0;
-
-	//display.prepField(MSG_FIELD_POS, MSG_FIELD);
+	int short_delay = 20;
+	int long_delay = 3000;
 
 	try {
 
@@ -141,10 +142,10 @@ void EventLog::logEvent(string msg, bool print) {
 				
 				//wait up to three seconds if other function is printing a msg
 				while (sync) {
-					this_thread::sleep_for(chrono::milliseconds(20));
-					count++;
+					this_thread::sleep_for(chrono::milliseconds(short_delay));
+					count =+ short_delay;
 
-					if (count >= 3)
+					if (count >= long_delay)
 						break;
 				}
 
@@ -158,7 +159,7 @@ void EventLog::logEvent(string msg, bool print) {
 
 				display.setColor(EventLog::msgColor);
 				cout << this->watch.nowTime() + (string)" - " + msg << endl;
-				this_thread::sleep_for(chrono::milliseconds(50)); //this ensure each message is display for this many seconds before being deleted. 
+				this_thread::sleep_for(chrono::milliseconds(short_delay)); //this ensure each message is display for this many seconds before being deleted. 
 				
 				unsetSync();
 			}

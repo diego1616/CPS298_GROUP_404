@@ -1,3 +1,8 @@
+//This class is the single entry control point for all things database.  It calls on DB_Tables.h and sqlite3.h to create the database if it doesnt exist.
+//If all is well, then it will stablish a connection to the database.  When the object is destructed, it closes the connection.  
+//There are several functions to help with queries in all kinds of situations.  It also provides standard messages for error for logging anf user feedback.
+//Last, it also serves as the access level control.  The idea is that this class is present everywhere, so it's good for storing the current acess level. 
+
 #pragma once
 #include <iostream>
 #include "sqlite_dependencies/sqlite3.h"
@@ -75,7 +80,6 @@ public:
 	void insertInto(string table, string fields, string values, string condition = "");
 	void queryFrom(string table, string fields, string condition = "");
 	void getTables();
-	bool generalQuery(string& search_What, string table = "");
 	string createUpdateString(string table, string fields_and_values, string condition);
 	string createSearchString(string fields, string table, string column, string search_keyword);
 	string createDeleteString(string table, string condition = "");

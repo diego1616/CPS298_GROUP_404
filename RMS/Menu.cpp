@@ -74,7 +74,6 @@ void Menu::prepField(int position, int length)
 
 void Menu::printWhiteBar(int where)
 {
-    //prepField(BAR_FIELD_POS, BAR_FIELD);
     gotoxy(HORIZOTAL_OFFSET, where);
     setColor(WHITE);
     for (int i = 0; i < 28; i++)
@@ -101,18 +100,6 @@ void Menu::getMenuLine(string& data, int margin, int position) {
     getline(cin, data);
 }
 
-//void Menu::outputMsg(string msg)
-//{
-//    EventLog log;
-//
-//    prepField(MSG_FIELD_POS, MSG_FIELD);
-//
-//    if (msg != "") {
-//        setColor(WHITE);
-//        EventLog log(msg);
-//    }
-//}
-
 string Menu::buildFields(string fields[], int size) {
     //add a comma at the end of each field, but it does not do it to the final field.
 
@@ -129,9 +116,9 @@ string Menu::buildFields(string fields[], int size) {
     return sqFields;
 }
 
+//adds a quotes AND commas at the end of each field, but it does not do it to the final field.
 string Menu::buildData(string data[], int size) {
-    //adds a quotes AND commas at the end of each field, but it does not do it to the final field.
-
+    
     string sqFields("");
 
     for (int i = 0; i < size; i++)
@@ -149,7 +136,22 @@ string Menu::buildData(string data[], int size) {
 
 void Menu::bar_Title_Menu(string title, string instructions)
 {
-    //printing white bar to separate message area
+    int count = 0;
+    int short_delay = 20;
+    int long_delay = 3000;
+
+    //wait up to three seconds if other function is printing a msg.  Otherwise there may be conflict. 
+    while (EventLog::sync) {
+        this_thread::sleep_for(chrono::milliseconds(short_delay));
+        count = +short_delay;
+
+        if (count >= long_delay)
+            break;
+    }
+
+    EventLog::setSync();
+
+        //printing white bar to separate message area
     printWhiteBar(BAR_FIELD_POS);
 
     //printing the title, if any
@@ -157,6 +159,10 @@ void Menu::bar_Title_Menu(string title, string instructions)
 
     //clearning old field, so that new output is clean and in the right place. 
     prepField(MENU_FIELD_POS, MENU_FIELD);
+
+    this_thread::sleep_for(chrono::milliseconds(short_delay)); //chill for a bit. then carry on. 
+
+    EventLog::unsetSync();
 
 }
 

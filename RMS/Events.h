@@ -1,8 +1,11 @@
+//Use this class to print messages to the MSG field and log to file. 
+
 #pragma once
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-//DO NOT USE <experimental/filesystem>, use <filesystem> then project_properties/C/C++/Language/C++ language standard = ISO C++17 Standard (/std:c++17)
+//DO NOT USE <experimental/filesystem>
+//use <filesystem> instead, and go to project_properties/C/C++/Language/C++ language standard = ISO C++17 Standard (/std:c++17)
 #include <string>
 #include <chrono>
 #include <thread>

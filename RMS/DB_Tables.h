@@ -1,3 +1,4 @@
+//This header file stores all of the syntax for the database creating.  If there are any tweaks needed, those go here. 
 
 #pragma once
 #include <vector>

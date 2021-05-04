@@ -20,21 +20,11 @@ User::User(string f_n, string l_n, int jb_id, int de_id, string psswrd, int per_
 
 void User::add_User() {
     // this adds a new user
-
-    //system("cls");
-
-    //the User class inherits from DB_Connect.h you can just call its methos directly. 
-    //DB_Connect dbc_add;
+  
     string full_name;
     string condition;
 
-    //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-    //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
     bar_Title_Menu();
-
-    //**************************************************************************************************************************************
-
 
     full_name = find_User_By_Name();
 
@@ -58,11 +48,8 @@ void User::add_User() {
          cout << "Is this information correct? yes/no ";
          getline(cin, yesno);
 
-         //I had to add it here in case the loop starts over
-         //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
          if(yesno[0] == 'n' || yesno[0] == 'N')
              bar_Title_Menu();
-         //**************************************************************************************************************************************
 
      } while (yesno == "no");
 
@@ -72,21 +59,12 @@ void User::add_User() {
      condition = " WHERE f_name = '" + f_name + "' AND l_name = " + "'" + l_name + "' AND job_id = " + string_job_id + " AND department_id = " + string_department_id + " AND permissions_level = " 
          + string_permissions_level;
 
-     //dbc_add.insertInto(table, fields, values);
-     //dbc_add.queryFrom(table, "*", condition);
-
      insertInto(table, fields, values);
-     //queryFrom(table, "*", condition);
 
      queryFrom(table, user_table::user_id + ", f_name, l_name, job_id, department_id, permissions_level", condition);
 
-     //this line is a good message, but it overwrites some stuff, so I decided to add an argument to change_User_Password().
-     //It will print a message in the title field, at the top of the screen. 
-     //cout << "Your password is \"default\".  Please change your password now.";
-      change_User_Password("Your password is \"default\".  Please change your password now.");
+     change_User_Password("Your password is \"default\".  Please change your password now.");
 
-
- 
  };
  
  string User::find_User_By_Name() {
@@ -99,10 +77,7 @@ void User::add_User() {
      string yesno = "no";
      string full_name;
  
-     //I had to add it here in case the loop starts over
-     //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
      bar_Title_Menu();
-     //**************************************************************************************************************************************
 
      do {
          cout << enter_First;
@@ -118,11 +93,8 @@ void User::add_User() {
          getline(cin, yesno);
          cout << endl;
 
-         //I had to add it here in case the loop starts over
-        //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
          if (yesno[0] == 'n' || yesno[0] == 'N')
              bar_Title_Menu();
-         //**************************************************************************************************************************************
  
      } while (yesno == "no");
 
@@ -141,22 +113,14 @@ void User::add_User() {
 
      string u_ID;
 
-     //No need to create a DB_Connect object.  This user class already has these methods by means of inheritance. 
-     //DB_Connect dbc_delete;
-
      string sql;
      string condition;
      string conditiond;
 
      string yesno = "no";
 
-     //system("cls");
-
-      //I had to add it here in case the loop starts over
-     //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-           bar_Title_Menu();
-     //**************************************************************************************************************************************
-
+     bar_Title_Menu();
+  
      cout << "Please enter the user's ID: ";
      getline(cin, u_ID);
 
@@ -165,15 +129,9 @@ void User::add_User() {
 
      condition = " WHERE user_id = " + u_ID;
 
-
-     //dbc_delete.queryFrom(table, "*", condition);
      queryFrom(table, "*", condition);
 
-
-     //I had to add it here in case the loop starts over
-       //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
      bar_Title_Menu();
-     //**************************************************************************************************************************************
 
      cout << "Are you sure you want to delete this user? ";
      getline(cin, yesno);
@@ -182,20 +140,15 @@ void User::add_User() {
      if (yesno == "yes")
      {
          conditiond = " user_id = " + u_ID;
-         //sql = dbc_delete.createDeleteString(table, conditiond);
-         //dbc_delete.dbUpdate(sql);
          sql = createDeleteString(table, conditiond);
          dbUpdate(sql);
-         
 
-         //system("pause");
      }
  
  };
 
  void User::user_Menu() {
 
-     //MainMenu mm;
 
      int number_Option = 0;
      string yesno = "no", new_f_name, new_l_name, what_Are_You_Changing;
@@ -219,8 +172,6 @@ void User::add_User() {
          cout << "That is not an option.  Please try again." << endl;
          };
 
-
-     //DB_Connect dbc;
      switch (number_Option) {
 
      case 1:
@@ -242,13 +193,11 @@ void User::add_User() {
          break;
 
      case 5:
-         //mm.menu_options();
+
          return;
          break;
      };
 
-     //I had to change this line to fix the it problem where it ditn't go back to the previous menu. 
-     //} while ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5));
      } while ( number_Option != 5);
  
 
@@ -267,18 +216,6 @@ void User::add_User() {
      string sql;
      int new_job_id, new_department_id, new_permissions_level;
      string u_ID;
-
-     //the User class inherits from DB_Connect.h you can just call its methos directly. 
-     //DB_Connect dbc;
-
-     //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-     //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
-     bar_Title_Menu();
-
-     //**************************************************************************************************************************************
-
-     
 
      bar_Title_Menu();
 
@@ -326,9 +263,6 @@ void User::add_User() {
 
                  fields_and_values = "f_name = " + new_f_name;
 
-                 //the User class inherits from DB_Connect.h you can just call its methos directly. 
-           /*      sql = dbc.createUpdateString(table, fields_and_values, condition);
-                 dbc.dbUpdate(sql);*/
                  sql = createUpdateString(table, fields_and_values, condition);
                  dbUpdate(sql);
 
@@ -349,10 +283,6 @@ void User::add_User() {
 
                  fields_and_values = "l_name = " + new_l_name;
 
-                 //the User class inherits from DB_Connect.h you can just call its methos directly.
-                 //sql = dbc.createUpdateString(table, fields_and_values, condition);
-                 //dbc.dbUpdate(sql);
-
                  sql = createUpdateString(table, fields_and_values, condition);
                  dbUpdate(sql);
 
@@ -370,8 +300,6 @@ void User::add_User() {
 
                  fields_and_values = "job_id = " + new_job_id;
 
-                 //sql = dbc.createUpdateString(table, fields_and_values, condition);
-                 //dbc.dbUpdate(sql);
                  sql = createUpdateString(table, fields_and_values, condition);
                  dbUpdate(sql);
 
@@ -389,9 +317,6 @@ void User::add_User() {
 
                  fields_and_values = "department_id = " + new_department_id;
 
-                 //sql = dbc.createUpdateString(table, fields_and_values, condition);
-                 //dbc.dbUpdate(sql);
-
                  sql = createUpdateString(table, fields_and_values, condition);
                  dbUpdate(sql);
                  break;
@@ -406,9 +331,6 @@ void User::add_User() {
                  } while (yesno == "no");
 
                  fields_and_values = "permissions_level = " + new_permissions_level;
-
-                 //sql = dbc.createUpdateString(table, fields_and_values, condition);
-                 //dbc.dbUpdate(sql);
                  sql = createUpdateString(table, fields_and_values, condition);
                  dbUpdate(sql);
 
@@ -418,15 +340,12 @@ void User::add_User() {
                  change_User_Password();
                  break;
              case 7:
-                 //user_Menu();
+
                  return;
                  break;
 
          };
 
- 
-     //} while ((number_Option != 1) && (number_Option != 2) && (number_Option != 3) && (number_Option != 4) && (number_Option != 5)
-     //    && (number_Option != 6) && (number_Option != 7));
 
      } while (number_Option != 7);
  
@@ -434,9 +353,6 @@ void User::add_User() {
  
  
  void User::change_User_Password(string carryOverMsg) {
- 
-     //this is used to create a new password or change an existing one.
-     //system("clear");     //this line clears old stuff that should not be cleared. 
 
      string user_Entered_Password = "";
      string new_Password_1;
@@ -448,16 +364,7 @@ void User::add_User() {
 
      string u_ID;
 
-     //The User class already inherits from DB_Connect.h you can just call the methods directly. 
-     //DB_Connect dbc_pass;
-
-     //********************* Line used to ensure display is right.  To use, each class must inherit from Menu.h *****************************
-
-     //this function takes up to two functional arguments.  if you want to print a title, just pass a string, or two.  
      bar_Title_Menu(carryOverMsg);
-
-     //**************************************************************************************************************************************
-
 
      cout << "Please enter the user ID: ";
      getline(cin, u_ID);
@@ -494,10 +401,6 @@ void User::add_User() {
      new_Password_1 = "'" + new_Password_1 + "'";
  
      fields_and_values = "password = " + new_Password_1;
-
-     //sql = dbc_pass.createUpdateString(table, fields_and_values, condition);
-     //dbc_pass.dbUpdate(sql);
-
      sql = createUpdateString(table, fields_and_values, condition);
      dbUpdate(sql);
  
@@ -540,18 +443,13 @@ void User::add_User() {
  };
 
  void User::see_All_Users() {
-     //system("cls");
-
-
-     //DB_Connect dbc_show_all;
+     
      string fields;
 
      fields = "user_id, f_name, l_name, job_id, department_id, permissions_level";
 
-     //bc_show_all.queryFrom(table, fields, "");
      queryFrom(table, fields, "");
 
-     //system("pause");
  };
  
  int User::getNumber() {
@@ -588,18 +486,13 @@ void User::add_User() {
     return 0;
 };
 
-
-
- 
  void User::dbSearch(string sql) {
-     // TODO: pass arrays of columns and eventually search criteria into function for parsing and formatting (add '' and , where needed)
- // "+product_table::product_id+","+product_table::item_name+"
+
      sqlite3_stmt* sql_statement;
-     // string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
 
      size_t statement_length = strlen(sql.c_str());
 
-     int prep = sqlite3_prepare_v2(sqLiteDB, sql.c_str(), statement_length, &sql_statement, NULL);
+     int prep = sqlite3_prepare_v2(sqLiteDB, sql.c_str(), (int)statement_length, &sql_statement, NULL);
      int step = 0; // new int(0)
 
 
@@ -607,9 +500,7 @@ void User::add_User() {
      if (prep == SQLITE_OK) {
 
          // Print basic header row
-         // another comment
-         
-
+     
          while (step != SQLITE_DONE) {
              step = sqlite3_step(sql_statement);
              if (step == SQLITE_ROW) {
@@ -622,11 +513,9 @@ void User::add_User() {
 
                      }
                      else if (sqlite3_column_type(sql_statement, cell) == SQLITE_NULL) {
-                         //cout << left << setw(15) << "NULL";
                      }
                  }
                  cout << endl;
-                 // end data row
              }
          }
      }

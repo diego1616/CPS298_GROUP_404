@@ -58,14 +58,10 @@ void Store::store_Choice() {
             thing = "storage location";
             break;
         case 4:
-            //mm.menu_options();
-            //log.logEvent("store_Choice() at the four choice");
             return;
-            //log.logEvent("store_Choice() after return");
             break;
         }
-        //log.logEvent("store_Choice() outside the switch");
-        
+
         if (choice != 4 && thing != "")
             thing_Choice(thing);
 
@@ -79,7 +75,6 @@ void Store::store_Choice() {
 void Store::print_Thing_Menu(string thing) {
 
     bar_Title_Menu();
-    ////system("cls");
 
     cout << "1.  Add a " << thing << "." << endl;
     cout << "2.  Change a " << thing << "." << endl;
@@ -97,8 +92,6 @@ void Store::thing_Choice(string thing) {
     string field_ID;
 
     do {
-
-    //log.logEvent("thing_Choice() before ifs");
 
     print_Thing_Menu(thing);
     
@@ -121,37 +114,30 @@ void Store::thing_Choice(string thing) {
         cout << "error." << endl;
     };
 
-    //log.logEvent("thing_Choice() after ifs");
-
     cout << "Please choose the number option: ";
     choice = getNumber();
-    //log.logEvent("thing_Choice() before the switch - choice = " + to_string(choice));
-
-        //print_Thing_Menu(thing);
 
         switch (choice) {
-            //log.logEvent("thing_Choice() inside switch");
 
         case 1:
             add_Thing(thing, table, field);
-            //thing_Choice(thing);
+
             break;
         case 2:
             change_Thing(thing, field, table);
-            //thing_Choice(thing);
+
             break;
         case 3:
             show_All_Thing(table);
-            //thing_Choice(thing);
+     
             break;
         case 4:
             delete_thing(thing, field_ID, table);
-            //thing_Choice(thing);
+      
             break;
         case 5:
-            //log.logEvent("thing_Choice() inside the switch - choice should be 5 = " + to_string(choice));
+     
             return;
-            //store_Choice();
             break;
 
         }
@@ -160,12 +146,6 @@ void Store::thing_Choice(string thing) {
 };
 
 void Store::add_Thing(string thing, string table, string field) {
-    //DB_Connect dbc_add;
-
-
-    ////system("cls");
-    
-   
 
     string value;
     string sql;
@@ -195,19 +175,13 @@ void Store::add_Thing(string thing, string table, string field) {
     value = thing_name;
 
 
-    //dbc_add.insertInto(table, field, value);
-    //dbc_add.queryFrom(table, "*", condition);
-
     insertInto(table, field, value);
     queryFrom(table, "*", condition);
 
-    //system("pause");
 };
 
 void Store::change_Thing(string thing, string field, string table) {
-    ////system("cls");
 
-    //DB_Connect dbc_change;
     string name;
     string yesno = "no";
     int choice = 0;
@@ -242,40 +216,22 @@ void Store::change_Thing(string thing, string field, string table) {
     fields_and_values = field + " = " + new_name;
     fields_and_values2 = " WHERE " + field + " = " + new_name;
 
-    //sql = dbc_change.createUpdateString(table, fields_and_values, condition);
-    //dbc_change.dbUpdate(sql);
-    //dbc_change.queryFrom(table, "*", fields_and_values2);
-
-
     sql = createUpdateString(table, fields_and_values, condition);
     dbUpdate(sql);
     queryFrom(table, "*", fields_and_values2);
-
-    //system("pause");
-
 
 };
 
 void Store::show_All_Thing(string table) {
 
-    ////system("cls");
-
-   // DB_Connect dbc_show_all;
-
-    //dbc_show_all.queryFrom(table, "*", "");
-
     queryFrom(table, "*", "");
 
-    //system("pause");
 };
 
 
 void Store::delete_thing(string thing, string field, string table) {
 
-
     string ID;
-    //DB_Connect dbc_delete;
-
     string condition;
     string conditiond;
     string yesno;
@@ -288,8 +244,6 @@ void Store::delete_thing(string thing, string field, string table) {
 
     condition = " WHERE " + field + " = " + ID;
 
-
-    //dbc_delete.queryFrom(table, "*", condition);
     queryFrom(table, "*", condition);
 
     bar_Title_Menu();
@@ -299,11 +253,6 @@ void Store::delete_thing(string thing, string field, string table) {
 
     if (yesno == "yes")
     {
-        //conditiond = field + " = " + ID;
-        //sql = dbc_delete.createDeleteString(table, conditiond);
-        //dbc_delete.dbUpdate(sql);
-        //system("pause");
-
         conditiond = field + " = " + ID;
         sql = createDeleteString(table, conditiond);
         dbUpdate(sql);

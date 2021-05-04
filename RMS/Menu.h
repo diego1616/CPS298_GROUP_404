@@ -1,3 +1,5 @@
+//the purpose of this class is to provide other classes with tools for proper display. If you need to move an object or enlarge a field, it all starts here. 
+
 #pragma once
 #include <string>
 #include <iostream>
@@ -80,10 +82,10 @@ public:
 	//actually collects the data from the menu line.  
     void getMenuLine(string& data, int margin, int position);
 
-	//void outputMsg(string msg=""); //use to either output to the msg field, or prime to the right place
-
+	//subroutine to print the white bar, a title if needed, clear and prep the menu field.  Good for many things!
 	void bar_Title_Menu(string title = " ", string instructions = " ");
 
+	//will print cout or not based on the current user access level
 	void loginBasedPrint(string text, int minAccess);
     
 

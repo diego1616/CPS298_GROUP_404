@@ -1,8 +1,6 @@
 #include "DB_Connect.h"
 #include "DB_Literals.h"
 #include <cstring>
-#include "AddProduct.h"
-#include "StockLevel.h"
 
 DB_Connect::DB_Connect() {
 	
@@ -133,6 +131,8 @@ void DB_Connect::insertInto(string table, string fields, string values, string c
 
 }
 
+//This function prints records veritcally by means of callback().  It is better not to use it for that reason 
+//User dbSearch() instead, which will print records the right way. 
 void DB_Connect::query(string& statement)
 {
 	EventLog log;
@@ -140,7 +140,6 @@ void DB_Connect::query(string& statement)
 	if (statement == "")
 		return;
 
-	//add code to check for sql injection attacks
 	try {
 
 
@@ -168,14 +167,6 @@ void DB_Connect::query(string& statement)
 	}
 }
 
-
-//this function works well, but it does not display so nice.  Rather than fixing it, I have used Dans function, who worked on this issue already. 
-//void DB_Connect::queryFrom(string table, string fields, string condition)
-//{
-//	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
-//	this->query(statement);
-//}
-
 void DB_Connect::queryFrom(string table, string fields, string condition)
 {
 	string statement = "SELECT " + fields + " FROM " + table + condition + ";";
@@ -183,28 +174,17 @@ void DB_Connect::queryFrom(string table, string fields, string condition)
 	this->dbSearch(statement);
 }
 
-
+//prints all of the tables in a database. Userd for testing database and such. 
 void DB_Connect::getTables()
 {
 	string statement = "SELECT name FROM sqlite_master WHERE type='table';";
 	this->query(statement);
 }
 
-
-bool DB_Connect::generalQuery(string& search_What, string table)
-{
-	//this function has not been tested, the code below is just a preview
-	string statement = "SELECT name FROM sqlite_master WHERE LIKE='" + search_What + "';";
-
-	return false;
-}
-
-
 string DB_Connect::createSearchString(string fields, string table, string column, string search_keyword) {
 	string sql = "SELECT " + fields + " FROM " + table + " WHERE " + column + " LIKE '%" + search_keyword + "%';";
 	return sql;
 }
-
 
 string DB_Connect::createUpdateString(string table, string fields_and_values, string condition) {
 	string sql = "UPDATE " + table + " SET " + fields_and_values + " WHERE " + condition + ";";
@@ -221,7 +201,6 @@ string DB_Connect::createDeleteString(string table, string condition) {
 	string sql = "DELETE FROM " + table + prepared_condition + ";";
 	return sql;
 }
-
 
 // Copied from the insert function above
 void DB_Connect::dbUpdate(string sql) {
@@ -249,10 +228,8 @@ void DB_Connect::dbUpdate(string sql) {
 
 //this is the old someTestDanMade function. 
 void DB_Connect::dbSearch(string sql) {
-	// TODO: pass arrays of columns and eventually search criteria into function for parsing and formatting (add '' and , where needed)
-// "+product_table::product_id+","+product_table::item_name+"
+
 	sqlite3_stmt* sql_statement;
-	// string sql = "SELECT " + fields + " FROM " + table + " " + condition + ";";
 
 	Menu display;
 
@@ -268,26 +245,12 @@ void DB_Connect::dbSearch(string sql) {
 	if (prep == SQLITE_OK) {
 
 		// Print basic header row
-		// another comment
+
 		for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
 			cout << left << setw(17) << sqlite3_column_name(sql_statement, header);
 		}
 		cout << endl;
 		// end basic header row
-
-		// for (int header = 0; header < sqlite3_column_count(sql_statement); header++) {
-		// 	string humanized_header = "";
-		// 	const char* col_header = sqlite3_column_name(sql_statement, header);
-		// 	for (int i = 0; i < sizeof(*table_fields); i++) {
-		// 		if (*table_fields[i][0] == col_header) {
-		// 			humanized_header = *table_fields[i][1];
-		// 			break; // not absolutely necessary, but avoids extra iterations
-		// 		}
-		// 	}
-		// 	cout << left << setw(25) << humanized_header;
-		// }
-		// cout << endl; 
-		// // end header row
 
 		while (step != SQLITE_DONE) {
 			step = sqlite3_step(sql_statement);
@@ -313,7 +276,8 @@ void DB_Connect::dbSearch(string sql) {
 	sqlite3_finalize(sql_statement);
 }
 
-//use this function to get a single data field from the DB.  Pass a string variable by reference, and the result will be there. 
+//use this overload is used to get a single data field from the DB.
+//Pass a string variable by reference, and the result will be there. 
 void DB_Connect::dbSearch(string sql, string& data) {
 
 	sqlite3_stmt* sql_statement;
